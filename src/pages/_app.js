@@ -1,5 +1,8 @@
 import Head from "next/head";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import { DefaultTemplate } from "@/common/templates";
+import { theme } from "@/styles";
 import { AppConfig } from "@/config";
 
 function App({ Component, pageProps }) {
@@ -12,10 +15,12 @@ function App({ Component, pageProps }) {
                 />
                 <title>{AppConfig.name}</title>
             </Head>
-
-            <DefaultTemplate>
-                <Component {...pageProps} />
-            </DefaultTemplate>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <DefaultTemplate>
+                    <Component {...pageProps} />
+                </DefaultTemplate>
+            </ThemeProvider>
         </>
     );
 }
