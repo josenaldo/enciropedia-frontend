@@ -4,6 +4,10 @@ import { deepPurple, teal, grey, blueGrey } from "@mui/material/colors";
 const theme = createTheme({
     palette: {
         mode: "dark",
+        neutral: {
+            main: "#bdbdbd",
+            contrastText: "#fff",
+        },
     },
     scroll: {
         "&::-webkit-scrollbar": {

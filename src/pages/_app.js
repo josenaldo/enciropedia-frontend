@@ -9,6 +9,10 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
+                <meta
+                    name="viewport"
+                    content="width=device-width initial-scale=1"
+                />
                 <title>{AppConfig.name}</title>
                 <meta name="description" content={AppConfig.description}></meta>
             </Head>

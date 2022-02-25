@@ -6,7 +6,7 @@ export function DefaultTemplate({ children }) {
         <Box>
             <Header />
 
-            <Box>{children}</Box>
+            <main>{children}</main>
 
             <Footer />
         </Box>
