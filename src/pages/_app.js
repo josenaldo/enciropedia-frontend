@@ -9,11 +9,8 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1, width=device-width"
-                />
                 <title>{AppConfig.name}</title>
+                <meta name="description" content={AppConfig.description}></meta>
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
