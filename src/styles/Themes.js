@@ -8,6 +8,10 @@ const theme = createTheme({
             main: "#bdbdbd",
             contrastText: "#fff",
         },
+        footer: {
+            background: "rgba(255, 255, 255, 0.12)",
+            contrastText: "#fff",
+        },
     },
     scroll: {
         "&::-webkit-scrollbar": {
