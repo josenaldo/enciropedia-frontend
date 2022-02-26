@@ -53,9 +53,10 @@ function Hero() {
                 <Box>
                     <Typography
                         component="h1"
-                        variant="h3"
                         textAlign="center"
                         sx={{
+                            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+
                             fontWeight: "700",
                             mb: "20px",
                         }}
@@ -68,7 +69,11 @@ function Hero() {
                     <Typography
                         variant="body1"
                         sx={{
-                            fontSize: "1.25rem",
+                            fontSize: {
+                                xs: "1rem",
+                                sm: "1.2rem",
+                                md: "1.5rem",
+                            },
                             display: "flex",
                             textAlign: "center",
                             width: "50%",
@@ -96,7 +101,7 @@ function Hero() {
                         size="large"
                         variant="contained"
                         color="primary"
-                        sx={{ mx: "5px" }}
+                        sx={{ m: "5px" }}
                     >
                         Conheça o Ciro
                     </Button>
