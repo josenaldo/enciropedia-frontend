@@ -12,6 +12,10 @@ const theme = createTheme({
             background: "rgba(255, 255, 255, 0.12)",
             contrastText: "#fff",
         },
+
+        background: {
+            alternative: "rgba(255, 255, 255, 0.12)",
+        },
     },
     scroll: {
         "&::-webkit-scrollbar": {
