@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { Header, Footer } from "@/common/layouts";
 
 export function DefaultTemplate({ children }) {
@@ -6,7 +6,9 @@ export function DefaultTemplate({ children }) {
         <Box>
             <Header />
 
-            <main>{children}</main>
+            <main>
+                <Container>{children}</Container>
+            </main>
 
             <Footer />
         </Box>

@@ -55,13 +55,15 @@ export function Footer(props) {
                             <Typography variant="h6" textAlign="center">
                                 Encontre esse projeto no Github
                             </Typography>
-                            <Button
-                                sx={{ color: palette.neutral.main }}
-                                href="https://github.com/josenaldo/enciropedia/"
-                                target="_new"
-                            >
-                                <GitHubIcon sx={{ fontSize: 60 }} />
-                            </Button>
+                            <Box sx={{ textAlign: "center" }}>
+                                <IconButton
+                                    sx={{ color: palette.neutral.main }}
+                                    href="https://github.com/josenaldo/enciropedia/"
+                                    target="_new"
+                                >
+                                    <GitHubIcon sx={{ fontSize: 100 }} />
+                                </IconButton>
+                            </Box>
                         </Box>
                         <Box
                             sx={{
@@ -82,7 +84,9 @@ export function Footer(props) {
                                     color: palette.neutral.main,
                                 }}
                             >
-                                Colabore!
+                                <Typography variant="h5" textAlign="center">
+                                    Colabore!
+                                </Typography>
                             </Button>
                         </Box>
                         <Box
