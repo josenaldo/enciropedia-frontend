@@ -72,7 +72,7 @@ function Hero() {
                             fontSize: {
                                 xs: "1rem",
                                 sm: "1.2rem",
-                                md: "1.5rem",
+                                md: "1.3rem",
                             },
                             display: "flex",
                             textAlign: "center",
