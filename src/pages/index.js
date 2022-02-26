@@ -4,10 +4,20 @@ import Image from "next/image";
 import { Box, Container, Typography, IconButton, Button } from "@mui/material";
 
 import { theme } from "@/styles";
+import { getSortedPostsData } from "@/common/lib";
 
 const palette = theme.palette;
 
-export default function Home() {
+export async function getStaticProps() {
+    const allPostsData = getSortedPostsData(3);
+    return {
+        props: {
+            allPostsData,
+        },
+    };
+}
+
+export default function Home({ allPostsData }) {
     return (
         <>
             <Box
@@ -18,6 +28,26 @@ export default function Home() {
             >
                 <Hero />
             </Box>
+
+            <Box
+                component="section"
+                sx={{
+                    bgcolor: palette.background.dp40,
+                }}
+            >
+                <h2>Blog</h2>
+                <ul>
+                    {allPostsData.map(({ id, date, title }) => (
+                        <li key={id}>
+                            {title}
+                            <br />
+                            {id}
+                            <br />
+                            {date}
+                        </li>
+                    ))}
+                </ul>
+            </Box>
         </>
     );
 }
@@ -26,7 +56,7 @@ function Hero() {
     return (
         <Container
             sx={{
-                bgcolor: palette.background.alternative,
+                bgcolor: palette.background.dp01,
                 my: 5,
                 py: 10,
                 borderRadius: "0.3rem",
@@ -91,7 +121,7 @@ function Hero() {
                         href="/pnd"
                         size="large"
                         variant="contained"
-                        color="success"
+                        color="primary"
                         sx={{ mx: "5px" }}
                     >
                         Conheça o PND
@@ -100,7 +130,7 @@ function Hero() {
                         href="/biografia"
                         size="large"
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         sx={{ m: "5px" }}
                     >
                         Conheça o Ciro

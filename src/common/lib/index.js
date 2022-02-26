@@ -1,0 +1,1 @@
+export { getSortedPostsData } from "./posts";
