@@ -1,15 +1,16 @@
-import Head from "next/head";
 import Image from "next/image";
 
-import { Box, Container, Typography, IconButton, Button } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 
 import { theme } from "@/styles";
 import { getSortedPostsData } from "@/common/lib";
 
+import { NewsCard } from "@/components/elements";
+
 const palette = theme.palette;
 
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData(3);
+    const allPostsData = getSortedPostsData();
     return {
         props: {
             allPostsData,
@@ -35,18 +36,7 @@ export default function Home({ allPostsData }) {
                     bgcolor: palette.background.dp40,
                 }}
             >
-                <h2>Blog</h2>
-                <ul>
-                    {allPostsData.map(({ id, date, title }) => (
-                        <li key={id}>
-                            {title}
-                            <br />
-                            {id}
-                            <br />
-                            {date}
-                        </li>
-                    ))}
-                </ul>
+                <News allPostsData={allPostsData} />
             </Box>
         </>
     );
@@ -136,6 +126,32 @@ function Hero() {
                         Conheça o Ciro
                     </Button>
                 </Box>
+            </Box>
+        </Container>
+    );
+}
+
+function News({ allPostsData }) {
+    return (
+        <Container>
+            <Box
+                sx={{
+                    px: "0",
+                    py: "20px",
+                    display: "grid",
+                    gap: 2,
+                    alignItems: "center",
+                    alignContent: "stretch",
+                    gridTemplateColumns: {
+                        xs: "repeat(1, 1fr)",
+                        sm: "repeat(2, 1fr)",
+                        md: "repeat(3, 1fr)",
+                    },
+                }}
+            >
+                {allPostsData.map((post) => (
+                    <NewsCard key={post.id} post={post}></NewsCard>
+                ))}
             </Box>
         </Container>
     );
