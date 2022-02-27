@@ -6,7 +6,7 @@ author: josenaldo
 tags: [convocação, vídeos, enciropedia]
 summary: Precisamos de voluntários para por vídeos no site
 image:
-    path: assets/images/posts/2021-12-13-a-enciropedia-precisa-de-videos.jpg
+    path: /images/posts/2021-12-13-a-enciropedia-precisa-de-videos.jpg
     width: "1200"
     height: "630"
 ---
@@ -65,7 +65,7 @@ No topo dos arquivos, entre a marcação `---`, temos os seguintes campos:
 - **video_id**: O ID do vídeo no youtube. O ID pode ser extraído direto da URL ou pode ser extraído usando a ferramneta [Youtube Video ID Extractor Online](https://freemediatools.com/youtubevideoid). Basta informar, nessa ferramenta, o link do vídeo, no youtube, que ela te diz qual o ID do vídeo.
 
 {% include image.html
-    src="assets/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-a.png"
+    src="/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-a.png"
     alt="Extrator de ID de vídeo" %}
 
 O trabalho é pegar cada vídeo da [lista de entrevistas do Ciro](https://www.youtube.com/playlist?list=PLUZtVUpn6Q5M5EmW7xwSHen__W_Vu0HyQ) e criar um arquivo. O mais difícil aí é caprichar na descrição do vídeo.
@@ -79,7 +79,7 @@ O texto é dividido em duas partes: o excerto e o principal. A divisão é coloc
 Pra enviar o arquivo, basta criar uma nova tarefa (*Issue*) no repositório do projeto: [https://github.com/josenaldo/enciropedia/issues](https://github.com/josenaldo/enciropedia/issues).
 
 {% include image.html
-    src="assets/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-b.jpg"
+    src="/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-b.jpg"
     alt="Extrator de ID de vídeo" %}
 
 Na página, clica no botão `New`. Na página seguinte, no título, basta informar algo como "Adicionar vídeo NOME DO VIDEO"
@@ -87,7 +87,7 @@ Na página, clica no botão `New`. Na página seguinte, no título, basta inform
 E no campo de comentário, você informa o link do vídeo e, logo abaixo, o conteúdo do arquivo de exemplo, preenchido.
 
 {% include image.html
-    src="assets/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-d.png"
+    src="/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-d.png"
     alt="Extrator de ID de vídeo" %}
 
 Se quiserem um arquivo de exemplo, pra usar como template, basta pegar um na pasta [conteudo/_videos](https://raw.githubusercontent.com/josenaldo/enciropedia/main/conteudo/_videos/ciro-no-inteligencia-limitada.md).

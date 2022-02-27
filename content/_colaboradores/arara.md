@@ -6,7 +6,7 @@ twitter: ararazu1
 instagram:
 facebook:
 github:
-image: assets/images/colaboradores/arara.png
+image: /images/colaboradores/arara.png
 ---
 Felipe Souza, também conhecido como Ararazul, é um designer gráfico formado desde março de 2020.
 

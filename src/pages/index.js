@@ -48,7 +48,7 @@ function Hero() {
             sx={{
                 bgcolor: palette.background.dp01,
                 my: 5,
-                py: 10,
+                py: "40px",
                 borderRadius: "0.3rem",
             }}
         >

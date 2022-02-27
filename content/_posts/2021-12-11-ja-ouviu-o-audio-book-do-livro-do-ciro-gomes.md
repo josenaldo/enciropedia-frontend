@@ -6,7 +6,10 @@ category: noticias
 author: josenaldo
 tags: [audiobook, livro, ciro, gomes]
 summary: Já pensou em ouvir o audiobook do Livro do Ciro Gomes?
-image: assets/images/posts/2021-12-11-ja-ouviu-o-audio-book-do-livro-do-ciro-gomes.jpg
+image:
+    path: /images/posts/2021-12-11-ja-ouviu-o-audio-book-do-livro-do-ciro-gomes.jpg
+    width: "1200"
+    height: "630"
 ---
 
 Saudações Turma Boa! Está sem tempo de ler o livro do Ciro Gomes? A correria não te deixa parar pra ler?

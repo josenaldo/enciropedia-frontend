@@ -3,11 +3,11 @@ import { NewsCard } from "@/components/news";
 
 export function NewsWall({ posts }) {
     return (
-        <Container>
+        <Container sx={{ px: { lg: 0 }, py: "40px" }}>
             <Box
                 sx={{
                     px: "0",
-                    py: "20px",
+                    // py: "40px",
                     display: "grid",
                     gap: 2,
                     alignItems: "center",

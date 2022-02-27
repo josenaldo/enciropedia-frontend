@@ -6,7 +6,10 @@ category: noticias
 author: josenaldo
 tags: [convocação, turma, boa]
 summary: Chega aí, Turma Boa! Vamos contruir a Enciropedia!
-image: assets/images/posts/2021-12-08-chega-mais-turma-boa.jpg
+image:
+    path: /images/posts/2021-12-08-chega-mais-turma-boa.jpg
+    width: "1200"
+    height: "630"
 ---
 Turma Boa, alegrem-se! Finalmente é chegada nossa EnCIROpedia! E vamos construí-la juntos!
 

@@ -6,7 +6,10 @@ category: noticias
 author: josenaldo
 tags: [ajuda, colaboração]
 summary: Quer saber como ajudar a Enciropedia?
-image: assets/images/posts/2021-12-13-como-ajudar.jpg
+image:
+    path: /images/posts/2021-12-13-como-ajudar.jpg
+    width: "1200"
+    height: "630"
 ---
 
 Saudações, Turma Boa! Quer ajudar a EnCIROpedia e não sabe como?
@@ -28,13 +31,13 @@ Você já tem o que é preciso: um editor de texto ou um navegador.
 Primeiro, você entra na [área de tarefas do repositório do projeto](https://github.com/josenaldo/enciropedia/issues) e escolhe uma tarefa, do tipo "Melhorar texto da página x", para resolver.
 
 {% include image.html
-    src="assets/images/posts/2021-12-13-como-ajudar-a.png"
+    src="/images/posts/2021-12-13-como-ajudar-a.png"
     alt="Lista de tarefas do GitHub" %}
 
 Daí, basta fazer um comentário na tarefa, com o texto que você quer nessa página.
 
 {% include image.html
-    src="assets/images/posts/2021-12-13-como-ajudar-d.png"
+    src="/images/posts/2021-12-13-como-ajudar-d.png"
     alt="Caixa de comentário no Github" %}
 
 Pronto! Nós iremos colocar o texto sugerido no site!
@@ -65,4 +68,3 @@ As tecnologias usadas no projeto também estão no [README.md](https://github.co
 ## Tem dúvidas? Quem procurar?
 
 Se tem dúvidas sobre como colaborar, procure por [@VuduReverso](https://twitter.com/VuduReverso) no Twitter. Ou envie um email para [josenaldo@gmail.com](mailto:josenaldo@gmail.com).
-

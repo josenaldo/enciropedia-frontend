@@ -6,7 +6,7 @@ twitter: vudureverso
 instagram: vudureverso
 github: josenaldo
 facebook: josenaldo.matos
-image: assets/images/colaboradores/josenaldo.png
+image: /images/colaboradores/josenaldo.png
 ---
 Josenaldo, também conhecido como Vudu Reverso (ele mesmo se intitulou assim), é um programador aposentado que inventou de fazer a Enciropedia pq cansou de não ter o que mandar quando perguntavam pra ele sobre o PND.
 
