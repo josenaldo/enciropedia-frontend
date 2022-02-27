@@ -5,7 +5,7 @@ import { Box, Container, Typography, Button } from "@mui/material";
 import { theme } from "@/styles";
 import { getSortedPostsData } from "@/common/lib";
 
-import { NewsCard } from "@/components/elements";
+import { NewsWall } from "@/components/news";
 
 const palette = theme.palette;
 
@@ -36,7 +36,7 @@ export default function Home({ allPostsData }) {
                     bgcolor: palette.background.dp40,
                 }}
             >
-                <News allPostsData={allPostsData} />
+                <NewsWall posts={allPostsData} />
             </Box>
         </>
     );
@@ -126,32 +126,6 @@ function Hero() {
                         Conheça o Ciro
                     </Button>
                 </Box>
-            </Box>
-        </Container>
-    );
-}
-
-function News({ allPostsData }) {
-    return (
-        <Container>
-            <Box
-                sx={{
-                    px: "0",
-                    py: "20px",
-                    display: "grid",
-                    gap: 2,
-                    alignItems: "center",
-                    alignContent: "stretch",
-                    gridTemplateColumns: {
-                        xs: "repeat(1, 1fr)",
-                        sm: "repeat(2, 1fr)",
-                        md: "repeat(3, 1fr)",
-                    },
-                }}
-            >
-                {allPostsData.map((post) => (
-                    <NewsCard key={post.id} post={post}></NewsCard>
-                ))}
             </Box>
         </Container>
     );
