@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 
@@ -10,8 +9,9 @@ import {
     CardMedia,
     Typography,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
+
+import { Link } from "@/components/elements";
 
 export function NewsPage({ post }) {
     return (
@@ -90,17 +90,14 @@ export function NewsPage({ post }) {
                         >
                             {post.date}
                         </Typography>
-                        <Link href={post.authorUrl} passHref>
-                            <MuiLink
-                                variant="caption"
-                                // component="div"
-                                color="neutral.main"
-                                underline="none"
-                                gutterBottom
-                                sx={{ mx: "10px" }}
-                            >
-                                {post.author}
-                            </MuiLink>
+                        <Link
+                            href={post.authorUrl}
+                            variant="caption"
+                            color="neutral.main"
+                            underline="none"
+                            sx={{ mx: "10px" }}
+                        >
+                            {post.author}
                         </Link>
                     </Box>
                     <Box

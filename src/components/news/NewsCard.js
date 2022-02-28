@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
     Box,
     Card,
@@ -8,8 +7,9 @@ import {
     Typography,
     Button,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
+
+import { Link } from "@/components/elements";
 
 export function NewsCard({ post }) {
     console.log(post);
@@ -42,16 +42,13 @@ export function NewsCard({ post }) {
                 }}
             >
                 <Box>
-                    <Link href={post.url} passHref>
-                        <MuiLink
-                            variant="h5"
-                            // component="div"
-                            color="primary"
-                            underline="none"
-                            gutterBottom
-                        >
-                            {post.title}
-                        </MuiLink>
+                    <Link
+                        href={post.url}
+                        variant="h5"
+                        color="primary"
+                        underline="none"
+                    >
+                        {post.title}
                     </Link>
                 </Box>
 
