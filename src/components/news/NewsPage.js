@@ -11,7 +11,7 @@ import {
     Chip,
 } from "@mui/material";
 
-import { Link } from "@/components/elements";
+import { Link, FormattedDate } from "@/components/elements";
 
 export function NewsPage({ post }) {
     return (
@@ -94,7 +94,7 @@ export function NewsPage({ post }) {
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            {post.date}
+                            <FormattedDate dateString={post.date} />
                         </Typography>
                         <Link
                             href={post.authorUrl}

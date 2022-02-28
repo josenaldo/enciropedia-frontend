@@ -13,8 +13,6 @@ export function Link({
     // const { href, children, variant, color, underline, sx, ...restProps } =
     //     props;
 
-    console.log(sx);
-
     const linkStyle = {
         color: `${color}.main`,
         "&:hover": {

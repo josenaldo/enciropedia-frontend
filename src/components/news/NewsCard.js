@@ -9,7 +9,7 @@ import {
     Chip,
 } from "@mui/material";
 
-import { Link } from "@/components/elements";
+import { Link, FormattedDate } from "@/components/elements";
 
 export function NewsCard({ post }) {
     console.log(post);
@@ -68,7 +68,7 @@ export function NewsCard({ post }) {
                         variant="caption"
                         ml="10px"
                     >
-                        {post.date}
+                        <FormattedDate dateString={post.date} />
                     </Typography>
                 </Box>
                 <Box pt="20px">
