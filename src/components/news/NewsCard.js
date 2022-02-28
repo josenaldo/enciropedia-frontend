@@ -47,6 +47,10 @@ export function NewsCard({ post }) {
                         variant="h5"
                         color="primary"
                         underline="none"
+                        sx={{
+                            display: "block",
+                            mb: "20px",
+                        }}
                     >
                         {post.title}
                     </Link>
@@ -69,7 +73,7 @@ export function NewsCard({ post }) {
                 </Box>
                 <Box pt="20px">
                     <Typography variant="body1" color="neutral.light">
-                        {post.summary}
+                        {post.excerpt}
                     </Typography>
                 </Box>
             </CardContent>

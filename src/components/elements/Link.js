@@ -1,16 +1,37 @@
 import NextLink from "next/link";
 import { Link as MuiLink } from "@mui/material";
 
-export function Link(props) {
-    const { href, children, variant, color, underline, ...restProps } = props;
-    console.log(props);
+export function Link({
+    href,
+    children,
+    variant,
+    color,
+    underline,
+    sx,
+    ...restProps
+}) {
+    // const { href, children, variant, color, underline, sx, ...restProps } =
+    //     props;
+
+    console.log(sx);
+
+    const linkStyle = {
+        color: `${color}.main`,
+        "&:hover": {
+            color: `${color}.dark`,
+        },
+        "&:focus": {
+            color: `${color}.light`,
+        },
+    };
+
     return (
         <NextLink href={href} passHref>
             <MuiLink
                 variant={variant}
-                color={color}
                 underline={underline}
                 {...restProps}
+                sx={{ ...sx, ...linkStyle }}
             >
                 {children}
             </MuiLink>
