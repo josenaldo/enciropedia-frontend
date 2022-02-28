@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import imageSize from "rehype-img-size";
+import externalLinks from "rehype-external-links";
 
 const postsDirectory = path.join(process.cwd(), "content/_posts");
 
@@ -113,7 +114,16 @@ export async function getPostData(id) {
         mdxOptions: {
             // use the image size plugin, you can also specify which folder to load images from
             // in my case images are in /public/images/, so I just prepend 'public'
-            rehypePlugins: [[imageSize, { dir: "public" }]],
+            rehypePlugins: [
+                [imageSize, { dir: "public" }],
+                [
+                    externalLinks,
+                    {
+                        target: "_blank",
+                        rel: ["nofollow", "noopener", "noreferrer"],
+                    },
+                ],
+            ],
         },
     });
 

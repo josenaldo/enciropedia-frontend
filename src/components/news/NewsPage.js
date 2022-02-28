@@ -47,6 +47,12 @@ export function NewsPage({ post }) {
                     sx={{
                         width: "100%",
                         height: "100%",
+                        px: {
+                            sx: "5px",
+                            sm: "10px",
+                            md: "20px",
+                            lg: "40px",
+                        },
                     }}
                 >
                     <Box>
@@ -74,7 +80,7 @@ export function NewsPage({ post }) {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            my: "10px",
+                            py: "20px",
                         }}
                     >
                         <Chip
@@ -102,12 +108,6 @@ export function NewsPage({ post }) {
                     </Box>
                     <Box
                         sx={{
-                            my: {
-                                sx: "5px",
-                                sm: "10px",
-                                md: "20px",
-                                lg: "40px",
-                            },
                             p: "20px",
                             bgcolor: "background.b800",
                             color: "neutral.darker",
@@ -121,7 +121,11 @@ export function NewsPage({ post }) {
                         </Typography>
                     </Box>
 
-                    <Box sx={{ px: "20px", color: "neutral.main" }}>
+                    <Box
+                        sx={{
+                            color: "neutral.main",
+                        }}
+                    >
                         <MDXRemote
                             {...post.mdxSource}
                             // components={{ Button, SyntaxHighlighter }}

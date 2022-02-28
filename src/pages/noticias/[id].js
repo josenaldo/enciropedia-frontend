@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 
 import { Container, Box } from "@mui/material";
@@ -7,10 +6,12 @@ import { MDXProvider } from "@mdx-js/react";
 
 import { NewsPage } from "@/components/news";
 import { ResponsiveImage } from "@/components/elements";
+import { Link } from "@/components/elements";
 import { getAllPostIds, getPostData } from "@/common/lib";
 
 const components = {
     img: ResponsiveImage,
+    a: Link,
 };
 
 export async function getStaticPaths() {
