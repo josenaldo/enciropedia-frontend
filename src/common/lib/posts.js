@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
+import imageSize from "rehype-img-size";
 
 const postsDirectory = path.join(process.cwd(), "content/_posts");
 
@@ -108,7 +109,13 @@ export async function getPostData(id) {
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
 
-    const mdxSource = await serialize(matterResult.content);
+    const mdxSource = await serialize(matterResult.content, {
+        mdxOptions: {
+            // use the image size plugin, you can also specify which folder to load images from
+            // in my case images are in /public/images/, so I just prepend 'public'
+            rehypePlugins: [[imageSize, { dir: "public" }]],
+        },
+    });
 
     // Combine the data with the id
     return {

@@ -1,9 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
-import { Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
+
+import { MDXProvider } from "@mdx-js/react";
 
 import { NewsPage } from "@/components/news";
+import { ResponsiveImage } from "@/components/elements";
 import { getAllPostIds, getPostData } from "@/common/lib";
+
+const components = {
+    img: ResponsiveImage,
+};
 
 export async function getStaticPaths() {
     const paths = getAllPostIds();
@@ -25,7 +33,9 @@ export async function getStaticProps({ params }) {
 export default function Post({ post }) {
     return (
         <Container sx={{ my: "40px" }}>
-            <NewsPage post={post} fullPage></NewsPage>
+            <MDXProvider components={components}>
+                <NewsPage post={post} fullPage></NewsPage>
+            </MDXProvider>
         </Container>
     );
 }

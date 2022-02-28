@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 
 export function NewsPage({ post }) {
-    console.log(post);
     return (
         <>
             <Head>
@@ -58,6 +57,14 @@ export function NewsPage({ post }) {
                             color="white"
                             textAlign="center"
                             fontWeight="bold"
+                            sx={{
+                                fontSize: {
+                                    xs: "2.00rem",
+                                    sm: "2.50rem",
+                                    md: "3.00rem",
+                                    lg: "3.50rem",
+                                },
+                            }}
                         >
                             {post.title}
                         </Typography>
@@ -67,6 +74,7 @@ export function NewsPage({ post }) {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            my: "10px",
                         }}
                     >
                         <Chip
@@ -97,7 +105,12 @@ export function NewsPage({ post }) {
                     </Box>
                     <Box
                         sx={{
-                            m: "20px",
+                            my: {
+                                sx: "5px",
+                                sm: "10px",
+                                md: "20px",
+                                lg: "40px",
+                            },
                             p: "20px",
                             bgcolor: "background.b800",
                             color: "neutral.darker",
