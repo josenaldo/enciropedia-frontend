@@ -5,15 +5,14 @@ date: 2021-12-08 22:00
 category: noticias
 author: josenaldo
 tags: [convocação, turma, boa]
-summary: Chega aí, Turma Boa! Vamos contruir a Enciropedia!
+summary: Chega aí, Turma Boa! Vamos construir a Enciropedia!
+excerpt: Turma Boa, alegrem-se! Finalmente é chegada nossa EnCIROpedia! E vamos construí-la juntos!
 image:
     path: /images/posts/2021-12-08-chega-mais-turma-boa.jpg
     width: "1200"
     height: "630"
 ---
 Turma Boa, alegrem-se! Finalmente é chegada nossa EnCIROpedia! E vamos construí-la juntos!
-
-<!-- more -->
 
 Tive a ideia de criar a enCIROpedia pra resolver um problema meu: onde encontro o PND?
 

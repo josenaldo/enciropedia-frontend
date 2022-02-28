@@ -4,8 +4,9 @@ title: Já ouviu o audiobook do Livro do Ciro Gomes?
 date: 2021-12-10 00:52
 category: noticias
 author: josenaldo
-tags: [audiobook, livro, ciro, gomes]
+tags: [audiobook, livro, ciro gomes]
 summary: Já pensou em ouvir o audiobook do Livro do Ciro Gomes?
+excerpt: Saudações Turma Boa! Está sem tempo de ler o livro do Ciro Gomes? A correria não te deixa parar pra ler?
 image:
     path: /images/posts/2021-12-11-ja-ouviu-o-audio-book-do-livro-do-ciro-gomes.jpg
     width: "1200"
@@ -13,8 +14,6 @@ image:
 ---
 
 Saudações Turma Boa! Está sem tempo de ler o livro do Ciro Gomes? A correria não te deixa parar pra ler?
-
-<!-- more -->
 
 Pois é, seus problemas acabaram! Graças aos canais [Progressistinha](https://www.youtube.com/channel/UCEAT34ffgnxP2s3A_Kzzrww) e [Discoteca](https://www.youtube.com/c/Discotecatv) nós temos duas opções de ebooks disponíveis.
 

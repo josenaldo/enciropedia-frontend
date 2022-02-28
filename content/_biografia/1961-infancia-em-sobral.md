@@ -2,13 +2,16 @@
 data: 1961
 title: Infância em Sobral
 ordem: 20
+excerpt: |-
+    Ciro fala com carinho da infância em Sobral, da alegria dos dias
+    de chuva no interior do sertão cearense e da rígida educação que
+    recebeu dos pais.
+
 ---
 
 Ciro fala com carinho da infância em Sobral, da alegria dos dias
 de chuva no interior do sertão cearense e da rígida educação que
 recebeu dos pais.
-
-<!-- more -->
 
 Em 1961, aos quatro anos de idade, a família de Ciro instalou-se em
 Sobral, Ceará, onde vivia toda a sua família paterna. Seu pai era

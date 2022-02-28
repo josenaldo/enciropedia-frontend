@@ -6,17 +6,14 @@ category: noticias
 author: josenaldo
 tags: [ajuda, colaboração]
 summary: Quer saber como ajudar a Enciropedia?
+excerpt: Saudações, Turma Boa! Quer ajudar a EnCIROpedia e não sabe como? Chega aí que eu te explico!
 image:
     path: /images/posts/2021-12-13-como-ajudar.jpg
     width: "1200"
     height: "630"
 ---
 
-Saudações, Turma Boa! Quer ajudar a EnCIROpedia e não sabe como?
-
-Chega aí que eu te explico!
-
-<!-- more -->
+Saudações, Turma Boa! Quer ajudar a EnCIROpedia e não sabe como? Chega aí que eu te explico!
 
 ## Escrevendo pro site
 
@@ -30,15 +27,11 @@ Você já tem o que é preciso: um editor de texto ou um navegador.
 
 Primeiro, você entra na [área de tarefas do repositório do projeto](https://github.com/josenaldo/enciropedia/issues) e escolhe uma tarefa, do tipo "Melhorar texto da página x", para resolver.
 
-{% include image.html
-    src="/images/posts/2021-12-13-como-ajudar-a.png"
-    alt="Lista de tarefas do GitHub" %}
+![Lista de tarefas do GitHub](/images/posts/2021-12-13-como-ajudar-a.png)
 
 Daí, basta fazer um comentário na tarefa, com o texto que você quer nessa página.
 
-{% include image.html
-    src="/images/posts/2021-12-13-como-ajudar-d.png"
-    alt="Caixa de comentário no Github" %}
+![Caixa de comentário no Github](/images/posts/2021-12-13-como-ajudar-d.png)
 
 Pronto! Nós iremos colocar o texto sugerido no site!
 

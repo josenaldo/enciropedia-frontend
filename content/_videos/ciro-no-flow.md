@@ -9,5 +9,3 @@ video_id: n6vVlG8raXY
 ---
 
 Neste podcast, Ciro fala conversa com Monark e Igor sobre o Projeto nacional de desenvolvimento.
-
-<!-- more -->
