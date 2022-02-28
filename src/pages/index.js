@@ -33,7 +33,7 @@ export default function Home({ allPostsData }) {
             <Box
                 component="section"
                 sx={{
-                    bgcolor: palette.background.dp40,
+                    bgcolor: palette.background.b500,
                 }}
             >
                 <NewsWall posts={allPostsData} />

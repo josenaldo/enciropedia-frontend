@@ -20,6 +20,7 @@ export function getSortedPostsData(numberOfPosts) {
         // Combine the data with the id
         return {
             id,
+            url: `/${matterResult.data.category}/${id}`,
             ...matterResult.data,
         };
     });
