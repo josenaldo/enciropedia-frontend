@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { green, amber, grey, blueGrey } from "@mui/material/colors";
+import { green, amber, grey } from "@mui/material/colors";
 
 const theme = createTheme({
     palette: {
@@ -11,11 +11,11 @@ const theme = createTheme({
             main: amber["200"],
         },
         neutral: {
-            lighter: blueGrey["50"],
-            light: blueGrey["100"],
-            main: blueGrey["200"],
-            dark: blueGrey["400"],
-            darker: blueGrey["600"],
+            lighter: grey["50"],
+            light: grey["100"],
+            main: grey["300"],
+            dark: grey["500"],
+            darker: grey["700"],
             contrastText: "#121212",
         },
         footer: {
