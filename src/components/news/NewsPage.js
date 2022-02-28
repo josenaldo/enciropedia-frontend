@@ -7,11 +7,8 @@ import {
     Box,
     Card,
     CardContent,
-    CardActions,
     CardMedia,
-    CardActionArea,
     Typography,
-    Button,
     Chip,
     Link as MuiLink,
 } from "@mui/material";

@@ -1,15 +1,6 @@
-import {
-    Box,
-    Container,
-    Card,
-    CardContent,
-    CardActions,
-    CardMedia,
-    CardActionArea,
-    Typography,
-    Button,
-    Chip,
-} from "@mui/material";
+import Link from "next/link";
+
+import { Container } from "@mui/material";
 
 import { NewsPage } from "@/components/news";
 import { getAllPostIds, getPostData } from "@/common/lib";

@@ -1,4 +1,7 @@
 import * as React from "react";
+import Link from "next/link";
+import Image from "next/image";
+
 import {
     Container,
     Box,
@@ -15,7 +18,6 @@ import {
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import Image from "next/image";
 import { SearchInput } from "@/components/elements";
 
 const pages = [
@@ -141,15 +143,15 @@ export function Header(props) {
                             }}
                         >
                             {pages.map((page) => (
-                                <Button
-                                    href={page.url}
-                                    key={page.name}
-                                    sx={{ mx: "5px" }}
-                                    size="small"
-                                    color="neutral"
-                                >
-                                    {page.name}
-                                </Button>
+                                <Link key={page.name} href={page.url} passHref>
+                                    <Button
+                                        sx={{ mx: "5px" }}
+                                        size="small"
+                                        color="neutral"
+                                    >
+                                        {page.name}
+                                    </Button>
+                                </Link>
                             ))}
                         </Box>
                         <Box
