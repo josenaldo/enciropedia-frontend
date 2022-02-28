@@ -1,13 +1,24 @@
-import Head from "next/head";
 import Image from "next/image";
 
-import { Box, Container, Typography, IconButton, Button } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 
 import { theme } from "@/styles";
+import { getSortedPostsData } from "@/common/lib";
+
+import { NewsWall } from "@/components/news";
 
 const palette = theme.palette;
 
-export default function Home() {
+export async function getStaticProps() {
+    const allPostsData = getSortedPostsData();
+    return {
+        props: {
+            allPostsData,
+        },
+    };
+}
+
+export default function Home({ allPostsData }) {
     return (
         <>
             <Box
@@ -18,6 +29,15 @@ export default function Home() {
             >
                 <Hero />
             </Box>
+
+            <Box
+                component="section"
+                sx={{
+                    bgcolor: palette.background.b500,
+                }}
+            >
+                <NewsWall posts={allPostsData} />
+            </Box>
         </>
     );
 }
@@ -26,9 +46,9 @@ function Hero() {
     return (
         <Container
             sx={{
-                bgcolor: palette.background.alternative,
+                bgcolor: palette.background.dp01,
                 my: 5,
-                py: 10,
+                py: "40px",
                 borderRadius: "0.3rem",
             }}
         >
@@ -72,7 +92,7 @@ function Hero() {
                             fontSize: {
                                 xs: "1rem",
                                 sm: "1.2rem",
-                                md: "1.5rem",
+                                md: "1.3rem",
                             },
                             display: "flex",
                             textAlign: "center",
@@ -91,7 +111,7 @@ function Hero() {
                         href="/pnd"
                         size="large"
                         variant="contained"
-                        color="success"
+                        color="primary"
                         sx={{ mx: "5px" }}
                     >
                         Conheça o PND
@@ -100,7 +120,7 @@ function Hero() {
                         href="/biografia"
                         size="large"
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                         sx={{ m: "5px" }}
                     >
                         Conheça o Ciro
