@@ -32,7 +32,7 @@ No projeto, existe uma [pasta](https://github.com/josenaldo/enciropedia/tree/mai
 
 O formato do arquivo é bem simples:
 
-```md
+```markdown
 ---
 title: "CIRO GOMES - Inteligência Ltda. Podcast #244"
 date: 2021-08-20 20:00
@@ -54,7 +54,6 @@ tentou ser presidente 3 vezes, e em 2022 será tetra-candidato. O Vilela pensou
 em concorrer a presidente também, mas o fato de ter que sair do porão
 inviabilizou sua candidatura.
 
-
 Mais texto aqui. O texto de cima aparece na página de vídeos. O texto de baixo só aparece na página do vídeo.
 
 ```
@@ -69,7 +68,7 @@ No topo dos arquivos, entre a marcação `---`, temos os seguintes campos:
 - **excerpt** O primeiro parágrafo do texto. Ou os dois primeiros, caso o primeiro seja muito pequeno.
 - **video_id**: O ID do vídeo no youtube. O ID pode ser extraído direto da URL ou pode ser extraído usando a ferramenta [Youtube Video ID Extractor Online](https://freemediatools.com/youtubevideoid). Basta informar, nessa ferramenta, o link do vídeo, no youtube, que ela te diz qual o ID do vídeo.
 
-[Extrator de ID de vídeo](images/posts/2021-12-13-a-enciropedia-precisa-de-videos-a.png)
+![Extrator de ID de vídeo](/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-a.png)
 
 O trabalho é pegar cada vídeo da [lista de entrevistas do Ciro](https://www.youtube.com/playlist?list=PLUZtVUpn6Q5M5EmW7xwSHen__W_Vu0HyQ) e criar um arquivo. O mais difícil aí é caprichar na descrição do vídeo.
 
@@ -77,13 +76,13 @@ O trabalho é pegar cada vídeo da [lista de entrevistas do Ciro](https://www.yo
 
 Pra enviar o arquivo, basta criar uma nova tarefa (*Issue*) no repositório do projeto: [https://github.com/josenaldo/enciropedia/issues](https://github.com/josenaldo/enciropedia/issues).
 
-[Extrator de ID de vídeo](/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-b.jpg)
+![Extrator de ID de vídeo](/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-b.jpg)
 
 Na página, clica no botão `New`. Na página seguinte, no título, basta informar algo como "Adicionar vídeo NOME DO VIDEO"
 
 E no campo de comentário, você informa o link do vídeo e, logo abaixo, o conteúdo do arquivo de exemplo, preenchido.
 
-[Extrator de ID de vídeo](/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-d.png)
+![Extrator de ID de vídeo](/images/posts/2021-12-13-a-enciropedia-precisa-de-videos-d.png)
 
 Se quiserem um arquivo de exemplo, pra usar como template, basta pegar um na pasta [conteudo/_videos](https://raw.githubusercontent.com/josenaldo/enciropedia/main/conteudo/_videos/ciro-no-inteligencia-limitada.md).
 

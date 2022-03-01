@@ -5,13 +5,13 @@ import { Container, Box } from "@mui/material";
 import { MDXProvider } from "@mdx-js/react";
 
 import { NewsPage } from "@/components/news";
-import { ResponsiveImage } from "@/components/elements";
-import { Link } from "@/components/elements";
+import { Link, ResponsiveImage, Code } from "@/components/elements";
 import { getAllPostIds, getPostData } from "@/common/lib";
 
 const components = {
     img: ResponsiveImage,
     a: Link,
+    pre: Code,
 };
 
 export async function getStaticPaths() {

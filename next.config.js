@@ -7,6 +7,8 @@ module.exports = nextConfig;
 
 const withMDX = require("@next/mdx")({
     extension: /\.mdx?$/,
+    commonmark: true,
+    gfm: true,
     options: {
         remarkPlugins: [],
         rehypePlugins: [],

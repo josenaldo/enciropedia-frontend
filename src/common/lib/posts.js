@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import imageSize from "rehype-img-size";
 import externalLinks from "rehype-external-links";
+import rehypePrism from "rehype-prism-plus";
 
 const postsDirectory = path.join(process.cwd(), "content/_posts");
 
@@ -123,6 +124,7 @@ export async function getPostData(id) {
                         rel: ["nofollow", "noopener", "noreferrer"],
                     },
                 ],
+                [rehypePrism],
             ],
         },
     });
