@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Box } from "@mui/material";
 
 export function Code(props) {
-    console.log(props);
     return (
         <Box
             className="remark-highlight"
