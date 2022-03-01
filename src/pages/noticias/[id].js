@@ -1,19 +1,18 @@
-import * as React from "react";
-import {
-    Box,
-    Container,
-    Card,
-    CardContent,
-    CardActions,
-    CardMedia,
-    CardActionArea,
-    Typography,
-    Button,
-    Chip,
-} from "@mui/material";
+import Image from "next/image";
+
+import { Container, Box } from "@mui/material";
+
+import { MDXProvider } from "@mdx-js/react";
 
 import { NewsPage } from "@/components/news";
+import { Link, ResponsiveImage, Code } from "@/components/elements";
 import { getAllPostIds, getPostData } from "@/common/lib";
+
+const components = {
+    img: ResponsiveImage,
+    a: Link,
+    pre: Code,
+};
 
 export async function getStaticPaths() {
     const paths = getAllPostIds();
@@ -35,7 +34,9 @@ export async function getStaticProps({ params }) {
 export default function Post({ post }) {
     return (
         <Container sx={{ my: "40px" }}>
-            <NewsPage post={post} fullPage></NewsPage>
+            <MDXProvider components={components}>
+                <NewsPage post={post} fullPage></NewsPage>
+            </MDXProvider>
         </Container>
     );
 }

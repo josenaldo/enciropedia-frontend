@@ -1,123 +1,138 @@
 import Image from "next/image";
-import Link from "next/link";
+import Head from "next/head";
+import { MDXRemote } from "next-mdx-remote";
 
 import {
     Box,
     Card,
     CardContent,
-    CardActions,
     CardMedia,
-    CardActionArea,
     Typography,
-    Button,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
 
+import { Link, FormattedDate } from "@/components/elements";
+
 export function NewsPage({ post }) {
-    console.log(post);
     return (
-        <Card
-            elevation={1}
-            sx={{
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                itemsAlign: "flex-start",
-            }}
-        >
-            {post.image ? (
-                <CardMedia title={post.title}>
-                    <Image
-                        src={post.image.path}
-                        height={post.image.height}
-                        width={post.image.width}
-                        objectFit="contain"
-                        alt={post.title}
-                    />
-                </CardMedia>
-            ) : (
-                ""
-            )}
-            <CardContent
+        <>
+            <Head>
+                <title>{post.title}</title>
+            </Head>
+            <Card
+                elevation={1}
                 sx={{
-                    width: "100%",
                     height: "100%",
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    itemsAlign: "flex-start",
                 }}
             >
-                <Box>
-                    <Typography
-                        gutterBottom
-                        variant="h2"
-                        component="div"
-                        color="white"
-                        textAlign="center"
-                        fontWeight="bold"
-                    >
-                        {post.title}
-                    </Typography>
-                </Box>
-
-                <Box
+                {post.image ? (
+                    <CardMedia title={post.title}>
+                        <Image
+                            src={post.image.path}
+                            height={post.image.height}
+                            width={post.image.width}
+                            objectFit="contain"
+                            alt={post.title}
+                        />
+                    </CardMedia>
+                ) : (
+                    ""
+                )}
+                <CardContent
                     sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        width: "100%",
+                        height: "100%",
+                        px: {
+                            sx: "5px",
+                            sm: "10px",
+                            md: "20px",
+                            lg: "40px",
+                        },
                     }}
                 >
-                    <Chip
-                        label={post.category}
-                        color="neutral"
-                        size="small"
-                        sx={{ mx: "10px" }}
-                    />
-                    <Typography
-                        color="neutral.main"
-                        variant="caption"
-                        sx={{ mx: "10px" }}
+                    <Box>
+                        <Typography
+                            gutterBottom
+                            variant="h2"
+                            component="div"
+                            color="white"
+                            textAlign="center"
+                            fontWeight="bold"
+                            sx={{
+                                fontSize: {
+                                    xs: "2.00rem",
+                                    sm: "2.50rem",
+                                    md: "3.00rem",
+                                    lg: "3.50rem",
+                                },
+                            }}
+                        >
+                            {post.title}
+                        </Typography>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            py: "20px",
+                        }}
                     >
-                        {post.date}
-                    </Typography>
-
-                    <Link href={post.authorUrl} passHref>
-                        <MuiLink
+                        <Chip
+                            label={post.category}
+                            color="neutral"
+                            size="small"
+                            sx={{ mx: "10px" }}
+                        />
+                        <Typography
+                            color="neutral.main"
                             variant="caption"
-                            // component="div"
+                            sx={{ mx: "10px" }}
+                        >
+                            <FormattedDate dateString={post.date} />
+                        </Typography>
+                        <Link
+                            href={post.authorUrl}
+                            variant="caption"
                             color="neutral.main"
                             underline="none"
-                            gutterBottom
                             sx={{ mx: "10px" }}
                         >
                             {post.author}
-                        </MuiLink>
-                    </Link>
-                </Box>
+                        </Link>
+                    </Box>
+                    <Box
+                        sx={{
+                            p: "20px",
+                            bgcolor: "background.b800",
+                            color: "neutral.darker",
+                            textAlign: "center",
+                            fontStyle: "italic",
+                            borderRadius: "0.2rem",
+                        }}
+                    >
+                        <Typography variant="body1" color="neutral.light">
+                            {post.summary}
+                        </Typography>
+                    </Box>
 
-                <Box
-                    sx={{
-                        m: "20px",
-                        p: "20px",
-                        bgcolor: "background.b800",
-                        color: "neutral.darker",
-                        textAlign: "center",
-                        fontStyle: "italic",
-                        borderRadius: "0.2rem",
-                    }}
-                >
-                    <Typography variant="body1" color="neutral.light">
-                        {post.summary}
-                    </Typography>
-                </Box>
-                <Box
-                    sx={{
-                        mx: "40px",
-                        color: "neutral.main",
-                    }}
-                    dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-                ></Box>
-            </CardContent>
-        </Card>
+                    <Box
+                        sx={{
+                            color: "neutral.main",
+                        }}
+                    >
+                        <MDXRemote
+                            {...post.mdxSource}
+                            // components={{ Button, SyntaxHighlighter }}
+                        />
+                    </Box>
+                </CardContent>
+            </Card>
+        </>
     );
 }

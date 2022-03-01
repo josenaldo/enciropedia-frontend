@@ -5,7 +5,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <meta charset="utf-8" />
+                    <meta charSet="utf-8" />
 
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge"></meta>
                     <link
@@ -15,6 +15,14 @@ class MyDocument extends Document {
                     <link
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                    />
+
+                    <link
+                        rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-darcula.css"
+                        integrity="sha512-GDAZ4WVai07by1+4lddBjO4anWI2wZFXT8gsfvahTctwsA/Qoe1GXkBpltYHCMvaLWA6L6eVdiF8Ky70Ssj3Fg=="
+                        crossOrigin="anonymous"
+                        referrerPolicy="no-referrer"
                     />
 
                     {/* <!-- Favicons generated at http://realfavicongenerator.net/--> */}

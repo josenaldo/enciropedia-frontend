@@ -10,5 +10,3 @@ video_id: ukgfu_XEmIA
 ---
 
 Debate do Parlatório com Ciro Gomes.
-
-<!-- more -->
