@@ -51,12 +51,16 @@ export function Header(props) {
                     >
                         {/* Logo Desktop */}
                         <Box component="div" sx={{ mr: 2 }}>
-                            <Image
-                                src="/images/enciropedia-logo-navbar.svg"
-                                alt="Logo a enciropedia"
-                                width={131}
-                                height={27}
-                            />
+                            <Link href="/">
+                                <a>
+                                    <Image
+                                        src="/images/enciropedia-logo-navbar.svg"
+                                        alt="Logo a enciropedia"
+                                        width={131}
+                                        height={27}
+                                    />
+                                </a>
+                            </Link>
                         </Box>
                         {/* Menu responsivo */}
                         <Box
@@ -93,12 +97,16 @@ export function Header(props) {
                                 >
                                     <List>
                                         <ListItem>
-                                            <Image
-                                                src="/images/enciropedia-logo-navbar.svg"
-                                                alt="Logo a enciropedia"
-                                                width={131}
-                                                height={27}
-                                            />
+                                            <Link href="/">
+                                                <a>
+                                                    <Image
+                                                        src="/images/enciropedia-logo-navbar.svg"
+                                                        alt="Logo a enciropedia"
+                                                        width={131}
+                                                        height={27}
+                                                    />
+                                                </a>
+                                            </Link>
                                         </ListItem>
                                     </List>
                                     <Divider />
