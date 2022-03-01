@@ -1,12 +1,15 @@
 ---
-data: 1961
+date: 1961
 title: Infância em Sobral
-ordem: 20
+order: 20
+image:
+    path: /images/biografia/1957-nascimento.jpg
+    width:
+    heigth:
 excerpt: |-
     Ciro fala com carinho da infância em Sobral, da alegria dos dias
     de chuva no interior do sertão cearense e da rígida educação que
     recebeu dos pais.
-
 ---
 
 Ciro fala com carinho da infância em Sobral, da alegria dos dias

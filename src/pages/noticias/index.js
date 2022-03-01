@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { getSortedPostsData } from "@/common/lib";
 import { NewsWall } from "@/components/news";
 
@@ -11,7 +11,7 @@ export async function getStaticProps() {
     };
 }
 
-export default function Noticias({ allPostsData }) {
+export default function NoticiasPage({ allPostsData }) {
     return (
         <Container>
             <Box component="section">
