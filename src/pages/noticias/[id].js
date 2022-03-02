@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Image from "next/image";
 
 import { Container, Box } from "@mui/material";
@@ -31,7 +33,15 @@ export async function getStaticProps({ params }) {
     };
 }
 
-export default function Post({ post }) {
+export default function Post({ setCrumbs, post }) {
+    useEffect(() => {
+        setCrumbs([
+            { text: "Home", href: "/" },
+            { text: "Notícias", href: "/noticias" },
+            { text: post.title, href: post.url },
+        ]);
+    }, [setCrumbs, post]);
+
     return (
         <Container sx={{ my: "40px" }}>
             <MDXProvider components={components}>

@@ -1,12 +1,22 @@
 import { Box } from "@mui/material";
-import { Header, Footer } from "@/common/layouts";
+import { Header, Footer, Breadcrumbs } from "@/common/layouts";
+import React from "react";
 
-export function DefaultTemplate({ children }) {
+export function DefaultTemplate(props) {
+    const [crumbs, setCrumbs] = React.useState([{ text: "Home", href: "/" }]);
+
     return (
         <Box>
             <Header />
 
-            <main>{children}</main>
+            <Breadcrumbs crumbs={crumbs} />
+
+            <main>
+                {React.cloneElement(props.children, {
+                    crumbs,
+                    setCrumbs,
+                })}
+            </main>
 
             <Footer />
         </Box>
