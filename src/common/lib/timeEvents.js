@@ -26,22 +26,36 @@ export function getAllTimeEventsData(numberOfTimeEvents) {
         const fileContents = fs.readFileSync(fullPath, "utf8");
 
         // Use gray-matter to parse the post metadata section
-        const { data } = matter(fileContents);
+        const { data, content } = matter(fileContents);
 
         // Combine the data with the id
         return {
-            id,
+            date: data.date,
+            title: data.title,
+            excerpt: data.excerpt,
             url: `/${timeEventsCategory}/${id}`,
-            ...data,
+            order: data.order,
+            // cardDetailedText: data.content,
+            media: {
+                type: "IMAGE",
+                source: {
+                    url: data.image.path,
+                },
+            },
         };
+        // return {
+        //     id,
+        //     url: `/${timeEventsCategory}/${id}`,
+        //     ...data,
+        // };
     });
 
     // Sort timeEvents by order
     const timeEventsData = allTimeEventsData.sort(
         ({ order: a }, { order: b }) => {
-            if (a < b) {
+            if (a > b) {
                 return 1;
-            } else if (a > b) {
+            } else if (a < b) {
                 return -1;
             } else {
                 return 0;
