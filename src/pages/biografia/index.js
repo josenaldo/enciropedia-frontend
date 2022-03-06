@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Box, Container, Typography, Button } from "@mui/material";
 import {
     VerticalTimeline,
@@ -32,6 +31,7 @@ function useWidth() {
 
 export async function getStaticProps() {
     const timeEvents = getAllTimeEventsData();
+
     return {
         props: {
             timeEvents,
@@ -39,14 +39,7 @@ export async function getStaticProps() {
     };
 }
 
-export default function BiografiaPage({ setCrumbs, timeEvents }) {
-    useEffect(() => {
-        setCrumbs([
-            { text: "Home", href: "/" },
-            { text: "Biografia", href: "/biografia" },
-        ]);
-    }, [setCrumbs]);
-
+export default function BiografiaPage({ breacrumbs, timeEvents }) {
     const theme = useTheme();
     const width = useWidth();
 

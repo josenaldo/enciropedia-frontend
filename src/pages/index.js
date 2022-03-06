@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import Image from "next/image";
 
 import { Box, Container, Typography, Button } from "@mui/material";
@@ -17,10 +15,6 @@ export async function getStaticProps() {
 }
 
 export default function HomePage({ setCrumbs, allPostsData }) {
-    useEffect(() => {
-        setCrumbs([{ text: "Home", href: "/" }]);
-    }, [setCrumbs]);
-
     return (
         <>
             <Box

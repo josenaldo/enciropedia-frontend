@@ -89,11 +89,9 @@ export function NewsCard({ post }) {
                 </Box>
             </CardContent>
 
-            <CardActions>
-                <Link href={post.url} passHref>
-                    <Button variant="text" color="primary">
-                        Leia mais...
-                    </Button>
+            <CardActions sx={{ p: "16px" }}>
+                <Link href={post.url} underline="none">
+                    Leia mais...
                 </Link>
             </CardActions>
         </Card>

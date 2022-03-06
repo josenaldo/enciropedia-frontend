@@ -72,6 +72,33 @@ export function getSortedPostsData(numberOfPosts) {
     }
 }
 
+export function getPostsLinks() {
+    // Get file names under /posts
+    const filenames = fs.readdirSync(postsDirectory);
+
+    const allPostsData = filenames.map((filename) => {
+        // Remove ".md" from file name to get id
+        const id = extractPostId(filename);
+        const datePrefix = extractPostDatePrexix(filename);
+
+        // Read markdown file as string
+        const fullPath = path.join(postsDirectory, filename);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        // Use gray-matter to parse the post metadata section
+        const matterResult = matter(fileContents);
+
+        // Combine the data with the id
+        return {
+            id,
+            url: `/${matterResult.data.category}/${id}`,
+            text: matterResult.data.title,
+        };
+    });
+
+    return allPostsData;
+}
+
 /**
  * Returns an array that looks like this:
  *

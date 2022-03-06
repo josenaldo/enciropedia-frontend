@@ -22,120 +22,119 @@ export function Footer(props) {
     const palette = theme.palette;
 
     return (
-        <footer>
-            <Box
-                sx={{
-                    bgcolor: palette.footer.background,
-                    color: palette.footer.color,
-                }}
-            >
-                <Container sx={{ py: "20px" }}>
+        <Box
+            component="footer"
+            sx={{
+                bgcolor: palette.footer.background,
+                color: palette.footer.color,
+            }}
+        >
+            <Container sx={{ py: "20px" }}>
+                <Box
+                    sx={{
+                        display: { xs: "flex", md: "grid" },
+                        alignItens: "flex-start",
+                        justifyContent: "space-between",
+                        width: "100%",
+                        flexDirection: { xs: "column", md: "row" },
+
+                        gridTemplateColumns: {
+                            xs: "none",
+                            md: "repeat(3, 1fr)",
+                        },
+                    }}
+                >
                     <Box
                         sx={{
-                            display: { xs: "flex", md: "grid" },
-                            alignItens: "flex-start",
-                            justifyContent: "space-between",
-                            width: "100%",
-                            flexDirection: { xs: "column", md: "row" },
-
-                            gridTemplateColumns: {
-                                xs: "none",
-                                md: "repeat(3, 1fr)",
-                            },
+                            display: "grid",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            my: "20px",
                         }}
                     >
-                        <Box
-                            sx={{
-                                display: "grid",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                my: "20px",
-                            }}
-                        >
-                            <Typography variant="h6" textAlign="center">
-                                Encontre esse projeto no Github
-                            </Typography>
-                            <Box sx={{ textAlign: "center" }}>
-                                <IconButton
-                                    sx={{ color: palette.neutral.main }}
-                                    href="https://github.com/josenaldo/enciropedia/"
-                                    target="_new"
-                                >
-                                    <GitHubIcon sx={{ fontSize: 100 }} />
-                                </IconButton>
-                            </Box>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: "grid",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                my: "20px",
-                            }}
-                        >
-                            <Typography variant="h6" textAlign="center">
-                                Quer ajudar esse projeto?
-                            </Typography>
-                            <Button
-                                href="/quero-ajudar/"
+                        <Typography variant="h6" textAlign="center">
+                            Encontre esse projeto no Github
+                        </Typography>
+                        <Box sx={{ textAlign: "center" }}>
+                            <IconButton
+                                sx={{ color: palette.neutral.main }}
+                                href="https://github.com/josenaldo/enciropedia/"
                                 target="_new"
-                                size="large"
-                                sx={{
-                                    color: palette.neutral.main,
-                                }}
                             >
-                                <Typography variant="h5" textAlign="center">
-                                    Colabore!
-                                </Typography>
-                            </Button>
+                                <GitHubIcon sx={{ fontSize: 100 }} />
+                            </IconButton>
                         </Box>
-                        <Box
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "grid",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            my: "20px",
+                        }}
+                    >
+                        <Typography variant="h6" textAlign="center">
+                            Quer ajudar esse projeto?
+                        </Typography>
+                        <Button
+                            href="/quero-ajudar/"
+                            target="_new"
+                            size="large"
                             sx={{
-                                display: "grid",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                my: "20px",
+                                color: palette.neutral.main,
                             }}
                         >
-                            <Typography variant="h6" textAlign="center">
-                                Quer falar comigo?
+                            <Typography variant="h5" textAlign="center">
+                                Colabore!
                             </Typography>
-                            <Box
-                                component="ul"
-                                sx={{
-                                    listStyleType: "none",
-                                    margin: 0,
-                                    padding: 0,
-                                }}
-                            >
-                                {socials.map((social) => (
-                                    <Box
-                                        component="li"
-                                        key={social.url}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "grid",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            my: "20px",
+                        }}
+                    >
+                        <Typography variant="h6" textAlign="center">
+                            Quer falar comigo?
+                        </Typography>
+                        <Box
+                            component="ul"
+                            sx={{
+                                listStyleType: "none",
+                                margin: 0,
+                                padding: 0,
+                            }}
+                        >
+                            {socials.map((social) => (
+                                <Box
+                                    component="li"
+                                    key={social.url}
+                                    sx={{
+                                        display: "inline",
+                                        magin: "0 5px",
+                                    }}
+                                >
+                                    <IconButton
+                                        href={social.url}
+                                        target="_new"
                                         sx={{
-                                            display: "inline",
-                                            magin: "0 5px",
+                                            color: palette.neutral.main,
                                         }}
                                     >
-                                        <IconButton
-                                            href={social.url}
-                                            target="_new"
-                                            sx={{
-                                                color: palette.neutral.main,
-                                            }}
-                                        >
-                                            <social.icon />
-                                        </IconButton>
-                                    </Box>
-                                ))}
-                            </Box>
+                                        <social.icon />
+                                    </IconButton>
+                                </Box>
+                            ))}
                         </Box>
                     </Box>
-                    <Box sx={{ my: "10px", textAlign: "center" }}>
-                        Copyright © 2022 - Josenaldo de Oliveira Matos Filho
-                    </Box>
-                </Container>
-            </Box>
-        </footer>
+                </Box>
+                <Box sx={{ my: "10px", textAlign: "center" }}>
+                    Copyright © 2022 - Josenaldo de Oliveira Matos Filho
+                </Box>
+            </Container>
+        </Box>
     );
 }
