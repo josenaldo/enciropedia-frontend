@@ -1,8 +1,11 @@
 ---
-data: 1957
+date: 1957
 title: Nascimento
-ordem: 10
-image: /images/biografia/1957-nascimento.jpg
+order: 10
+image:
+    path: /images/biografia/1957-nascimento.jpg
+    width:
+    heigth:
 excerpt: |-
     Ciro Ferreira Gomes, filho do cearense José Euclides Ferreira Gomes Júnior (1918-1996) e da paulista Maria José Santos (1928-2015), nasceu na casa da avó materna, em Pindamonhangaba, interior de São Paulo.
 ---

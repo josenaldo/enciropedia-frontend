@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
+import NextLink from "next/link";
 import { MDXRemote } from "next-mdx-remote";
 
 import {
@@ -9,6 +10,7 @@ import {
     CardMedia,
     Typography,
     Chip,
+    Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
@@ -83,12 +85,15 @@ export function NewsPage({ post }) {
                             py: "20px",
                         }}
                     >
-                        <Chip
-                            label={post.category}
-                            color="neutral"
-                            size="small"
-                            sx={{ mx: "10px" }}
-                        />
+                        <MuiLink underline="none">
+                            <Chip
+                                label={post.category}
+                                color="neutral"
+                                size="small"
+                                clickable={true}
+                                sx={{ textDecaoration: "none" }}
+                            />
+                        </MuiLink>
                         <Typography
                             color="neutral.main"
                             variant="caption"

@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
     Box,
     Card,
@@ -7,12 +8,12 @@ import {
     Typography,
     Button,
     Chip,
+    Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
 
 export function NewsCard({ post }) {
-    console.log(post);
     return (
         <Card
             elevation={1}
@@ -62,7 +63,17 @@ export function NewsCard({ post }) {
                         alignItems: "center",
                     }}
                 >
-                    <Chip label={post.category} color="neutral" size="small" />
+                    <NextLink href={`/${post.category}`} passHref>
+                        <MuiLink underline="none">
+                            <Chip
+                                label={post.category}
+                                color="neutral"
+                                size="small"
+                                clickable={true}
+                                sx={{ textDecaoration: "none" }}
+                            />
+                        </MuiLink>
+                    </NextLink>
                     <Typography
                         color="neutral.main"
                         variant="caption"
@@ -78,11 +89,9 @@ export function NewsCard({ post }) {
                 </Box>
             </CardContent>
 
-            <CardActions>
-                <Link href={post.url} passHref>
-                    <Button variant="text" color="primary">
-                        Leia mais...
-                    </Button>
+            <CardActions sx={{ p: "16px" }}>
+                <Link href={post.url} underline="none">
+                    Leia mais...
                 </Link>
             </CardActions>
         </Card>

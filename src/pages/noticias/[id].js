@@ -31,7 +31,7 @@ export async function getStaticProps({ params }) {
     };
 }
 
-export default function Post({ post }) {
+export default function Post({ setCrumbs, post }) {
     return (
         <Container sx={{ my: "40px" }}>
             <MDXProvider components={components}>

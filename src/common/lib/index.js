@@ -1,1 +1,12 @@
-export { getSortedPostsData, getAllPostIds, getPostData } from "./posts";
+export {
+    getSortedPostsData,
+    getAllPostIds,
+    getPostData,
+    getPostsLinks,
+} from "./posts";
+
+export {
+    getAllTimeEventsData,
+    getAllTimeEventsIds,
+    getdTimeEventData,
+} from "./timeEvents";

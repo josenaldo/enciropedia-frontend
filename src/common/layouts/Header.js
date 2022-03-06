@@ -20,16 +20,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { SearchInput } from "@/components/elements";
 
-const pages = [
-    { name: "Home", url: "/" },
-    { name: "Notícias", url: "/noticias" },
-    { name: "Biografia", url: "/biografia" },
-    { name: "PND", url: "/pnd" },
-    { name: "Vídeos", url: "/videos" },
-    { name: "Podcasts", url: "/podcast" },
-    { name: "Movimentos de apoio", url: "/movimentos" },
-    { name: "Colaboradores", url: "/colaboradores" },
-];
+import { topPages } from "@/constants";
 
 export function Header(props) {
     const [menuOpen, setMenuOpen] = React.useState(false);
@@ -51,12 +42,16 @@ export function Header(props) {
                     >
                         {/* Logo Desktop */}
                         <Box component="div" sx={{ mr: 2 }}>
-                            <Image
-                                src="/images/enciropedia-logo-navbar.svg"
-                                alt="Logo a enciropedia"
-                                width={131}
-                                height={27}
-                            />
+                            <Link href="/">
+                                <a>
+                                    <Image
+                                        src="/images/enciropedia-logo-navbar.svg"
+                                        alt="Logo a enciropedia"
+                                        width={131}
+                                        height={27}
+                                    />
+                                </a>
+                            </Link>
                         </Box>
                         {/* Menu responsivo */}
                         <Box
@@ -93,24 +88,36 @@ export function Header(props) {
                                 >
                                     <List>
                                         <ListItem>
-                                            <Image
-                                                src="/images/enciropedia-logo-navbar.svg"
-                                                alt="Logo a enciropedia"
-                                                width={131}
-                                                height={27}
-                                            />
+                                            <Link href="/">
+                                                <a>
+                                                    <Image
+                                                        src="/images/enciropedia-logo-navbar.svg"
+                                                        alt="Logo a enciropedia"
+                                                        width={131}
+                                                        height={27}
+                                                    />
+                                                </a>
+                                            </Link>
                                         </ListItem>
                                     </List>
                                     <Divider />
                                     <List>
-                                        {pages.map((page) => (
-                                            <ListItem button key={page.name}>
+                                        <ListItem button>
+                                            <ListItemButton
+                                                component="a"
+                                                href="/"
+                                            >
+                                                <ListItemText primary="Home" />
+                                            </ListItemButton>
+                                        </ListItem>
+                                        {topPages.map((page) => (
+                                            <ListItem button key={page.text}>
                                                 <ListItemButton
                                                     component="a"
                                                     href={page.url}
                                                 >
                                                     <ListItemText
-                                                        primary={page.name}
+                                                        primary={page.text}
                                                     />
                                                 </ListItemButton>
                                             </ListItem>
@@ -142,14 +149,23 @@ export function Header(props) {
                                 mx: "5px",
                             }}
                         >
-                            {pages.map((page) => (
-                                <Link key={page.name} href={page.url} passHref>
+                            <Link href="/" passHref>
+                                <Button
+                                    sx={{ mx: "5px" }}
+                                    size="small"
+                                    color="neutral"
+                                >
+                                    Home
+                                </Button>
+                            </Link>
+                            {topPages.map((page) => (
+                                <Link key={page.text} href={page.url} passHref>
                                     <Button
                                         sx={{ mx: "5px" }}
                                         size="small"
                                         color="neutral"
                                     >
-                                        {page.name}
+                                        {page.text}
                                     </Button>
                                 </Link>
                             ))}

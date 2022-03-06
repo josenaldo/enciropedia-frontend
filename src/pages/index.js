@@ -2,15 +2,11 @@ import Image from "next/image";
 
 import { Box, Container, Typography, Button } from "@mui/material";
 
-import { theme } from "@/styles";
 import { getSortedPostsData } from "@/common/lib";
-
 import { NewsWall } from "@/components/news";
 
-const palette = theme.palette;
-
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData();
+    const allPostsData = getSortedPostsData(3);
     return {
         props: {
             allPostsData,
@@ -18,13 +14,13 @@ export async function getStaticProps() {
     };
 }
 
-export default function Home({ allPostsData }) {
+export default function HomePage({ setCrumbs, allPostsData }) {
     return (
         <>
             <Box
                 component="section"
                 sx={{
-                    bgcolor: palette.background.default,
+                    bgcolor: "background.default",
                 }}
             >
                 <Hero />
@@ -33,7 +29,7 @@ export default function Home({ allPostsData }) {
             <Box
                 component="section"
                 sx={{
-                    bgcolor: palette.background.b500,
+                    bgcolor: "background.b500",
                 }}
             >
                 <NewsWall posts={allPostsData} />
@@ -46,7 +42,7 @@ function Hero() {
     return (
         <Container
             sx={{
-                bgcolor: palette.background.dp01,
+                bgcolor: "background.paper",
                 my: 5,
                 py: "40px",
                 borderRadius: "0.3rem",
@@ -97,7 +93,7 @@ function Hero() {
                             display: "flex",
                             textAlign: "center",
                             width: "50%",
-                            color: palette.neutral.main,
+                            color: "neutral.main",
                         }}
                     >
                         Cansou de procurar informações sobre o PND? Cansou de
