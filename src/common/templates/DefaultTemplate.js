@@ -15,7 +15,7 @@ export function DefaultTemplate({ children }) {
     }, []);
 
     const getTextGenerator = React.useCallback(async (param, query) => {
-        const baseUrl = AppConfig.baseurl || "http://localhost:3000";
+        const baseUrl = AppConfig.baseurl;
         const urlPageById = `${baseUrl}/api/page-by-id?id=${query}`;
 
         const page = await fetch(urlPageById)
