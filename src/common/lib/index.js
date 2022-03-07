@@ -11,4 +11,9 @@ export {
     getdTimeEventData,
 } from "./timeEvents";
 
-export { getSortedVideosData } from "./videos";
+export {
+    getSortedVideosData,
+    getAllVideosIds,
+    getVideoData,
+    getVideosLinks,
+} from "./videos";

@@ -4,9 +4,9 @@ import { Container, Box } from "@mui/material";
 
 import { MDXProvider } from "@mdx-js/react";
 
-import { NewsPage } from "@/components/news";
+import { VideoPage } from "@/components/videos";
 import { Link, ResponsiveImage, Code } from "@/components/elements";
-import { getAllPostIds, getPostData } from "@/common/lib";
+import { getAllVideosIds, getVideoData } from "@/common/lib";
 
 const components = {
     img: ResponsiveImage,
@@ -15,7 +15,7 @@ const components = {
 };
 
 export async function getStaticPaths() {
-    const paths = getAllPostIds();
+    const paths = getAllVideosIds();
     return {
         paths,
         fallback: false,
@@ -23,19 +23,19 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const post = await getPostData(params.id);
+    const video = await getVideoData(params.id);
     return {
         props: {
-            post,
+            video,
         },
     };
 }
 
-export default function Post({ post }) {
+export default function Video({ video }) {
     return (
         <Container sx={{ my: "40px" }}>
             <MDXProvider components={components}>
-                <NewsPage post={post} fullPage></NewsPage>
+                <VideoPage video={video} fullPage></VideoPage>
             </MDXProvider>
         </Container>
     );

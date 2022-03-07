@@ -12,28 +12,6 @@ function extractVideoId(filename) {
     return filename.replace(/\.md$/, "");
 }
 
-async function serializeContent(content) {
-    const mdxSource = await serialize(content, {
-        mdxOptions: {
-            // use the image size plugin, you can also specify which folder to load images from
-            // in my case images are in /public/images/, so I just prepend 'public'
-            rehypePlugins: [
-                [imageSize, { dir: "public" }],
-                [
-                    externalLinks,
-                    {
-                        target: "_blank",
-                        rel: ["nofollow", "noopener", "noreferrer"],
-                    },
-                ],
-                [rehypePrism],
-            ],
-        },
-    });
-
-    return mdxSource;
-}
-
 export function getSortedVideosData(numberOfVideos) {
     // Get file names under /videos
     const filenames = fs.readdirSync(videosDirectory);
@@ -73,4 +51,94 @@ export function getSortedVideosData(numberOfVideos) {
     } else {
         return videosData;
     }
+}
+
+export function getVideosLinks() {
+    // Get file names under /videos
+    const filenames = fs.readdirSync(videosDirectory);
+
+    const allVideosData = filenames.map((filename) => {
+        // Remove ".md" from file name to get id
+        const id = extractVideoId(filename);
+
+        // Read markdown file as string
+        const fullPath = path.join(videosDirectory, filename);
+        const fileContents = fs.readFileSync(fullPath, "utf8");
+
+        // Use gray-matter to parse the post metadata section
+        const { data } = matter(fileContents);
+
+        // Combine the data with the id
+        return {
+            id,
+            url: `/${data.category}/${id}`,
+            text: data.title,
+        };
+    });
+
+    return allVideosData;
+}
+
+/**
+ * Returns an array that looks like this:
+ *
+ * @example
+ * [
+ *     {
+ *         params: {
+ *             id: 'ssg-ssr'
+ *         }
+ *     },
+ *     {
+ *         params: {
+ *             id: 'pre-rendering'
+ *         }
+ *     }
+ * ]
+ */
+export function getAllVideosIds() {
+    const filenames = fs.readdirSync(videosDirectory);
+
+    return filenames.map((filename) => {
+        return {
+            params: {
+                id: extractVideoId(filename),
+            },
+        };
+    });
+}
+
+export async function getVideoData(id) {
+    const fullPath = path.join(videosDirectory, `${id}.md`);
+    const fileContents = fs.readFileSync(fullPath, "utf8");
+
+    // Use gray-matter to parse the post metadata section
+    const matterResult = matter(fileContents);
+
+    const mdxSource = await serialize(matterResult.content, {
+        mdxOptions: {
+            // use the image size plugin, you can also specify which folder to load images from
+            // in my case images are in /public/images/, so I just prepend 'public'
+            rehypePlugins: [
+                [imageSize, { dir: "public" }],
+                [
+                    externalLinks,
+                    {
+                        target: "_blank",
+                        rel: ["nofollow", "noopener", "noreferrer"],
+                    },
+                ],
+                [rehypePrism],
+            ],
+        },
+    });
+
+    // Combine the data with the id
+    return {
+        id,
+        mdxSource,
+        url: `/${matterResult.data.category}/${id}`,
+        authorUrl: `/colaboradores/${matterResult.data.author}`,
+        ...matterResult.data,
+    };
 }
