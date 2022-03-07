@@ -11,7 +11,7 @@ export async function getStaticProps() {
     };
 }
 
-export default function NoticiasPage({ setCrumbs, allPostsData }) {
+export default function NoticiasPage({ allPostsData }) {
     return (
         <Container>
             <Box component="section">

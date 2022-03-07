@@ -6,9 +6,11 @@ const theme = createTheme({
         mode: "dark",
         primary: {
             main: green["200"],
+            contrastText: "#121212",
         },
         secondary: {
             main: amber["200"],
+            contrastText: "#121212",
         },
         neutral: {
             lighter: grey["50"],

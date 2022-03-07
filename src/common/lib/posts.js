@@ -49,7 +49,7 @@ export function getSortedPostsData(numberOfPosts) {
             id,
             datePrefix,
             url: `/${matterResult.data.category}/${id}`,
-            authorUrl: `/colaboradores}/${matterResult.data.author}`,
+            authorUrl: `/colaboradores/${matterResult.data.author}`,
             ...matterResult.data,
         };
     });
@@ -162,7 +162,7 @@ export async function getPostData(id) {
         datePrefix,
         mdxSource,
         url: `/${matterResult.data.category}/${id}`,
-        authorUrl: `/colaboradores}/${matterResult.data.author}`,
+        authorUrl: `/colaboradores/${matterResult.data.author}`,
         ...matterResult.data,
     };
 }
