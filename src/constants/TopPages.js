@@ -1,4 +1,4 @@
-export const topPages = [
+const topPages = [
     { id: "pnd", url: "/pnd", text: "PND" },
     { id: "noticias", url: "/noticias", text: "Notícias" },
     { id: "biografia", url: "/biografia", text: "Biografia" },
@@ -7,3 +7,5 @@ export const topPages = [
     { id: "movimentos", url: "/movimentos", text: "Movimentos" },
     { id: "colaboradores", url: "/colaboradores", text: "Colaboradores" },
 ];
+
+export { topPages };

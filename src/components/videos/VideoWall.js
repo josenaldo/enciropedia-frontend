@@ -1,7 +1,7 @@
 import { Container, Box } from "@mui/material";
 import { VideoCard } from "@/components/videos";
 
-export function VideoWall({ videos }) {
+const VideoWall = ({ videos }) => {
     return (
         <Container sx={{ px: { lg: 0 }, py: "40px" }}>
             <Box
@@ -25,4 +25,6 @@ export function VideoWall({ videos }) {
             </Box>
         </Container>
     );
-}
+};
+
+export { VideoWall };

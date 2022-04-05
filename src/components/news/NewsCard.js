@@ -6,14 +6,13 @@ import {
     CardActions,
     CardMedia,
     Typography,
-    Button,
     Chip,
     Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
 
-export function NewsCard({ post }) {
+const NewsCard = ({ post }) => {
     return (
         <Card
             elevation={1}
@@ -96,4 +95,6 @@ export function NewsCard({ post }) {
             </CardActions>
         </Card>
     );
-}
+};
+
+export { NewsCard };

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Head from "next/head";
-import NextLink from "next/link";
 import { MDXRemote } from "next-mdx-remote";
 
 import {
@@ -15,7 +14,7 @@ import {
 
 import { Link, FormattedDate } from "@/components/elements";
 
-export function NewsPage({ post }) {
+const NewsPage = ({ post }) => {
     return (
         <>
             <Head>
@@ -140,4 +139,6 @@ export function NewsPage({ post }) {
             </Card>
         </>
     );
-}
+};
+
+export { NewsPage };

@@ -13,7 +13,7 @@ export async function getStaticProps() {
     };
 }
 
-const Home = ({ allPostsData }) => {
+export default function Home({ allPostsData }) {
     return (
         <>
             <Box
@@ -35,6 +35,4 @@ const Home = ({ allPostsData }) => {
             </Box>
         </>
     );
-};
-
-export default Home;
+}

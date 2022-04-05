@@ -12,7 +12,7 @@ import {
 
 import { Link, FormattedDate } from "@/components/elements";
 
-export function VideoCard({ video }) {
+const VideoCard = ({ video }) => {
     return (
         <Card
             elevation={1}
@@ -90,4 +90,6 @@ export function VideoCard({ video }) {
             </CardActions>
         </Card>
     );
-}
+};
+
+export { VideoCard };

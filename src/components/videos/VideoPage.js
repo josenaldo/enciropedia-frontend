@@ -15,7 +15,7 @@ import {
 
 import { Link, FormattedDate } from "@/components/elements";
 
-export function VideoPage({ video }) {
+const VideoPage = ({ video }) => {
     return (
         <>
             <Head>
@@ -114,4 +114,6 @@ export function VideoPage({ video }) {
             </Card>
         </>
     );
-}
+};
+
+export { VideoPage };

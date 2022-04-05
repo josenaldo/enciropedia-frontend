@@ -1,7 +1,7 @@
 import { Container, Box } from "@mui/material";
 import { NewsCard } from "@/components/news";
 
-export function NewsWall({ posts }) {
+const NewsWall = ({ posts }) => {
     return (
         <Container sx={{ px: { lg: 0 }, py: "40px" }}>
             <Box
@@ -25,4 +25,6 @@ export function NewsWall({ posts }) {
             </Box>
         </Container>
     );
-}
+};
+
+export { NewsWall };
