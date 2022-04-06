@@ -43,7 +43,22 @@ export class BiographyEventsApi {
     async getData(path) {
         const result = await apiCall({
             path: BiographyEventsApi.apiPath,
-            params: { "filters[slug][$eq]": path, populate: "*" },
+            params: {
+                filters: {
+                    slug: {
+                        $eq: path,
+                    },
+                },
+                populate: {
+                    imagem: "*",
+                    anterior: {
+                        fields: ["slug", "titulo"],
+                    },
+                    proximo: {
+                        fields: ["slug", "titulo"],
+                    },
+                },
+            },
         });
 
         const biographyEvent = result.data[0];
@@ -66,11 +81,10 @@ export class BiographyEventsApi {
             },
         });
 
-        console.log(mdxSource);
         return {
             id: biographyEvent.id,
             url: `/biografia/${biographyEvent.attributes.slug}`,
-            mdxSource,
+            mdxSource: mdxSource,
             ...biographyEvent.attributes,
         };
     }

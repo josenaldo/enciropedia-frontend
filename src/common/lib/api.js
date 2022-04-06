@@ -1,10 +1,13 @@
+import qs from "qs";
+
 export async function fetcher(url, params = {}, option = {}) {
     let response;
 
-    let finalUrl = new URL(url);
-    for (let key in params) {
-        finalUrl.searchParams.append(key, params[key]);
-    }
+    const query = qs.stringify(params, {
+        encodeValuesOnly: true,
+    });
+
+    let finalUrl = new URL(`${url}?${query}`);
 
     if (!option) {
         response = await fetch(finalUrl);

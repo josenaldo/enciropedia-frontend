@@ -31,12 +31,12 @@ const BiographyEventPage = ({ biographyEvent }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                {biographyEvent.imagem ? (
+                {biographyEvent.imagem.data ? (
                     <CardMedia title={biographyEvent.titulo}>
                         <Image
-                            src={biographyEvent.imagem.path}
-                            height={biographyEvent.imagem.height}
-                            width={biographyEvent.imagem.width}
+                            src={biographyEvent.imagem.data.path}
+                            height={biographyEvent.imagem.data.height}
+                            width={biographyEvent.imagem.data.width}
                             objectFit="contain"
                             alt={biographyEvent.titulo}
                         />
