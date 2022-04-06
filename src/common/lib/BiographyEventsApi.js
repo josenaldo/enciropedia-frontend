@@ -43,12 +43,12 @@ export class BiographyEventsApi {
     async getData(path) {
         const result = await apiCall({
             path: BiographyEventsApi.apiPath,
-            params: { "filters[slug][$eq]": path },
+            params: { "filters[slug][$eq]": path, populate: "*" },
         });
 
         const biographyEvent = result.data[0];
 
-        const mdxSource = await serialize(biographyEvent.conteudo, {
+        const mdxSource = await serialize(biographyEvent.attributes.conteudo, {
             mdxOptions: {
                 // use the image size plugin, you can also specify which folder to load images from
                 // in my case images are in /public/images/, so I just prepend 'public'
@@ -66,6 +66,7 @@ export class BiographyEventsApi {
             },
         });
 
+        console.log(mdxSource);
         return {
             id: biographyEvent.id,
             url: `/biografia/${biographyEvent.attributes.slug}`,

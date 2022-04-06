@@ -40,9 +40,7 @@ export default function Post({ biographyEvent }) {
     return (
         <Container sx={{ my: "40px" }}>
             <MDXProvider components={components}>
-                {/* <BiographyEventPage biographyEvent={post}></BiographyEventPage> */}
-                <h1>{biographyEvent.titulo}</h1>
-                <p>{biographyEvent.resumo}</p>
+                <BiographyEventPage biographyEvent={biographyEvent} />
             </MDXProvider>
         </Container>
     );
