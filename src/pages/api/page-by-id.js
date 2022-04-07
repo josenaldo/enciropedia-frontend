@@ -1,11 +1,15 @@
-import { getPostsLinks } from "@/common/lib";
+// import { getPostsLinks } from "@/common/lib";
+import { BiographyEventsApi } from "@/common/lib";
 import { topPages } from "@/constants";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     const id = req.query.id;
 
-    const posts = getPostsLinks();
-    const allPages = [...topPages, ...posts];
+    // const posts = getPostsLinks();
+    const biographyEventsApi = new BiographyEventsApi();
+    const biographyEvents = await biographyEventsApi.findAllLinks();
+    console.log(biographyEvents);
+    const allPages = [...topPages, ...biographyEvents];
 
     const pages = allPages.reduce((previous, current) => {
         previous[current.id] = { url: current.url, text: current.text };

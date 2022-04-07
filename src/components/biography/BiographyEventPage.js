@@ -7,7 +7,6 @@ import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
 import { Link } from "@/components/elements";
 const BiographyEventPage = ({ biographyEvent }) => {
-    console.log(biographyEvent);
     return (
         <>
             <Card

@@ -10,13 +10,17 @@ export class BiographyEventsApi {
 
     constructor() {}
 
+    createUrl(path) {
+        return `/biografia/${path}`;
+    }
+
     async findAll() {
         const result = await apiCall({ path: BiographyEventsApi.apiPath });
 
         const biographyEvents = result.data.map((biographyEvent) => {
             return {
                 id: biographyEvent.id,
-                url: `/biografia/${biographyEvent.attributes.slug}`,
+                url: this.createUrl(biographyEvent.attributes.slug),
                 ...biographyEvent.attributes,
             };
         });
@@ -35,6 +39,23 @@ export class BiographyEventsApi {
                 params: {
                     slug: biographyEvent.attributes.slug,
                 },
+            };
+        });
+
+        return paths;
+    }
+
+    async findAllLinks() {
+        const result = await apiCall({
+            path: BiographyEventsApi.apiPath,
+            params: { fields: ["slug", "titulo"] },
+        });
+
+        const paths = result.data.map((biographyEvent) => {
+            return {
+                id: biographyEvent.attributes.slug,
+                url: this.createUrl(biographyEvent.attributes.slug),
+                text: biographyEvent.attributes.titulo,
             };
         });
 
@@ -85,7 +106,9 @@ export class BiographyEventsApi {
         let anterior = biographyEvent.attributes.anterior;
 
         if (anterior && anterior.data) {
-            anterior.data.attributes.url = `/biografia/${anterior.data.attributes.slug}`;
+            anterior.data.attributes.url = this.createUrl(
+                anterior.data.attributes.slug
+            );
             anterior = anterior.data.attributes;
         } else {
             anterior = null;
@@ -93,7 +116,9 @@ export class BiographyEventsApi {
 
         let proximo = biographyEvent.attributes.proximo;
         if (proximo && proximo.data) {
-            proximo.data.attributes.url = `/biografia/${proximo.data.attributes.slug}`;
+            proximo.data.attributes.url = this.createUrl(
+                proximo.data.attributes.slug
+            );
             proximo = proximo.data.attributes;
         } else {
             proximo = null;
@@ -101,7 +126,7 @@ export class BiographyEventsApi {
 
         return {
             id: biographyEvent.id,
-            url: `/biografia/${biographyEvent.attributes.slug}`,
+            url: this.createUrl(biographyEvent.attributes.slug),
             mdxSource: mdxSource,
             ...biographyEvent.attributes,
             anterior: anterior,
