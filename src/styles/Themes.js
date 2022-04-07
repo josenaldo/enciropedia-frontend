@@ -60,4 +60,36 @@ const theme = createTheme({
     },
 });
 
+theme.typography.h1 = {
+    fontSize: "2.0rem",
+    [theme.breakpoints.up("sm")]: {
+        fontSize: "2.25rem",
+    },
+    [theme.breakpoints.up("md")]: {
+        fontSize: "2.50rem",
+    },
+    [theme.breakpoints.up("lg")]: {
+        fontSize: "2.75rem",
+    },
+    [theme.breakpoints.up("xl")]: {
+        fontSize: "3.0rem",
+    },
+};
+
+theme.typography.h2 = {
+    fontSize: "1.75rem",
+    [theme.breakpoints.up("sm")]: {
+        fontSize: "2.00rem",
+    },
+    [theme.breakpoints.up("md")]: {
+        fontSize: "2.25rem",
+    },
+    [theme.breakpoints.up("lg")]: {
+        fontSize: "2.50rem",
+    },
+    [theme.breakpoints.up("xl")]: {
+        fontSize: "2.75rem",
+    },
+};
+
 export { theme };

@@ -1,25 +1,15 @@
 import Image from "next/image";
-import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 
-import {
-    Box,
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    Chip,
-} from "@mui/material";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import ArrowLeftOutlinedIcon from "@mui/icons-material/ArrowLeftOutlined";
+import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
-import { Link, FormattedDate } from "@/components/elements";
-
+import { Link } from "@/components/elements";
 const BiographyEventPage = ({ biographyEvent }) => {
     console.log(biographyEvent);
     return (
         <>
-            <Head>
-                <title>{biographyEvent.titulo}</title>
-            </Head>
             <Card
                 elevation={1}
                 sx={{
@@ -57,22 +47,7 @@ const BiographyEventPage = ({ biographyEvent }) => {
                     }}
                 >
                     <Box>
-                        <Typography
-                            gutterBottom
-                            variant="h2"
-                            component="div"
-                            color="white"
-                            textAlign="center"
-                            fontWeight="bold"
-                            sx={{
-                                fontSize: {
-                                    xs: "2.00rem",
-                                    sm: "2.50rem",
-                                    md: "3.00rem",
-                                    lg: "3.50rem",
-                                },
-                            }}
-                        >
+                        <Typography variant="h1" textAlign="center">
                             {biographyEvent.titulo}
                         </Typography>
                     </Box>
@@ -81,13 +56,13 @@ const BiographyEventPage = ({ biographyEvent }) => {
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
-                            py: "20px",
                         }}
                     >
                         <Typography
-                            color="neutral.main"
-                            variant="caption"
-                            sx={{ mx: "10px" }}
+                            variant="h2"
+                            color="neutral.dark"
+
+                            // sx={{ mx: "10px" }}
                         >
                             {biographyEvent.ano}
                         </Typography>
@@ -116,6 +91,38 @@ const BiographyEventPage = ({ biographyEvent }) => {
                             {...biographyEvent.mdxSource}
                             // components={{ Button, SyntaxHighlighter }}
                         />
+                    </Box>
+                    <Box
+                        sx={{
+                            mt: "30px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent:
+                                biographyEvent.anterior &&
+                                biographyEvent.proximo
+                                    ? "space-between"
+                                    : "center",
+                        }}
+                    >
+                        {biographyEvent.anterior && (
+                            <Link
+                                href={biographyEvent.anterior.url}
+                                sx={{ display: "flex", alignItems: "center" }}
+                            >
+                                <ArrowLeftOutlinedIcon />
+                                {biographyEvent.anterior.titulo}
+                            </Link>
+                        )}
+
+                        {biographyEvent.proximo && (
+                            <Link
+                                href={biographyEvent.proximo.url}
+                                sx={{ display: "flex", alignItems: "center" }}
+                            >
+                                {biographyEvent.proximo.titulo}
+                                <ArrowRightOutlinedIcon />
+                            </Link>
+                        )}
                     </Box>
                 </CardContent>
             </Card>

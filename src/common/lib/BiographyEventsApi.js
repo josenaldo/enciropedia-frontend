@@ -7,6 +7,7 @@ import rehypePrism from "rehype-prism-plus";
 
 export class BiographyEventsApi {
     static apiPath = "/eventos-biograficos";
+
     constructor() {}
 
     async findAll() {
@@ -81,11 +82,30 @@ export class BiographyEventsApi {
             },
         });
 
+        let anterior = biographyEvent.attributes.anterior;
+
+        if (anterior && anterior.data) {
+            anterior.data.attributes.url = `/biografia/${anterior.data.attributes.slug}`;
+            anterior = anterior.data.attributes;
+        } else {
+            anterior = null;
+        }
+
+        let proximo = biographyEvent.attributes.proximo;
+        if (proximo && proximo.data) {
+            proximo.data.attributes.url = `/biografia/${proximo.data.attributes.slug}`;
+            proximo = proximo.data.attributes;
+        } else {
+            proximo = null;
+        }
+
         return {
             id: biographyEvent.id,
             url: `/biografia/${biographyEvent.attributes.slug}`,
             mdxSource: mdxSource,
             ...biographyEvent.attributes,
+            anterior: anterior,
+            proximo: proximo,
         };
     }
 }

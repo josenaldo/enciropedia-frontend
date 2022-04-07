@@ -13,13 +13,17 @@ import {
     Link as MuiLink,
 } from "@mui/material";
 
+import { AppConfig } from "@/config";
+
 import { Link, FormattedDate } from "@/components/elements";
 
 const VideoPage = ({ video }) => {
     return (
         <>
             <Head>
-                <title>{video.title}</title>
+                <title>
+                    {video.title} - {AppConfig.name}
+                </title>
             </Head>
             <Card
                 elevation={1}

@@ -12,13 +12,17 @@ import {
     Link as MuiLink,
 } from "@mui/material";
 
+import { AppConfig } from "@/config";
+
 import { Link, FormattedDate } from "@/components/elements";
 
 const NewsPage = ({ post }) => {
     return (
         <>
             <Head>
-                <title>{post.title}</title>
+                <title>
+                    {post.title} - {AppConfig.name}
+                </title>
             </Head>
             <Card
                 elevation={1}
