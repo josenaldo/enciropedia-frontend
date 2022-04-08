@@ -20,3 +20,4 @@
 
 export { fetcher, apiCall } from "./api";
 export { BiographyEventsApi } from "./BiographyEventsApi";
+export { ArticlesApi } from "./ArticlesApi";

@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import Image from "next/image";
 import {
     Box,
     Card,
@@ -12,7 +12,8 @@ import {
 
 import { Link, FormattedDate } from "@/components/elements";
 
-const NewsCard = ({ post }) => {
+const NewsCard = ({ article }) => {
+    console.log(article);
     return (
         <Card
             elevation={1}
@@ -25,16 +26,20 @@ const NewsCard = ({ post }) => {
                 itemsAlign: "flex-start",
             }}
         >
-            {post.image ? (
-                <CardMedia
-                    component="img"
-                    height="210"
-                    image={post.image.path}
-                    alt={post.title}
-                />
+            {article.imagem && article.imagem.data ? (
+                <CardMedia title={article.titulo}>
+                    <Image
+                        src={article.imagem.data.path}
+                        height={article.imagem.data.height}
+                        width={article.imagem.data.width}
+                        objectFit="contain"
+                        alt={article.titulo}
+                    />
+                </CardMedia>
             ) : (
                 ""
             )}
+
             <CardContent
                 sx={{
                     width: "100%",
@@ -43,7 +48,7 @@ const NewsCard = ({ post }) => {
             >
                 <Box>
                     <Link
-                        href={post.url}
+                        href={article.url}
                         variant="h5"
                         color="primary"
                         underline="none"
@@ -52,7 +57,7 @@ const NewsCard = ({ post }) => {
                             mb: "20px",
                         }}
                     >
-                        {post.title}
+                        {article.titulo}
                     </Link>
                 </Box>
 
@@ -62,34 +67,32 @@ const NewsCard = ({ post }) => {
                         alignItems: "center",
                     }}
                 >
-                    <NextLink href={`/${post.category}`} passHref>
-                        <MuiLink underline="none">
-                            <Chip
-                                label={post.category}
-                                color="neutral"
-                                size="small"
-                                clickable={true}
-                                sx={{ textDecaoration: "none" }}
-                            />
-                        </MuiLink>
-                    </NextLink>
+                    <Link href={`/${article.categoria.slug}`} underline="none">
+                        <Chip
+                            label={article.categoria.rotulo}
+                            color="neutral"
+                            size="small"
+                            clickable={true}
+                            sx={{ textDecaoration: "none" }}
+                        />
+                    </Link>
                     <Typography
                         color="neutral.main"
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={post.date} />
+                        <FormattedDate dateString={article.publishedAt} />
                     </Typography>
                 </Box>
                 <Box pt="20px">
                     <Typography variant="body1" color="neutral.light">
-                        {post.excerpt}
+                        {article.resumo}
                     </Typography>
                 </Box>
             </CardContent>
 
             <CardActions sx={{ p: "16px" }}>
-                <Link href={post.url} underline="none">
+                <Link href={article.url} underline="none">
                     Leia mais...
                 </Link>
             </CardActions>

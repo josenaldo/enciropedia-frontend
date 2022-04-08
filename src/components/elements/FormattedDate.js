@@ -1,7 +1,7 @@
-import { parse, format } from "date-fns";
+import { parseISO, format } from "date-fns";
 
 const FormattedDate = ({ dateString }) => {
-    const date = parse(dateString, "yyyy-MM-dd HH:mm", new Date());
+    const date = parseISO(dateString);
     return <time dateTime={dateString}>{format(date, "dd/MM/yyyy")}</time>;
 };
 

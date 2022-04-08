@@ -4,39 +4,66 @@ import imageSize from "rehype-img-size";
 import externalLinks from "rehype-external-links";
 import rehypePrism from "rehype-prism-plus";
 
-export class BiographyEventsApi {
-    static apiPath = "/eventos-biograficos";
+export class ArticlesApi {
+    static apiPath = "/artigos";
 
     constructor() {}
 
-    createUrl(path) {
-        return `/biografia/${path}`;
+    createUrl(path, category) {
+        return `/${category}/${path}`;
     }
 
-    async findAll() {
-        const result = await apiCall({ path: BiographyEventsApi.apiPath });
+    async findAll(category) {
+        const result = await apiCall({
+            path: ArticlesApi.apiPath,
+            params: {
+                populate: "*",
+                filters: {
+                    categoria: {
+                        slug: {
+                            $eq: category,
+                        },
+                    },
+                },
+            },
+        });
 
-        const biographyEvents = result.data.map((biographyEvent) => {
+        const articles = result.data.map((article) => {
             return {
-                id: biographyEvent.id,
-                url: this.createUrl(biographyEvent.attributes.slug),
-                ...biographyEvent.attributes,
+                id: article.id,
+                url: this.createUrl(article.attributes.slug),
+                ...article.attributes,
+                categoria: {
+                    id: article.categoria.data.id,
+                    ...article.categoria.data.attributes,
+                },
+                colaborador: {
+                    id: article.colaborador.data.id,
+                    ...article.colaborador.data.attributes,
+                },
             };
         });
 
-        return biographyEvents;
+        return articles;
     }
 
     async findAllPaths() {
         const result = await apiCall({
-            path: BiographyEventsApi.apiPath,
-            params: { fields: "slug" },
+            path: ArticlesApi.apiPath,
+            params: {
+                fields: "slug",
+                filters: {
+                    categoria: {
+                        $eq: category,
+                    },
+                },
+            },
         });
 
-        const paths = result.data.map((biographyEvent) => {
+        const paths = result.data.map((article) => {
             return {
                 params: {
-                    slug: biographyEvent.attributes.slug,
+                    slug: article.attributes.slug,
                 },
             };
         });
@@ -46,15 +73,22 @@ export class BiographyEventsApi {
 
     async findAllLinks() {
         const result = await apiCall({
-            path: BiographyEventsApi.apiPath,
-            params: { fields: ["slug", "titulo"] },
+            path: ArticlesApi.apiPath,
+            params: {
+                fields: ["slug", "titulo"],
+                filters: {
+                    categoria: {
+                        $eq: category,
+                    },
+                },
+            },
         });
 
-        const paths = result.data.map((biographyEvent) => {
+        const paths = result.data.map((article) => {
             return {
-                id: biographyEvent.attributes.slug,
-                url: this.createUrl(biographyEvent.attributes.slug),
-                text: biographyEvent.attributes.titulo,
+                id: article.attributes.slug,
+                url: this.createUrl(article.attributes.slug),
+                text: article.attributes.titulo,
             };
         });
 
@@ -63,11 +97,14 @@ export class BiographyEventsApi {
 
     async getData(path) {
         const result = await apiCall({
-            path: BiographyEventsApi.apiPath,
+            path: ArticlesApi.apiPath,
             params: {
                 filters: {
                     slug: {
                         $eq: path,
+                    },
+                    categoria: {
+                        $eq: category,
                     },
                 },
                 populate: {
@@ -82,9 +119,9 @@ export class BiographyEventsApi {
             },
         });
 
-        const biographyEvent = result.data[0];
+        const article = result.data[0];
 
-        const mdxSource = await serialize(biographyEvent.attributes.conteudo, {
+        const mdxSource = await serialize(article.attributes.conteudo, {
             mdxOptions: {
                 // use the image size plugin, you can also specify which folder to load images from
                 // in my case images are in /public/images/, so I just prepend 'public'
@@ -102,7 +139,7 @@ export class BiographyEventsApi {
             },
         });
 
-        let anterior = biographyEvent.attributes.anterior;
+        let anterior = article.attributes.anterior;
 
         if (anterior && anterior.data) {
             anterior.data.attributes.url = this.createUrl(
@@ -113,7 +150,7 @@ export class BiographyEventsApi {
             anterior = null;
         }
 
-        let proximo = biographyEvent.attributes.proximo;
+        let proximo = article.attributes.proximo;
         if (proximo && proximo.data) {
             proximo.data.attributes.url = this.createUrl(
                 proximo.data.attributes.slug
@@ -124,10 +161,10 @@ export class BiographyEventsApi {
         }
 
         return {
-            id: biographyEvent.id,
-            url: this.createUrl(biographyEvent.attributes.slug),
+            id: article.id,
+            url: this.createUrl(article.attributes.slug),
             mdxSource: mdxSource,
-            ...biographyEvent.attributes,
+            ...article.attributes,
             anterior: anterior,
             proximo: proximo,
         };

@@ -1,7 +1,7 @@
 import { Container, Box } from "@mui/material";
 import { NewsCard } from "@/components/news";
 
-const NewsWall = ({ posts }) => {
+const NewsWall = ({ articles }) => {
     return (
         <Container sx={{ px: { lg: 0 }, py: "40px" }}>
             <Box
@@ -19,8 +19,8 @@ const NewsWall = ({ posts }) => {
                     },
                 }}
             >
-                {posts.map((post) => (
-                    <NewsCard key={post.id} post={post}></NewsCard>
+                {articles.map((article) => (
+                    <NewsCard key={article.id} article={article}></NewsCard>
                 ))}
             </Box>
         </Container>

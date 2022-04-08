@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import {
     Container,
     Box,
@@ -9,9 +11,9 @@ import {
     Chip,
 } from "@mui/material";
 
+import { AppConfig } from "@/config";
 import { FormattedDate, Link } from "@/components/elements";
 import { getSortedVideosData } from "@/common/lib";
-
 import { VideoWall } from "@/components/videos";
 
 export async function getStaticProps() {
@@ -26,6 +28,9 @@ export async function getStaticProps() {
 export default function VideosPage({ allVideosData }) {
     return (
         <Container>
+            <Head>
+                <title>Vídeos - {AppConfig.name}</title>
+            </Head>
             <Box component="section">
                 <VideoWall videos={allVideosData} />
             </Box>

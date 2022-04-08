@@ -1,6 +1,10 @@
+import Head from "next/head";
+
 import { Box, Container } from "@mui/material";
-import { TimeLine } from "@/components/biography";
+
+import { AppConfig } from "@/config";
 import { BiographyEventsApi } from "@/common/lib";
+import { TimeLine } from "@/components/biography";
 
 export async function getStaticProps() {
     const api = new BiographyEventsApi();
@@ -15,6 +19,9 @@ export async function getStaticProps() {
 export default function BiografiaPage({ biographyEvents }) {
     return (
         <Container sx={{ px: { lg: 0 } }}>
+            <Head>
+                <title>Biograafia - {AppConfig.name}</title>
+            </Head>
             <Box
                 sx={{
                     width: "100%",

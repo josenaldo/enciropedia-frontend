@@ -1,21 +1,30 @@
+import Head from "next/head";
+
 import { Box, Container } from "@mui/material";
-import { getSortedPostsData } from "@/common/lib";
+
+import { AppConfig } from "@/config";
+import { ArticlesApi } from "@/common/lib";
 import { NewsWall } from "@/components/news";
 
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData();
+    const api = new ArticlesApi();
+    const articles = await api.findAll("noticias");
     return {
         props: {
-            allPostsData,
+            articles: articles,
         },
     };
 }
 
-export default function NoticiasPage({ allPostsData }) {
+export default function NoticiasPage({ articles }) {
+    // console.log(articles);
     return (
         <Container>
+            <Head>
+                <title>Notícias - {AppConfig.name}</title>
+            </Head>
             <Box component="section">
-                <NewsWall posts={allPostsData} />
+                <NewsWall articles={articles} />
             </Box>
         </Container>
     );

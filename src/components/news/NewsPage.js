@@ -16,12 +16,13 @@ import { AppConfig } from "@/config";
 
 import { Link, FormattedDate } from "@/components/elements";
 
-const NewsPage = ({ post }) => {
+const NewsPage = ({ article }) => {
+    console.log(article);
     return (
         <>
             <Head>
                 <title>
-                    {post.title} - {AppConfig.name}
+                    {article.title} - {AppConfig.name}
                 </title>
             </Head>
             <Card
@@ -35,14 +36,14 @@ const NewsPage = ({ post }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                {post.image ? (
-                    <CardMedia title={post.title}>
+                {article.image ? (
+                    <CardMedia title={article.title}>
                         <Image
-                            src={post.image.path}
-                            height={post.image.height}
-                            width={post.image.width}
+                            src={article.image.path}
+                            height={article.image.height}
+                            width={article.image.width}
                             objectFit="contain"
-                            alt={post.title}
+                            alt={article.title}
                         />
                     </CardMedia>
                 ) : (
@@ -77,7 +78,7 @@ const NewsPage = ({ post }) => {
                                 },
                             }}
                         >
-                            {post.title}
+                            {article.title}
                         </Typography>
                     </Box>
                     <Box
@@ -90,7 +91,7 @@ const NewsPage = ({ post }) => {
                     >
                         <MuiLink underline="none">
                             <Chip
-                                label={post.category}
+                                label={article.category}
                                 color="neutral"
                                 size="small"
                                 clickable={true}
@@ -102,16 +103,16 @@ const NewsPage = ({ post }) => {
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            <FormattedDate dateString={post.date} />
+                            <FormattedDate dateString={article.publishedAt} />
                         </Typography>
                         <Link
-                            href={post.authorUrl}
+                            href={article.authorUrl}
                             variant="caption"
                             color="neutral.main"
                             underline="none"
                             sx={{ mx: "10px" }}
                         >
-                            {post.author}
+                            {article.author}
                         </Link>
                     </Box>
                     <Box
@@ -125,7 +126,7 @@ const NewsPage = ({ post }) => {
                         }}
                     >
                         <Typography variant="body1" color="neutral.light">
-                            {post.summary}
+                            {article.summary}
                         </Typography>
                     </Box>
 
@@ -135,7 +136,7 @@ const NewsPage = ({ post }) => {
                         }}
                     >
                         <MDXRemote
-                            {...post.mdxSource}
+                            {...article.mdxSource}
                             // components={{ Button, SyntaxHighlighter }}
                         />
                     </Box>

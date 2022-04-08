@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     // const posts = getPostsLinks();
     const biographyEventsApi = new BiographyEventsApi();
     const biographyEvents = await biographyEventsApi.findAllLinks();
-    console.log(biographyEvents);
+    // console.log(biographyEvents);
     const allPages = [...topPages, ...biographyEvents];
 
     const pages = allPages.reduce((previous, current) => {

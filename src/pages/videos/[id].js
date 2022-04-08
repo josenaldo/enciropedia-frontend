@@ -1,8 +1,11 @@
+import Head from "next/head";
 import Image from "next/image";
 
 import { Container, Box } from "@mui/material";
 
 import { MDXProvider } from "@mdx-js/react";
+
+import { AppConfig } from "@/config";
 
 import { VideoPage } from "@/components/videos";
 import { Link, ResponsiveImage, Code } from "@/components/elements";
@@ -34,6 +37,11 @@ export async function getStaticProps({ params }) {
 export default function Video({ video }) {
     return (
         <Container sx={{ my: "40px" }}>
+            <Head>
+                <title>
+                    {video.titulo} - {AppConfig.name}
+                </title>
+            </Head>
             <MDXProvider components={components}>
                 <VideoPage video={video} fullPage></VideoPage>
             </MDXProvider>
