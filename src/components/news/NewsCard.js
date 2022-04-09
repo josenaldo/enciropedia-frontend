@@ -86,7 +86,7 @@ const NewsCard = ({ article }) => {
                 </Box>
                 <Box pt="20px">
                     <Typography variant="body1" color="neutral.light">
-                        {article.resumo}
+                        {article.descricao}
                     </Typography>
                 </Box>
             </CardContent>

@@ -18,6 +18,7 @@
 //     getVideosLinks,
 // } from "./videos";
 
+export { flatten } from "./flatten";
 export { fetcher, apiCall } from "./api";
 export { BiographyEventsApi } from "./BiographyEventsApi";
 export { ArticlesApi } from "./ArticlesApi";

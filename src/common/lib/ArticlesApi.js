@@ -1,4 +1,4 @@
-import { apiCall } from "@/common/lib";
+import { apiCall, flatten } from "@/common/lib";
 import { serialize } from "next-mdx-remote/serialize";
 import imageSize from "rehype-img-size";
 import externalLinks from "rehype-external-links";
@@ -28,20 +28,11 @@ export class ArticlesApi {
             },
         });
 
-        const articles = result.data.map((article) => {
-            return {
-                id: article.id,
-                url: this.createUrl(article.attributes.slug),
-                ...article.attributes,
-                categoria: {
-                    id: article.categoria.data.id,
-                    ...article.categoria.data.attributes,
-                },
-                colaborador: {
-                    id: article.colaborador.data.id,
-                    ...article.colaborador.data.attributes,
-                },
-            };
+        const normalized = flatten(result.data);
+
+        const articles = normalized.map((article) => {
+            article.url = this.createUrl(article.slug, category);
+            return article;
         });
 
         return articles;
