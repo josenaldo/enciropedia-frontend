@@ -1,4 +1,4 @@
-import { apiCall, flatten } from "@/common/lib";
+import { apiCall, flatten, strapi } from "@/common/lib";
 import { serialize } from "next-mdx-remote/serialize";
 import imageSize from "rehype-img-size";
 import externalLinks from "rehype-external-links";

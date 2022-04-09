@@ -1,4 +1,4 @@
-import { apiCall } from "@/common/lib";
+import { apiCall, strapi } from "@/common/lib";
 import { serialize } from "next-mdx-remote/serialize";
 import imageSize from "rehype-img-size";
 import externalLinks from "rehype-external-links";
@@ -17,26 +17,24 @@ export class BiographyEventsApi {
         const result = await apiCall({ path: BiographyEventsApi.apiPath });
 
         const biographyEvents = result.data.map((biographyEvent) => {
-            return {
-                id: biographyEvent.id,
-                url: this.createUrl(biographyEvent.attributes.slug),
-                ...biographyEvent.attributes,
-            };
+            biographyEvent.url = this.createUrl(biographyEvent.slug);
+            return biographyEvent;
         });
 
         return biographyEvents;
     }
 
     async findAllPaths() {
+        const params = { fields: "slug" };
         const result = await apiCall({
             path: BiographyEventsApi.apiPath,
-            params: { fields: "slug" },
+            params: params,
         });
 
         const paths = result.data.map((biographyEvent) => {
             return {
                 params: {
-                    slug: biographyEvent.attributes.slug,
+                    slug: biographyEvent.slug,
                 },
             };
         });
@@ -45,16 +43,17 @@ export class BiographyEventsApi {
     }
 
     async findAllLinks() {
+        const params = { fields: ["slug", "titulo"] };
         const result = await apiCall({
             path: BiographyEventsApi.apiPath,
-            params: { fields: ["slug", "titulo"] },
+            params: params,
         });
 
         const paths = result.data.map((biographyEvent) => {
             return {
-                id: biographyEvent.attributes.slug,
-                url: this.createUrl(biographyEvent.attributes.slug),
-                text: biographyEvent.attributes.titulo,
+                id: biographyEvent.slug,
+                url: this.createUrl(biographyEvent.slug),
+                text: biographyEvent.titulo,
             };
         });
 
@@ -62,29 +61,30 @@ export class BiographyEventsApi {
     }
 
     async getData(path) {
-        const result = await apiCall({
-            path: BiographyEventsApi.apiPath,
-            params: {
-                filters: {
-                    slug: {
-                        $eq: path,
-                    },
-                },
-                populate: {
-                    imagem: "*",
-                    anterior: {
-                        fields: ["slug", "titulo"],
-                    },
-                    proximo: {
-                        fields: ["slug", "titulo"],
-                    },
+        const params = {
+            filters: {
+                slug: {
+                    $eq: path,
                 },
             },
+            populate: {
+                imagem: "*",
+                anterior: {
+                    fields: ["slug", "titulo"],
+                },
+                proximo: {
+                    fields: ["slug", "titulo"],
+                },
+            },
+        };
+        const result = await apiCall({
+            path: BiographyEventsApi.apiPath,
+            params: params,
         });
 
         const biographyEvent = result.data[0];
 
-        const mdxSource = await serialize(biographyEvent.attributes.conteudo, {
+        const mdxSource = await serialize(biographyEvent.conteudo, {
             mdxOptions: {
                 // use the image size plugin, you can also specify which folder to load images from
                 // in my case images are in /public/images/, so I just prepend 'public'
@@ -102,34 +102,19 @@ export class BiographyEventsApi {
             },
         });
 
-        let anterior = biographyEvent.attributes.anterior;
-
-        if (anterior && anterior.data) {
-            anterior.data.attributes.url = this.createUrl(
-                anterior.data.attributes.slug
+        biographyEvent.mdxSource = mdxSource;
+        biographyEvent.url = this.createUrl(biographyEvent.slug);
+        if (biographyEvent.anterior) {
+            biographyEvent.anterior.url = this.createUrl(
+                biographyEvent.anterior.slug
             );
-            anterior = anterior.data.attributes;
-        } else {
-            anterior = null;
+        }
+        if (biographyEvent.proximo) {
+            biographyEvent.proximo.url = this.createUrl(
+                biographyEvent.proximo.slug
+            );
         }
 
-        let proximo = biographyEvent.attributes.proximo;
-        if (proximo && proximo.data) {
-            proximo.data.attributes.url = this.createUrl(
-                proximo.data.attributes.slug
-            );
-            proximo = proximo.data.attributes;
-        } else {
-            proximo = null;
-        }
-
-        return {
-            id: biographyEvent.id,
-            url: this.createUrl(biographyEvent.attributes.slug),
-            mdxSource: mdxSource,
-            ...biographyEvent.attributes,
-            anterior: anterior,
-            proximo: proximo,
-        };
+        return biographyEvent;
     }
 }

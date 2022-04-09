@@ -20,7 +20,7 @@ const BiographyEventPage = ({ biographyEvent }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                {biographyEvent.imagem.data ? (
+                {biographyEvent.imagem && biographyEvent.imagem.data ? (
                     <CardMedia title={biographyEvent.titulo}>
                         <Image
                             src={biographyEvent.imagem.data.path}
