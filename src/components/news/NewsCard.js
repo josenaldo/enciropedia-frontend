@@ -7,7 +7,6 @@ import {
     CardMedia,
     Typography,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
@@ -48,7 +47,7 @@ const NewsCard = ({ article }) => {
             >
                 <Box>
                     <Link
-                        href={article.url}
+                        href={`${article.url}`}
                         variant="h5"
                         color="primary"
                         underline="none"

@@ -3,3 +3,4 @@ export { ResponsiveImage } from "./ResponsiveImage";
 export { Link } from "./Link";
 export { FormattedDate } from "./FormattedDate";
 export { Code } from "./Code";
+export { MDXContent } from "./MDXContent";

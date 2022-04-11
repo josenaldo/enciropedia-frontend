@@ -35,4 +35,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Referências
 
--
+- <https://github.com/kawamt/rehype-probe-image-size>
+- <https://github.com/remarkjs/react-markdown>

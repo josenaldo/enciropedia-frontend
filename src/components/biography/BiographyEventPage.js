@@ -1,11 +1,10 @@
 import Image from "next/image";
-import { MDXRemote } from "next-mdx-remote";
 
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import ArrowLeftOutlinedIcon from "@mui/icons-material/ArrowLeftOutlined";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
 
-import { Link } from "@/components/elements";
+import { Link, MDXContent } from "@/components/elements";
 const BiographyEventPage = ({ biographyEvent }) => {
     return (
         <>
@@ -86,10 +85,7 @@ const BiographyEventPage = ({ biographyEvent }) => {
                             color: "neutral.main",
                         }}
                     >
-                        <MDXRemote
-                            {...biographyEvent.mdxSource}
-                            // components={{ Button, SyntaxHighlighter }}
-                        />
+                        <MDXContent content={biographyEvent.conteudo} />
                     </Box>
                     <Box
                         sx={{

@@ -1,30 +1,64 @@
+import { useState } from "react";
 import Head from "next/head";
-
-import { Box, Container } from "@mui/material";
+import { Box, Container, Stack, Pagination } from "@mui/material";
+import useSWR from "swr";
 
 import { AppConfig } from "@/config";
 import { ArticlesApi } from "@/common/lib";
+import { fetcher } from "@/common/api";
 import { NewsWall } from "@/components/news";
 
 export async function getStaticProps() {
     const api = new ArticlesApi();
-    const articles = await api.findAll("noticias");
+    const result = await api.findAll("noticias", 1);
     return {
         props: {
-            articles: articles,
+            result: result,
         },
     };
 }
 
-export default function NoticiasPage({ articles }) {
-    // console.log(articles);
+export default function NoticiasPage({ result }) {
+    const api = new ArticlesApi();
+    const [pageIndex, setPageIndex] = useState(1);
+    const category = "noticias";
+    const url = api.createFindAllUrl(category, pageIndex, 2) + "";
+
+    const { data } = useSWR(url, fetcher, {
+        fallbackData: result,
+    });
+
+    api.injectUrl(data, category);
+
+    const handleChange = (event, value) => {
+        console.log("Mudando para pagina: ", value);
+        setPageIndex(value);
+    };
+
     return (
-        <Container>
+        <Container sx={{ my: "40px" }}>
             <Head>
                 <title>Notícias - {AppConfig.name}</title>
             </Head>
             <Box component="section">
-                <NewsWall articles={articles} />
+                <NewsWall articles={data.data} />
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                    }}
+                >
+                    <Stack spacing={2}>
+                        <Pagination
+                            count={data.meta.pagination.pageCount}
+                            size="large"
+                            siblingCount={0}
+                            boundaryCount={2}
+                            page={pageIndex}
+                            onChange={handleChange}
+                        />
+                    </Stack>
+                </Box>
             </Box>
         </Container>
     );

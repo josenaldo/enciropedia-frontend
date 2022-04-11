@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Head from "next/head";
-import NextLink from "next/link";
-import { MDXRemote } from "next-mdx-remote";
 
 import {
     Box,
@@ -15,7 +13,7 @@ import {
 
 import { AppConfig } from "@/config";
 
-import { Link, FormattedDate } from "@/components/elements";
+import { Link, FormattedDate, MDXContent } from "@/components/elements";
 
 const VideoPage = ({ video }) => {
     return (
@@ -112,7 +110,7 @@ const VideoPage = ({ video }) => {
                             color: "neutral.main",
                         }}
                     >
-                        <MDXRemote {...video.mdxSource} />
+                        <MDXContent content={video.conteudo} />
                     </Box>
                 </CardContent>
             </Card>

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Head from "next/head";
-import { MDXRemote } from "next-mdx-remote";
 
 import {
     Box,
@@ -9,15 +8,13 @@ import {
     CardMedia,
     Typography,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
 
 import { AppConfig } from "@/config";
 
-import { Link, FormattedDate } from "@/components/elements";
+import { Link, FormattedDate, MDXContent } from "@/components/elements";
 
 const NewsPage = ({ article }) => {
-    console.log(article);
     return (
         <>
             <Head>
@@ -89,15 +86,18 @@ const NewsPage = ({ article }) => {
                             py: "20px",
                         }}
                     >
-                        <MuiLink underline="none">
+                        <Link
+                            underline="none"
+                            href={`/${article.category.url}`}
+                        >
                             <Chip
-                                label={article.category}
+                                label={article.category.rotulo}
                                 color="neutral"
                                 size="small"
                                 clickable={true}
-                                sx={{ textDecaoration: "none" }}
+                                sx={{ textDecoration: "none" }}
                             />
-                        </MuiLink>
+                        </Link>
                         <Typography
                             color="neutral.main"
                             variant="caption"
@@ -105,15 +105,15 @@ const NewsPage = ({ article }) => {
                         >
                             <FormattedDate dateString={article.publishedAt} />
                         </Typography>
-                        <Link
-                            href={article.authorUrl}
+                        {/* <Link
+                            href={`${article.colaborador.url}`}
                             variant="caption"
                             color="neutral.main"
                             underline="none"
                             sx={{ mx: "10px" }}
-                        >
-                            {article.author}
-                        </Link>
+                        > */}
+                        {article.author}
+                        {/* </Link> */}
                     </Box>
                     <Box
                         sx={{
@@ -135,10 +135,7 @@ const NewsPage = ({ article }) => {
                             color: "neutral.main",
                         }}
                     >
-                        <MDXRemote
-                            {...article.mdxSource}
-                            // components={{ Button, SyntaxHighlighter }}
-                        />
+                        <MDXContent content={article.conteudo} />
                     </Box>
                 </CardContent>
             </Card>

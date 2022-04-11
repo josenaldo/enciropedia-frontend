@@ -1,8 +1,4 @@
-import { apiCall, flatten, strapi } from "@/common/lib";
-import { serialize } from "next-mdx-remote/serialize";
-import imageSize from "rehype-img-size";
-import externalLinks from "rehype-external-links";
-import rehypePrism from "rehype-prism-plus";
+import { apiCall, createApiUrl } from "@/common/api";
 
 export class ArticlesApi {
     static apiPath = "/artigos";
@@ -13,42 +9,68 @@ export class ArticlesApi {
         return `/${category}/${path}`;
     }
 
-    async findAll(category) {
-        const result = await apiCall({
-            path: ArticlesApi.apiPath,
-            params: {
-                populate: "*",
-                filters: {
-                    categoria: {
-                        slug: {
-                            $eq: category,
-                        },
-                    },
-                },
-            },
-        });
-
-        const normalized = flatten(result.data);
-
-        const articles = normalized.map((article) => {
+    injectUrl(result, category) {
+        const articles = result.data.map((article) => {
             article.url = this.createUrl(article.slug, category);
             return article;
         });
 
-        return articles;
+        result.data = articles;
     }
 
-    async findAllPaths() {
-        const result = await apiCall({
-            path: ArticlesApi.apiPath,
-            params: {
-                fields: "slug",
-                filters: {
-                    categoria: {
+    createFindAllParams(category, page = 1, pageSize = 5) {
+        return {
+            populate: "*",
+            filters: {
+                categoria: {
+                    slug: {
                         $eq: category,
                     },
                 },
             },
+            pagination: {
+                page: page,
+                pageSize: pageSize,
+            },
+        };
+    }
+
+    createFindAllUrl(category, page = 1, pageSize = 5) {
+        const params = this.createFindAllParams(category, page, pageSize);
+        const url = createApiUrl(ArticlesApi.apiPath, params);
+
+        return url;
+    }
+
+    async findAll(category, page = 1, pageSize = 5) {
+        const result = await apiCall({
+            path: ArticlesApi.apiPath,
+            params: this.createFindAllParams(category, page, pageSize),
+        });
+
+        // const articles = result.data.map((article) => {
+        //     article.url = this.createUrl(article.slug, category);
+        //     return article;
+        // });
+
+        this.injectUrl(result, category);
+
+        return result;
+    }
+
+    async findAllPaths() {
+        const params = {
+            fields: "slug",
+            filters: {
+                categoria: {
+                    $eq: category,
+                },
+            },
+        };
+
+        const result = await apiCall({
+            path: ArticlesApi.apiPath,
+            params: params,
         });
 
         const paths = result.data.map((article) => {
@@ -62,31 +84,33 @@ export class ArticlesApi {
         return paths;
     }
 
-    async findAllLinks() {
-        const result = await apiCall({
-            path: ArticlesApi.apiPath,
-            params: {
-                fields: ["slug", "titulo"],
-                filters: {
-                    categoria: {
-                        $eq: category,
-                    },
+    async findAllLinks(category) {
+        const params = {
+            fields: ["slug", "titulo"],
+            filters: {
+                categoria: {
+                    $eq: category,
                 },
             },
+        };
+
+        const result = await apiCall({
+            path: ArticlesApi.apiPath,
+            params: params,
         });
 
         const paths = result.data.map((article) => {
             return {
-                id: article.attributes.slug,
-                url: this.createUrl(article.attributes.slug),
-                text: article.attributes.titulo,
+                id: article.slug,
+                url: this.createUrl(article.slug, category),
+                text: article.titulo,
             };
         });
 
         return paths;
     }
 
-    async getData(path) {
+    async getData(path, category) {
         const result = await apiCall({
             path: ArticlesApi.apiPath,
             params: {
@@ -112,52 +136,7 @@ export class ArticlesApi {
 
         const article = result.data[0];
 
-        const mdxSource = await serialize(article.attributes.conteudo, {
-            mdxOptions: {
-                // use the image size plugin, you can also specify which folder to load images from
-                // in my case images are in /public/images/, so I just prepend 'public'
-                rehypePlugins: [
-                    [imageSize, { dir: "public" }],
-                    [
-                        externalLinks,
-                        {
-                            target: "_blank",
-                            rel: ["nofollow", "noopener", "noreferrer"],
-                        },
-                    ],
-                    [rehypePrism],
-                ],
-            },
-        });
-
-        let anterior = article.attributes.anterior;
-
-        if (anterior && anterior.data) {
-            anterior.data.attributes.url = this.createUrl(
-                anterior.data.attributes.slug
-            );
-            anterior = anterior.data.attributes;
-        } else {
-            anterior = null;
-        }
-
-        let proximo = article.attributes.proximo;
-        if (proximo && proximo.data) {
-            proximo.data.attributes.url = this.createUrl(
-                proximo.data.attributes.slug
-            );
-            proximo = proximo.data.attributes;
-        } else {
-            proximo = null;
-        }
-
-        return {
-            id: article.id,
-            url: this.createUrl(article.attributes.slug),
-            mdxSource: mdxSource,
-            ...article.attributes,
-            anterior: anterior,
-            proximo: proximo,
-        };
+        article.url = this.createUrl(article.slug, category);
+        return article;
     }
 }
