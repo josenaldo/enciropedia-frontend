@@ -31,7 +31,6 @@ export default function NoticiasPage({ result }) {
     api.injectUrl(data, category);
 
     const handleChange = (event, value) => {
-        console.log("Mudando para pagina: ", value);
         setPageIndex(value);
     };
 

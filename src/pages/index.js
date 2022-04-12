@@ -1,19 +1,21 @@
 import { Box } from "@mui/material";
 
-import { getSortedPostsData } from "@/common/lib";
+import { ArticlesApi } from "@/common/lib";
+import { fetcher } from "@/common/api";
 import { NewsWall } from "@/components/news";
 import { Hero } from "@/components/home";
 
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData(3);
+    const api = new ArticlesApi();
+    const result = await api.findAll("noticias", 1);
     return {
         props: {
-            allPostsData,
+            articlesResult: result,
         },
     };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ articlesResult }) {
     return (
         <>
             <Box
@@ -31,7 +33,7 @@ export default function Home({ allPostsData }) {
                     bgcolor: "background.b500",
                 }}
             >
-                <NewsWall posts={allPostsData} />
+                <NewsWall articles={articlesResult.data} />
             </Box>
         </>
     );

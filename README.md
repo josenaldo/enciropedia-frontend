@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 - <https://github.com/kawamt/rehype-probe-image-size>
 - <https://github.com/remarkjs/react-markdown>
+- <https://swr.vercel.app/docs>

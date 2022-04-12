@@ -12,7 +12,6 @@ import {
 import { Link, FormattedDate } from "@/components/elements";
 
 const NewsCard = ({ article }) => {
-    console.log(article);
     return (
         <Card
             elevation={1}
