@@ -20,7 +20,7 @@ export default function BiografiaPage({ result }) {
     return (
         <Container sx={{ px: { lg: 0 } }}>
             <Head>
-                <title>Biograafia - {AppConfig.name}</title>
+                <title>Biografia - {AppConfig.name}</title>
             </Head>
             <Box
                 sx={{
