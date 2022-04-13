@@ -32,6 +32,7 @@ export class ArticlesApi {
                 page: page,
                 pageSize: pageSize,
             },
+            sort: ["publishedAt:desc"],
         };
     }
 
@@ -58,12 +59,14 @@ export class ArticlesApi {
         return result;
     }
 
-    async findAllPaths() {
+    async findAllPaths(category) {
         const params = {
             fields: "slug",
             filters: {
                 categoria: {
-                    $eq: category,
+                    slug: {
+                        $eq: category,
+                    },
                 },
             },
         };
@@ -76,7 +79,7 @@ export class ArticlesApi {
         const paths = result.data.map((article) => {
             return {
                 params: {
-                    slug: article.attributes.slug,
+                    slug: article.slug,
                 },
             };
         });
@@ -89,7 +92,9 @@ export class ArticlesApi {
             fields: ["slug", "titulo"],
             filters: {
                 categoria: {
-                    $eq: category,
+                    slug: {
+                        $eq: category,
+                    },
                 },
             },
         };
@@ -119,24 +124,23 @@ export class ArticlesApi {
                         $eq: path,
                     },
                     categoria: {
-                        $eq: category,
+                        slug: {
+                            $eq: category,
+                        },
                     },
                 },
                 populate: {
                     imagem: "*",
-                    anterior: {
-                        fields: ["slug", "titulo"],
-                    },
-                    proximo: {
-                        fields: ["slug", "titulo"],
-                    },
+                    categoria: "*",
+                    colaborador: "*",
                 },
             },
         });
 
         const article = result.data[0];
 
-        article.url = this.createUrl(article.slug, category);
+        article.url = this.createUrl(article.slug, article.categoria.slug);
+        article.categoria.url = `/${article.categoria.slug}`;
         return article;
     }
 }

@@ -8,15 +8,15 @@ import { TimeLine } from "@/components/biography";
 
 export async function getStaticProps() {
     const api = new BiographyEventsApi();
-    const biographyEvents = await api.findAll();
+    const result = await api.findAll();
     return {
         props: {
-            biographyEvents: biographyEvents,
+            result: result,
         },
     };
 }
 
-export default function BiografiaPage({ biographyEvents }) {
+export default function BiografiaPage({ result }) {
     return (
         <Container sx={{ px: { lg: 0 } }}>
             <Head>
@@ -29,7 +29,7 @@ export default function BiografiaPage({ biographyEvents }) {
                     overflow: "hidden",
                 }}
             >
-                <TimeLine biographyEvents={biographyEvents} />
+                <TimeLine biographyEvents={result.data} />
             </Box>
         </Container>
     );

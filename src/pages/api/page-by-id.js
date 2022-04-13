@@ -1,4 +1,3 @@
-// import { getPostsLinks } from "@/common/lib";
 import { BiographyEventsApi } from "@/common/lib";
 import { ArticlesApi } from "@/common/lib";
 import { topPages } from "@/constants";

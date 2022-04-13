@@ -1,10 +1,9 @@
 import Image from "next/image";
-
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import ArrowLeftOutlinedIcon from "@mui/icons-material/ArrowLeftOutlined";
 import ArrowRightOutlinedIcon from "@mui/icons-material/ArrowRightOutlined";
-
 import { Link, MDXContent } from "@/components/elements";
+
 const BiographyEventPage = ({ biographyEvent }) => {
     return (
         <>

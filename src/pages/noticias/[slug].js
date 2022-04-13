@@ -1,12 +1,13 @@
 import Head from "next/head";
 import { Container } from "@mui/material";
 import { AppConfig } from "@/config";
-import { BiographyEventsApi } from "@/common/lib";
-import { BiographyEventPage } from "@/components/biography";
+import { ArticlesApi } from "@/common/lib";
+import { NewsPage } from "@/components/news";
 
+const articleCategory = "noticias";
 export async function getStaticPaths() {
-    const api = new BiographyEventsApi();
-    const paths = await api.findAllPaths();
+    const api = new ArticlesApi();
+    const paths = await api.findAllPaths(articleCategory);
 
     return {
         paths,
@@ -15,26 +16,28 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const api = new BiographyEventsApi();
+    const api = new ArticlesApi();
 
-    const biographyEvent = await api.getData(params.slug);
+    const article = await api.getData(params.slug, articleCategory);
     return {
         props: {
-            biographyEvent,
+            article,
         },
     };
 }
 
-export default function Post({ biographyEvent }) {
+export default function Post({ article }) {
+    console.log(article);
+
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
                 <title>
-                    {biographyEvent.titulo} - {AppConfig.name}
+                    {article.titulo} - {AppConfig.name}
                 </title>
             </Head>
             {/* <MDXProvider components={components}> */}
-            <BiographyEventPage biographyEvent={biographyEvent} />
+            <NewsPage article={article}></NewsPage>
             {/* </MDXProvider> */}
         </Container>
     );

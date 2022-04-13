@@ -17,11 +17,6 @@ import { Link, FormattedDate, MDXContent } from "@/components/elements";
 const NewsPage = ({ article }) => {
     return (
         <>
-            <Head>
-                <title>
-                    {article.title} - {AppConfig.name}
-                </title>
-            </Head>
             <Card
                 elevation={1}
                 sx={{
@@ -34,13 +29,13 @@ const NewsPage = ({ article }) => {
                 }}
             >
                 {article.image ? (
-                    <CardMedia title={article.title}>
+                    <CardMedia title={article.titulo}>
                         <Image
                             src={article.image.path}
                             height={article.image.height}
                             width={article.image.width}
                             objectFit="contain"
-                            alt={article.title}
+                            alt={article.titulo}
                         />
                     </CardMedia>
                 ) : (
@@ -75,7 +70,7 @@ const NewsPage = ({ article }) => {
                                 },
                             }}
                         >
-                            {article.title}
+                            {article.titulo}
                         </Typography>
                     </Box>
                     <Box
@@ -88,10 +83,10 @@ const NewsPage = ({ article }) => {
                     >
                         <Link
                             underline="none"
-                            href={`/${article.category.url}`}
+                            href={`/${article.categoria.url}`}
                         >
                             <Chip
-                                label={article.category.rotulo}
+                                label={article.categoria.rotulo}
                                 color="neutral"
                                 size="small"
                                 clickable={true}
@@ -112,7 +107,7 @@ const NewsPage = ({ article }) => {
                             underline="none"
                             sx={{ mx: "10px" }}
                         > */}
-                        {article.author}
+                        {article.colaborador.nome}
                         {/* </Link> */}
                     </Box>
                     <Box
@@ -126,7 +121,7 @@ const NewsPage = ({ article }) => {
                         }}
                     >
                         <Typography variant="body1" color="neutral.light">
-                            {article.summary}
+                            {article.descricao}
                         </Typography>
                     </Box>
 
