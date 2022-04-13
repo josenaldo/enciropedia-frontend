@@ -1,4 +1,3 @@
-import NextLink from "next/link";
 import {
     Box,
     Card,
@@ -7,7 +6,6 @@ import {
     CardMedia,
     Typography,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
@@ -25,12 +23,14 @@ const VideoCard = ({ video }) => {
                 itemsAlign: "flex-start",
             }}
         >
-            <CardMedia
-                component="img"
-                height="210"
-                image={`https://img.youtube.com/vi/${video.video_id}/0.jpg`}
-                alt={video.summary}
-            />
+            {video.video_id && (
+                <CardMedia
+                    component="img"
+                    height="210"
+                    image={`https://img.youtube.com/vi/${video.video_id}/0.jpg`}
+                    alt={video.titulo}
+                />
+            )}
 
             <CardContent
                 sx={{
@@ -49,7 +49,7 @@ const VideoCard = ({ video }) => {
                             mb: "20px",
                         }}
                     >
-                        {video.title}
+                        {video.titulo}
                     </Link>
                 </Box>
 
@@ -73,12 +73,12 @@ const VideoCard = ({ video }) => {
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={video.date} />
+                        <FormattedDate dateString={video.publishedAt} />
                     </Typography>
                 </Box>
                 <Box pt="20px">
                     <Typography variant="body1" color="neutral.light">
-                        {video.excerpt}
+                        {video.descricao}
                     </Typography>
                 </Box>
             </CardContent>
