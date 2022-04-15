@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Container } from "@mui/material";
 import { AppConfig } from "@/config";
-import { ArticlesApi } from "@/common/lib";
+import { ArticlesApi } from "@/common/api";
 import { VideoPage } from "@/components/videos";
 
 const articleCategory = "videos";
@@ -28,8 +28,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ article }) {
-    console.log(article);
-
     return (
         <Container sx={{ my: "40px" }}>
             <Head>

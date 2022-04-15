@@ -4,8 +4,8 @@ import { Box, Container, Stack, Pagination } from "@mui/material";
 import useSWR from "swr";
 
 import { AppConfig } from "@/config";
-import { ArticlesApi } from "@/common/lib";
-import { fetcher } from "@/common/api";
+import { ArticlesApi } from "@/common/api";
+import { fetcher } from "@/common/lib";
 import { VideoWall } from "@/components/videos";
 
 const articleCategory = "videos";
@@ -35,7 +35,6 @@ export default function VideosPage({ result }) {
         setPageIndex(value);
     };
 
-    console.log("Videos:", videos);
     return (
         <Container sx={{ my: "40px" }}>
             <Head>

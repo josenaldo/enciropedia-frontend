@@ -3,8 +3,9 @@ import { Box } from "@mui/material";
 import { Header, Footer, Breadcrumbs } from "@/common/layouts";
 import { topPages } from "@/constants";
 import { AppConfig } from "@/config";
+import { UserProvider } from "@/contexts";
 
-export function DefaultTemplate({ children }) {
+export function DefaultTemplate({ user, loading = false, children }) {
     const getDefaultTextGenerator = React.useCallback((subpath) => {
         const pages = topPages.reduce((previous, current) => {
             previous[current.id] = { url: current.url, text: current.text };
@@ -30,17 +31,19 @@ export function DefaultTemplate({ children }) {
     }, []);
 
     return (
-        <Box>
-            <Header />
+        <UserProvider value={{ user, loading }}>
+            <Box>
+                <Header />
 
-            <Breadcrumbs
-                getDefaultTextGenerator={getDefaultTextGenerator}
-                getTextGenerator={getTextGenerator}
-            />
+                <Breadcrumbs
+                    getDefaultTextGenerator={getDefaultTextGenerator}
+                    getTextGenerator={getTextGenerator}
+                />
 
-            <main>{children}</main>
+                <main>{children}</main>
 
-            <Footer />
-        </Box>
+                <Footer />
+            </Box>
+        </UserProvider>
     );
 }

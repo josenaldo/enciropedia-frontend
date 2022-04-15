@@ -1,5 +1,5 @@
 import qs from "qs";
-import { fetcher } from "@/common/api";
+import { fetcher } from "@/common/lib";
 
 const createApiUrl = (path, params) => {
     const query = qs.stringify(params, {

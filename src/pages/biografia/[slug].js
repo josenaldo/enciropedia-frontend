@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Container } from "@mui/material";
 import { AppConfig } from "@/config";
-import { BiographyEventsApi } from "@/common/lib";
+import { BiographyEventsApi } from "@/common/api";
 import { BiographyEventPage } from "@/components/biography";
 
 export async function getStaticPaths() {

@@ -1,5 +1,5 @@
-import { BiographyEventsApi } from "@/common/lib";
-import { ArticlesApi } from "@/common/lib";
+import { BiographyEventsApi } from "@/common/api";
+import { ArticlesApi } from "@/common/api";
 import { topPages } from "@/constants";
 
 export default async function handler(req, res) {

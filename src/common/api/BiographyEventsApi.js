@@ -1,4 +1,4 @@
-import { apiCall } from "@/common/api";
+import { apiCall } from "@/common/lib";
 
 export class BiographyEventsApi {
     static apiPath = "/eventos-biograficos";

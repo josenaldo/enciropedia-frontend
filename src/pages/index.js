@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 
-import { ArticlesApi } from "@/common/lib";
-import { fetcher } from "@/common/api";
+import { ArticlesApi } from "@/common/api";
 import { NewsWall } from "@/components/news";
 import { Hero } from "@/components/home";
 

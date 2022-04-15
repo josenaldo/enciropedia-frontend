@@ -4,8 +4,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { DefaultTemplate } from "@/common/templates";
 import { theme } from "@/styles";
 import { AppConfig } from "@/config";
+import { useFetchUser } from "@/contexts";
 
 function App({ Component, pageProps }) {
+    const { user, loading } = useFetchUser();
     return (
         <>
             <Head>
@@ -18,7 +20,7 @@ function App({ Component, pageProps }) {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <DefaultTemplate>
+                <DefaultTemplate user={user} loading={loading}>
                     <Component {...pageProps} />
                 </DefaultTemplate>
             </ThemeProvider>

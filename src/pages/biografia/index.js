@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Box, Container } from "@mui/material";
 
 import { AppConfig } from "@/config";
-import { BiographyEventsApi } from "@/common/lib";
+import { BiographyEventsApi } from "@/common/api";
 import { TimeLine } from "@/components/biography";
 
 export async function getStaticProps() {
