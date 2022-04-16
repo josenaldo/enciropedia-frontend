@@ -7,6 +7,7 @@ export {
     getUserFromLocalCookie,
     getIdFromLocalCookie,
     getTokenFromLocalCookie,
+    getUserFromServerCookie,
     getIdFromServerCookie,
     getTokenFromServerCookie,
 } from "./auth";

@@ -6,7 +6,10 @@ const topPages = [
     { id: "podcasts", url: "/podcasts", text: "Podcast" },
     { id: "movimentos", url: "/movimentos", text: "Movimentos" },
     { id: "colaboradores", url: "/colaboradores", text: "Colaboradores" },
-    { id: "login", url: "/login", text: "Login" },
 ];
 
-export { topPages };
+const authenticatedPages = [
+    { id: "favoritos", url: "/favoritos", text: "Favoritos" },
+];
+
+export { topPages, authenticatedPages };

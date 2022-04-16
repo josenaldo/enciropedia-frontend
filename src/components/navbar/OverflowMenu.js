@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, IconButton, Divider, ListItemIcon } from "@mui/material";
+import { Box, Button, IconButton, Divider, ListItemIcon } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
@@ -17,6 +17,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { LoginDialog } from "@/components/login";
 
 import { unsetToken } from "@/common/lib";
+
+import { Link } from "@/components/elements";
 
 const OverflowMenu = ({ user, loading }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,12 +64,22 @@ const OverflowMenu = ({ user, loading }) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>
-                <ListItemIcon>
-                    <AccountCircle fontSize="small" />
-                </ListItemIcon>
-                Minha conta
-            </MenuItem>
+            <Link
+                href="/favoritos"
+                color="neutral"
+                sx={{
+                    textDecoration: "none",
+                    display: "block",
+                }}
+            >
+                <MenuItem>
+                    <ListItemIcon>
+                        <AccountCircle fontSize="small" />
+                    </ListItemIcon>
+                    Favoritos
+                </MenuItem>
+            </Link>
+
             <Divider />
             <MenuItem onClick={handleLogout}>
                 <ListItemIcon>

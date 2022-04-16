@@ -1,22 +1,25 @@
-import * as React from "react";
+import { useState } from "react";
+
 import {
     Box,
+    Typography,
+    IconButton,
     TextField,
     Button,
-    IconButton,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
 } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
 
-import { setToken, fetcher } from "@/common/lib";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-const LoginDialog = () => {
-    const [open, setOpen] = React.useState(false);
-    const [data, setData] = React.useState({ identifier: "", password: "" });
+const Favorite = ({ user, article }) => {
+    const [favorite, setFavorite] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState({ anotacao: "" });
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,18 +51,16 @@ const LoginDialog = () => {
     };
 
     return (
-        <Box>
-            <IconButton
-                size="large"
-                edge="end"
-                aria-label="login"
-                aria-haspopup="true"
-                onClick={handleClickOpen}
-                color="inherit"
-            >
-                <LoginIcon />
-            </IconButton>
-
+        <>
+            {favorite ? (
+                <IconButton aria-label="favorite" onClick={toggleFavorite}>
+                    <FavoriteIcon />
+                </IconButton>
+            ) : (
+                <IconButton aria-label="unfavorite" onClick={handleClickOpen}>
+                    <FavoriteBorderIcon />
+                </IconButton>
+            )}
             <Dialog open={open} onClose={handleClose}>
                 <Box
                     component="form"
@@ -67,39 +68,34 @@ const LoginDialog = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <DialogTitle>Login</DialogTitle>
+                    <DialogTitle>Adicionar favorito</DialogTitle>
                     <DialogContent>
+                        <DialogContentText>
+                            Deseja favoritar o artigo &lsquo;{article.titulo}
+                            &rsquo;?
+                        </DialogContentText>
                         <TextField
-                            type="email"
-                            name="identifier"
-                            id="identifier"
-                            label="Email"
+                            type="textarea"
+                            name="anotacao"
+                            id="anotacao"
+                            label="Anotação"
                             variant="standard"
                             margin="dense"
                             fullWidth
-                            required
                             autoFocus
-                            onChange={handleChange}
-                        />
-                        <TextField
-                            type="password"
-                            name="password"
-                            id="password"
-                            label="Senha"
-                            variant="standard"
-                            margin="dense"
-                            fullWidth
-                            required
                             onChange={handleChange}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button type="submit">Entrar</Button>
+                        <Button type="button" onClick={handleClose}>
+                            Não
+                        </Button>
+                        <Button type="submit">Sim</Button>
                     </DialogActions>
                 </Box>
             </Dialog>
-        </Box>
+        </>
     );
 };
 
-export { LoginDialog };
+export { Favorite };

@@ -20,7 +20,6 @@ import { Logo, NavMenu, OverflowMenu } from "@/components/navbar";
 import { useUser } from "@/contexts";
 
 export function Header(props) {
-    // const [user, setUser] = React.useState();
     const { user, loading } = useUser();
 
     return (

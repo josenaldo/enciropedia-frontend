@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
 
 import {
     Box,
@@ -8,13 +7,20 @@ import {
     CardMedia,
     Typography,
     Chip,
+    IconButton,
 } from "@mui/material";
 
-import { AppConfig } from "@/config";
-
-import { Link, FormattedDate, MDXContent } from "@/components/elements";
+import {
+    Link,
+    FormattedDate,
+    MDXContent,
+    Favorite,
+} from "@/components/elements";
+import { useUser } from "@/contexts";
 
 const NewsPage = ({ article }) => {
+    const { user, loading } = useUser();
+
     return (
         <>
             <Card
@@ -100,15 +106,20 @@ const NewsPage = ({ article }) => {
                         >
                             <FormattedDate dateString={article.publishedAt} />
                         </Typography>
-                        {/* <Link
-                            href={`${article.colaborador.url}`}
-                            variant="caption"
-                            color="neutral.main"
-                            underline="none"
-                            sx={{ mx: "10px" }}
-                        > */}
-                        {article.colaborador.nome}
-                        {/* </Link> */}
+                        <Box>
+                            {/* <Link
+                                href={`${article.colaborador.url}`}
+                                variant="caption"
+                                color="neutral.main"
+                                underline="none"
+                                sx={{ mx: "10px" }}
+                            > */}
+                            {article.colaborador.nome}
+                            {/* </Link> */}
+                        </Box>
+                        <Box sx={{ px: "5px" }}>
+                            {user && <Favorite user={user} article={article} />}
+                        </Box>
                     </Box>
                     <Box
                         sx={{

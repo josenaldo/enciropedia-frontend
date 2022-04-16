@@ -1,6 +1,6 @@
 import { BiographyEventsApi } from "@/common/api";
 import { ArticlesApi } from "@/common/api";
-import { topPages } from "@/constants";
+import { topPages, authenticatedPages } from "@/constants";
 
 export default async function handler(req, res) {
     const id = req.query.id;
@@ -11,7 +11,12 @@ export default async function handler(req, res) {
     const articlesApi = new ArticlesApi();
     const articles = await articlesApi.findAllLinks();
 
-    const allPages = [...topPages, ...biographyEvents, ...articles];
+    const allPages = [
+        ...topPages,
+        ...authenticatedPages,
+        ...biographyEvents,
+        ...articles,
+    ];
 
     const pages = allPages.reduce((previous, current) => {
         previous[current.id] = { url: current.url, text: current.text };

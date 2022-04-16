@@ -64,30 +64,31 @@ export const getTokenFromLocalCookie = () => {
     return Cookies.get("jwt");
 };
 
-export const getTokenFromServerCookie = (req) => {
+const getCookieFromServer = (req, cookieName) => {
     if (!req.headers.cookie || "") {
         return undefined;
     }
-    const jwtCookie = req.headers.cookie
+    const cookie = req.headers.cookie
         .split(";")
-        .find((c) => c.trim().startsWith("jwt="));
-    if (!jwtCookie) {
+        .find((c) => c.trim().startsWith(`${cookieName}=`));
+    if (!cookie) {
         return undefined;
     }
-    const jwt = jwtCookie.split("=")[1];
-    return jwt;
+    const value = cookie.split("=")[1];
+    return value;
+};
+
+export const getUserFromServerCookie = (req) => {
+    const username = getCookieFromServer("username");
+    return username;
 };
 
 export const getIdFromServerCookie = (req) => {
-    if (!req.headers.cookie || "") {
-        return undefined;
-    }
-    const idCookie = req.headers.cookie
-        .split(";")
-        .find((c) => c.trim().startsWith("id="));
-    if (!idCookie) {
-        return undefined;
-    }
-    const id = idCookie.split("=")[1];
+    const id = getCookieFromServer("id");
     return id;
+};
+
+export const getTokenFromServerCookie = (req) => {
+    const jwt = getCookieFromServer("jwt");
+    return jwt;
 };

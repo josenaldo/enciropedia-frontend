@@ -34,9 +34,7 @@ export default function Post({ article }) {
                     {article.titulo} - {AppConfig.name}
                 </title>
             </Head>
-            {/* <MDXProvider components={components}> */}
             <NewsPage article={article}></NewsPage>
-            {/* </MDXProvider> */}
         </Container>
     );
 }
