@@ -28,6 +28,14 @@ export default function FavoritosPage() {
         getFav();
     }, [user]);
 
+    const refreshList = async () => {
+        const api = new FavoritesApi();
+        if (user) {
+            const result = await api.findAll();
+            setResult(result);
+        }
+    };
+
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
@@ -35,7 +43,10 @@ export default function FavoritosPage() {
             </Head>
             <Box component="section">
                 {result && result.data ? (
-                    <FavoriteList favoritos={result.data} />
+                    <FavoriteList
+                        favoritos={result.data}
+                        refreshList={refreshList}
+                    />
                 ) : (
                     "Favoritos não encontrados"
                 )}

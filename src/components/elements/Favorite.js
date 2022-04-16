@@ -29,9 +29,12 @@ const Favorite = ({ user, article }) => {
     };
 
     const handleDeleteFavorite = async () => {
+        setLoadingFavorite(true);
+
         const api = new FavoritesApi();
         const result = await api.delete(favorite);
         setFavorite(null);
+        setLoadingFavorite(false);
     };
 
     const handleCloseAddFavoriteDialog = () => {
@@ -39,11 +42,14 @@ const Favorite = ({ user, article }) => {
     };
 
     const handleSubmitFavorite = async (e) => {
+        setLoadingFavorite(true);
+
         e.preventDefault();
 
         const api = new FavoritesApi();
         const result = await api.create(article, note);
         setFavorite(result.data);
+        setLoadingFavorite(false);
         setOpen(false);
     };
 
