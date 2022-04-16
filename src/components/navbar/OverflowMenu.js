@@ -1,11 +1,18 @@
 import * as React from "react";
-import { Box, Button, IconButton, Divider, ListItemIcon } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
+import {
+    Badge,
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    InputBase,
+    ListItemIcon,
+    Menu,
+    MenuIcon,
+    MenuItem,
+    Typography,
+} from "@mui/material";
+
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
@@ -13,11 +20,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { LoginDialog } from "@/components/login";
-
 import { unsetToken } from "@/common/lib";
-
 import { Link } from "@/components/elements";
 
 const OverflowMenu = ({ user, loading }) => {
@@ -74,7 +80,7 @@ const OverflowMenu = ({ user, loading }) => {
             >
                 <MenuItem>
                     <ListItemIcon>
-                        <AccountCircle fontSize="small" />
+                        <FavoriteIcon fontSize="small" />
                     </ListItemIcon>
                     Favoritos
                 </MenuItem>
