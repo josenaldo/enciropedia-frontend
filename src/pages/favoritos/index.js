@@ -20,7 +20,7 @@ export default function FavoritosPage() {
         const getFav = async () => {
             const api = new FavoritesApi();
             if (user) {
-                const result = await api.findAll({ user });
+                const result = await api.findAll();
                 setResult(result);
             }
         };

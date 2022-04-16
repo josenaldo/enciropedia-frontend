@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
     Box,
@@ -16,55 +16,77 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-const Favorite = ({ user, article }) => {
-    const [favorite, setFavorite] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [data, setData] = useState({ anotacao: "" });
+import { FavoritesApi } from "@/common/api";
 
-    const handleClickOpen = () => {
+const Favorite = ({ user, article }) => {
+    const [loadingFavorite, setLoadingFavorite] = useState(true);
+    const [favorite, setFavorite] = useState(null);
+    const [open, setOpen] = useState(false);
+    const [note, setNote] = useState("");
+
+    const handleAddFavorite = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
+    const handleDeleteFavorite = async () => {
+        const api = new FavoritesApi();
+        const result = await api.delete(favorite);
+        setFavorite(null);
+    };
+
+    const handleCloseAddFavoriteDialog = () => {
         setOpen(false);
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmitFavorite = async (e) => {
         e.preventDefault();
 
-        const responseData = await fetcher(
-            `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`,
-            {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    identifier: data.identifier,
-                    password: data.password,
-                }),
-            }
-        );
-        setToken(responseData);
+        const api = new FavoritesApi();
+        const result = await api.create(article, note);
+        setFavorite(result.data);
+        setOpen(false);
     };
 
-    const handleChange = (e) => {
-        setData({ ...data, [e.target.name]: e.target.value });
+    const handleChangeNote = (e) => {
+        setNote(e.target.value);
     };
+
+    useEffect(() => {
+        const isFav = async () => {
+            if (user) {
+                const api = new FavoritesApi();
+                const fav = await api.find({ user, article });
+                setFavorite(fav);
+                setLoadingFavorite(false);
+            }
+        };
+
+        isFav();
+    }, [user, article]);
 
     return (
         <>
             {favorite ? (
-                <IconButton aria-label="favorite" onClick={toggleFavorite}>
+                <IconButton
+                    aria-label="favorite"
+                    onClick={handleDeleteFavorite}
+                    disabled={loadingFavorite}
+                >
                     <FavoriteIcon />
                 </IconButton>
             ) : (
-                <IconButton aria-label="unfavorite" onClick={handleClickOpen}>
+                <IconButton
+                    aria-label="unfavorite"
+                    onClick={handleAddFavorite}
+                    disabled={loadingFavorite}
+                >
                     <FavoriteBorderIcon />
                 </IconButton>
             )}
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleCloseAddFavoriteDialog}>
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmitFavorite}
                     noValidate
                     autoComplete="off"
                 >
@@ -76,18 +98,21 @@ const Favorite = ({ user, article }) => {
                         </DialogContentText>
                         <TextField
                             type="textarea"
-                            name="anotacao"
-                            id="anotacao"
+                            name="note"
+                            id="note"
                             label="Anotação"
                             variant="standard"
                             margin="dense"
                             fullWidth
                             autoFocus
-                            onChange={handleChange}
+                            onChange={handleChangeNote}
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button type="button" onClick={handleClose}>
+                        <Button
+                            type="button"
+                            onClick={handleCloseAddFavoriteDialog}
+                        >
                             Não
                         </Button>
                         <Button type="submit">Sim</Button>

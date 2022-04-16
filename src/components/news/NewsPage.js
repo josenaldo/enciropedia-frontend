@@ -89,7 +89,7 @@ const NewsPage = ({ article }) => {
                     >
                         <Link
                             underline="none"
-                            href={`/${article.categoria.url}`}
+                            href={`${article.categoria.url}`}
                         >
                             <Chip
                                 label={article.categoria.rotulo}

@@ -1,7 +1,8 @@
 import {
     apiCall,
     getTokenFromLocalCookie,
-    getTokenFromServerCookie,
+    getUserFromLocalCookie,
+    getIdFromLocalCookie,
 } from "@/common/lib";
 
 import { ArticlesApi } from "@/common/api";
@@ -15,11 +16,9 @@ export class FavoritesApi {
         return `/biografia/${path}`;
     }
 
-    async findAll({ user, req, page = 1, pageSize = 10 }) {
-        const jwt =
-            typeof window !== "undefined"
-                ? getTokenFromLocalCookie()
-                : getTokenFromServerCookie(req);
+    async findAll() {
+        const user = await getUserFromLocalCookie();
+        const jwt = getTokenFromLocalCookie();
 
         const option = jwt
             ? { headers: { Authorization: `Bearer ${jwt}` } }
@@ -38,10 +37,6 @@ export class FavoritesApi {
                         $eq: user,
                     },
                 },
-            },
-            pagination: {
-                page: page,
-                pageSize: pageSize,
             },
             sort: ["createdAt:desc"],
         };
@@ -66,7 +61,90 @@ export class FavoritesApi {
         return result;
     }
 
-    async create() {}
+    async find({ user, article }) {
+        const jwt = getTokenFromLocalCookie();
 
-    async isFavorito(user, article) {}
+        const option = jwt
+            ? { headers: { Authorization: `Bearer ${jwt}` } }
+            : "";
+
+        const params = {
+            populate: {
+                artigo: {
+                    fields: ["titulo", "slug", "descricao"],
+                    populate: { categoria: "*" },
+                },
+            },
+            filters: {
+                user: {
+                    username: {
+                        $eq: user,
+                    },
+                },
+                artigo: {
+                    id: {
+                        $eq: article.id,
+                    },
+                },
+            },
+        };
+
+        const result = await apiCall({
+            path: FavoritesApi.apiPath,
+            params: params,
+            option: option,
+        });
+
+        return result.data && result.data.length > 0 ? result.data[0] : null;
+    }
+
+    async create(article, note) {
+        const userId = await getIdFromLocalCookie();
+        const jwt = getTokenFromLocalCookie();
+
+        const option = {
+            method: "POST",
+            body: JSON.stringify({
+                data: {
+                    artigo: article.id,
+                    anotacao: note,
+                    user: userId,
+                },
+            }),
+        };
+
+        if (jwt) {
+            option.headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+            };
+        }
+
+        const result = await apiCall({
+            path: FavoritesApi.apiPath,
+            option: option,
+        });
+        return result;
+    }
+
+    async delete(favorite) {
+        const jwt = getTokenFromLocalCookie();
+
+        const option = {
+            method: "DELETE",
+        };
+
+        if (jwt) {
+            option.headers = {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+            };
+        }
+
+        const result = await apiCall({
+            path: `${FavoritesApi.apiPath}/${favorite.id}`,
+            option: option,
+        });
+        return result;
+    }
 }
