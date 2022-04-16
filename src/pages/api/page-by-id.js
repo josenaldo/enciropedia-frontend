@@ -23,5 +23,9 @@ export default async function handler(req, res) {
         return previous;
     }, {});
 
-    res.status(200).json(pages[id]);
+    const text = pages[id]
+        ? pages[id]
+        : { url: "/404", text: "Página não encontrada" };
+
+    res.status(200).json(text);
 }
