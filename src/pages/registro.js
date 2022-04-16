@@ -3,11 +3,13 @@ import { AppConfig } from "@/config";
 
 import { Box, Container } from "@mui/material";
 
-export default function PageNotFoundErrorPage() {
+import { RegisterPage } from "@/components/account";
+
+export default function RegistroPage() {
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
-                <title>404 - {AppConfig.name}</title>
+                <title>Registro - {AppConfig.name}</title>
             </Head>
             <Box
                 sx={{
@@ -16,7 +18,7 @@ export default function PageNotFoundErrorPage() {
                     overflow: "hidden",
                 }}
             >
-                <h1>Página não encontrada</h1>
+                <RegisterPage />
             </Box>
         </Container>
     );

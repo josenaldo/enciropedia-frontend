@@ -2,7 +2,7 @@ import Router from "next/router";
 import Cookies from "js-cookie";
 import { fetcher } from "@/common/lib";
 
-export const setToken = (data) => {
+export const setToken = (data, reload = true) => {
     if (typeof window === "undefined") {
         return;
     }
@@ -10,7 +10,7 @@ export const setToken = (data) => {
     Cookies.set("username", data.user.username);
     Cookies.set("jwt", data.jwt);
 
-    if (Cookies.get("username")) {
+    if (reload && Cookies.get("username")) {
         Router.reload("/");
     }
 };

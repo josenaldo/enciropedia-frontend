@@ -12,4 +12,10 @@ const authenticatedPages = [
     { id: "favoritos", url: "/favoritos", text: "Favoritos" },
 ];
 
-export { topPages, authenticatedPages };
+const accountPages = [
+    { id: "login", url: "/login", text: "Login" },
+    { id: "registro", url: "/registro", text: "Registro" },
+    { id: "perfil", url: "/perfil", text: "Perfil" },
+];
+
+export { topPages, authenticatedPages, accountPages };

@@ -1,13 +1,14 @@
 import Head from "next/head";
-import { AppConfig } from "@/config";
 
 import { Box, Container } from "@mui/material";
 
-export default function PageNotFoundErrorPage() {
+import { AppConfig } from "@/config";
+
+export default function PerfilPage() {
     return (
-        <Container sx={{ my: "40px" }}>
+        <Container sx={{ px: { lg: 0 } }}>
             <Head>
-                <title>404 - {AppConfig.name}</title>
+                <title>Login - {AppConfig.name}</title>
             </Head>
             <Box
                 sx={{
@@ -16,7 +17,7 @@ export default function PageNotFoundErrorPage() {
                     overflow: "hidden",
                 }}
             >
-                <h1>Página não encontrada</h1>
+                <h1>Perfil</h1>
             </Box>
         </Container>
     );

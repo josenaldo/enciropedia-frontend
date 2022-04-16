@@ -1,6 +1,6 @@
 import { BiographyEventsApi } from "@/common/api";
 import { ArticlesApi } from "@/common/api";
-import { topPages, authenticatedPages } from "@/constants";
+import { topPages, authenticatedPages, accountPages } from "@/constants";
 
 export default async function handler(req, res) {
     const id = req.query.id;
@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     const allPages = [
         ...topPages,
         ...authenticatedPages,
+        ...accountPages,
         ...biographyEvents,
         ...articles,
     ];

@@ -2,27 +2,21 @@ import * as React from "react";
 import {
     Badge,
     Box,
-    Button,
     Divider,
     IconButton,
-    InputBase,
     ListItemIcon,
     Menu,
-    MenuIcon,
     MenuItem,
-    Typography,
 } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import { LoginDialog } from "@/components/login";
+import { LoginDialog } from "@/components/account";
 import { unsetToken } from "@/common/lib";
 import { Link } from "@/components/elements";
 
