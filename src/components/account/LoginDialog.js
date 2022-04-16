@@ -94,6 +94,7 @@ const LoginDialog = () => {
                         />
                     </DialogContent>
                     <DialogActions>
+                        <Button href="/registro">Criar conta</Button>
                         <Button type="submit">Entrar</Button>
                     </DialogActions>
                 </Box>

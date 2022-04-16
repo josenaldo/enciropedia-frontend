@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import {
     Box,
+    Alert,
+    AlertTitle,
     Button,
     Card,
     CardContent,
@@ -19,9 +21,17 @@ const RegisterPage = () => {
         password: "",
         confirmPassword: "",
     });
+    const [errorMessage, setErrorMessage] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (userData.password !== userData.confirmPassword) {
+            setErrorMessage(
+                "Senha e Confirmar Senha não podem ser diferentes."
+            );
+            return;
+        }
         try {
             const responseData = await fetcher(
                 `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local/register`,
@@ -79,6 +89,17 @@ const RegisterPage = () => {
                         </Typography>
                     </Box>
 
+                    {errorMessage && (
+                        <Alert
+                            severity="error"
+                            onClose={() => {
+                                setErrorMessage(null);
+                            }}
+                        >
+                            <AlertTitle>Erro</AlertTitle>
+                            {errorMessage}
+                        </Alert>
+                    )}
                     <Box
                         sx={{
                             color: "neutral.main",
