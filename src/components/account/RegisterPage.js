@@ -65,12 +65,13 @@ const RegisterPage = () => {
             onSubmit={handleSubmit}
             noValidate
             autoComplete="off"
+            sx={{ display: "flex", justifyContent: "center" }}
         >
             <Card
                 elevation={1}
                 sx={{
                     height: "100%",
-                    width: "100%",
+                    width: { xs: "100%", sm: "50%", md: "40%", lg: "30%" },
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
