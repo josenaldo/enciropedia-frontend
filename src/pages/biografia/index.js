@@ -6,7 +6,7 @@ import { AppConfig } from "@/config";
 import { BiographyEventsApi } from "@/common/api";
 import { TimeLine } from "@/components/biography";
 
-export async function getStaticProps() {
+const getStaticProps = async () => {
     const api = new BiographyEventsApi();
     const result = await api.findAll();
     return {
@@ -14,9 +14,9 @@ export async function getStaticProps() {
             result: result,
         },
     };
-}
+};
 
-export default function BiografiaPage({ result }) {
+const BiografiaPage = ({ result }) => {
     return (
         <Container sx={{ px: { lg: 0 } }}>
             <Head>
@@ -33,4 +33,7 @@ export default function BiografiaPage({ result }) {
             </Box>
         </Container>
     );
-}
+};
+
+export { getStaticProps };
+export default BiografiaPage;

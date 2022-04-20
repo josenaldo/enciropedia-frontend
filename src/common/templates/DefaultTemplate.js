@@ -21,7 +21,6 @@ export function DefaultTemplate({ user, loading = false, children }) {
 
         const page = await fetch(urlPageById)
             .then((response) => {
-                console.log(response);
                 return response.json();
             })
             .then((data) => {

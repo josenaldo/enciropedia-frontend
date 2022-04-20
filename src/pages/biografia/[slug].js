@@ -4,7 +4,7 @@ import { AppConfig } from "@/config";
 import { BiographyEventsApi } from "@/common/api";
 import { BiographyEventPage } from "@/components/biography";
 
-export async function getStaticPaths() {
+const getStaticPaths = async () => {
     const api = new BiographyEventsApi();
     const paths = await api.findAllPaths();
 
@@ -12,9 +12,9 @@ export async function getStaticPaths() {
         paths,
         fallback: false,
     };
-}
+};
 
-export async function getStaticProps({ params }) {
+const getStaticProps = async ({ params }) => {
     const api = new BiographyEventsApi();
 
     const biographyEvent = await api.getData(params.slug);
@@ -23,9 +23,9 @@ export async function getStaticProps({ params }) {
             biographyEvent,
         },
     };
-}
+};
 
-export default function Post({ biographyEvent }) {
+const EventoBiograficoPage = ({ biographyEvent }) => {
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
@@ -38,4 +38,8 @@ export default function Post({ biographyEvent }) {
             {/* </MDXProvider> */}
         </Container>
     );
-}
+};
+
+export { getStaticPaths, getStaticProps };
+
+export default EventoBiograficoPage;
