@@ -38,15 +38,13 @@ const FavoriteList = ({ favoritos, refreshList }) => {
                         }
                     >
                         <ListItemAvatar>
-                            <Link href="">
-                                <IconButton
-                                    edge="end"
-                                    aria-label="link"
-                                    href={favorito.artigo.url}
-                                >
-                                    <LinkIcon />
-                                </IconButton>
-                            </Link>
+                            <IconButton
+                                edge="end"
+                                aria-label="link"
+                                href={favorito.artigo.url}
+                            >
+                                <LinkIcon />
+                            </IconButton>
                         </ListItemAvatar>
                         <ListItemText
                             primary={favorito.artigo.titulo}

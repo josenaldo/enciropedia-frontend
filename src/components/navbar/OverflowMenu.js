@@ -46,6 +46,7 @@ const OverflowMenu = ({ user, loading }) => {
 
     const handleLogout = () => {
         unsetToken();
+        handleMenuClose();
     };
     const menuDesktopId = "account-menu";
     const menuDesktop = (

@@ -9,6 +9,7 @@ import { FavoritesApi } from "@/common/api";
 
 import { useUser } from "@/contexts";
 import { FavoriteList } from "@/components/favorites";
+import { ErrorScreen } from "@/components/error";
 
 export default function FavoritosPage() {
     const { user, loading } = useUser();
@@ -19,21 +20,17 @@ export default function FavoritosPage() {
     useEffect(() => {
         const getFav = async () => {
             const api = new FavoritesApi();
-            if (user) {
-                const result = await api.findAll();
-                setResult(result);
-            }
+            const resultResponse = await api.findAll();
+            setResult(resultResponse);
         };
 
         getFav();
-    }, [user]);
+    }, []);
 
     const refreshList = async () => {
         const api = new FavoritesApi();
-        if (user) {
-            const result = await api.findAll();
-            setResult(result);
-        }
+        const resultResponse = await api.findAll();
+        setResult(resultResponse);
     };
 
     return (
@@ -41,16 +38,21 @@ export default function FavoritosPage() {
             <Head>
                 <title>Favoritos - {AppConfig.name}</title>
             </Head>
-            <Box component="section">
-                {result && result.data ? (
-                    <FavoriteList
-                        favoritos={result.data}
-                        refreshList={refreshList}
-                    />
-                ) : (
-                    "Favoritos não encontrados"
-                )}
-            </Box>
+
+            {result && result.error ? (
+                <ErrorScreen error={result.error} />
+            ) : (
+                <Box component="section">
+                    {result && result.data ? (
+                        <FavoriteList
+                            favoritos={result.data}
+                            refreshList={refreshList}
+                        />
+                    ) : (
+                        "Favoritos não encontrados"
+                    )}
+                </Box>
+            )}
         </Container>
     );
 }
