@@ -13,7 +13,13 @@ import {
     TextField,
     Input,
     IconButton,
+    Switch,
+    FormGroup,
+    FormControlLabel,
+    CircularProgress,
 } from "@mui/material";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import {
     AddAPhoto as AddAPhotoIcon,
@@ -24,57 +30,80 @@ import {
     Person as PersonIcon,
     Phone as PhoneIcon,
     Map as MapIcon,
-    Whatsapp as WhatsappIcon,
+    WhatsApp as WhatsAppIcon,
+    Save as SaveIcon,
 } from "@mui/icons-material";
 
 import { useFetchUser } from "@/contexts";
-import { setToken, fetcher, getTokenFromServerCookie } from "@/common/lib";
+import { setToken, fetcher, getTokenFromLocalCookie } from "@/common/lib";
 import { ProfileAvatar } from "@/components/account";
 
 const ProfilePage = ({ userData }) => {
     const router = useRouter();
     const [userProfileData, setUserProfileData] = useState(userData);
-    const [errorMessage, setErrorMessage] = useState();
+    const [message, setMessage] = useState();
+    const [loadingSave, setLoadingSave] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoadingSave(true);
 
         if (userData.password !== userData.confirmPassword) {
-            setErrorMessage(
-                "Senha e Confirmar Senha não podem ser diferentes."
-            );
+            setMessage({
+                text: "Senha e Confirmar Senha não podem ser diferentes.",
+                level: "error",
+            });
+            setLoadingSave(false);
             return;
         }
+
         try {
+            const jwt = getTokenFromLocalCookie();
             const responseData = await fetcher(
-                `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local/register`,
+                `${process.env.NEXT_PUBLIC_STRAPI_URL}/users/${userData.id}`,
                 {
+                    method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
+                        Authorization: `Bearer ${jwt}`,
                     },
                     body: JSON.stringify({
-                        username: userData.username,
-                        email: userData.email,
-                        password: userData.password,
+                        username: userProfileData.username,
+                        email: userProfileData.email,
+                        password: userProfileData.password,
 
-                        fullname: userData.fullname,
-                        phone: userData.phone,
-                        cep: userData.cep,
-                        allowGroup: userData.allowGroup,
+                        fullname: userProfileData.fullname,
+                        phone: userProfileData.phone,
+                        cep: userProfileData.cep,
+                        allowGroup: userProfileData.allowGroup,
                     }),
-                    method: "POST",
                 }
             );
-            setToken(responseData, false);
+            setMessage({
+                text: "Usuário salvo com sucesso.",
+                level: "success",
+            });
+            setLoadingSave(false);
+
             router.push("/perfil");
         } catch (error) {
             console.error(error);
+            setMessage({
+                text: "Ocorreu um erro ao salvar. Tente novamente em alguns minutos.",
+                level: "error",
+            });
+            setLoadingSave(false);
         }
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserProfileData({ ...userProfileData, [name]: value });
+    };
+
+    const handleChangSwitch = (e) => {
+        const { name, checked } = e.target;
+        setUserProfileData({ ...userProfileData, [name]: checked });
     };
 
     return (
@@ -113,15 +142,14 @@ const ProfilePage = ({ userData }) => {
                         height: "100%",
                     }}
                 >
-                    {errorMessage && (
+                    {message && (
                         <Alert
-                            severity="error"
+                            severity={message.level}
                             onClose={() => {
-                                setErrorMessage(null);
+                                setMessage(null);
                             }}
                         >
-                            <AlertTitle>Erro</AlertTitle>
-                            {errorMessage}
+                            {message.text}
                         </Alert>
                     )}
                     <Box
@@ -216,6 +244,36 @@ const ProfilePage = ({ userData }) => {
                             required
                             onChange={(e) => handleChange(e)}
                         />
+
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "flex-end",
+                                flexDirection: "row",
+                                mb: "16px",
+                            }}
+                        >
+                            <Box
+                                sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                            >
+                                <WhatsAppIcon />
+                            </Box>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={
+                                        <Switch
+                                            name="allowGroup"
+                                            checked={userProfileData.allowGroup}
+                                            onChange={(e) =>
+                                                handleChangSwitch(e)
+                                            }
+                                        />
+                                    }
+                                    label="Quero fazer parte do grupo da Aliança
+                                    Rebelde"
+                                />
+                            </FormGroup>
+                        </Box>
                     </Box>
                 </CardContent>
                 <CardActions
@@ -225,7 +283,16 @@ const ProfilePage = ({ userData }) => {
                         justifyContent: "flex-end",
                     }}
                 >
-                    <Button type="submit">Salvar</Button>
+                    {/* {loadingSave && <CircularProgress color="primary" />} */}
+                    <LoadingButton
+                        type="submit"
+                        loading={loadingSave}
+                        loadingPosition="start"
+                        startIcon={<SaveIcon />}
+                    >
+                        Salvar
+                    </LoadingButton>
+                    {/* <Button type="submit">Salvar</Button> */}
                 </CardActions>
             </Card>
         </Box>

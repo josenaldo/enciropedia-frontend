@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.8.1",
     "@mdx-js/loader": "^2.0.0",
     "@mui/icons-material": "^5.4.2",
+    "@mui/lab": "^5.0.0-alpha.78",
     "@mui/material": "^5.4.3",
     "@next/mdx": "^12.1.0",
     "cloudinary": "^1.29.1",
