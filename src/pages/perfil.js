@@ -4,11 +4,43 @@ import { Box, Container } from "@mui/material";
 
 import { AppConfig } from "@/config";
 
-export default function PerfilPage() {
+import { ProfilePage } from "@/components/account";
+import { setToken, fetcher, getTokenFromServerCookie } from "@/common/lib";
+
+const getServerSideProps = async ({ req }) => {
+    const jwt = getTokenFromServerCookie(req);
+
+    if (!jwt) {
+        return {
+            redirect: { destination: "/" },
+        };
+    } else {
+        const responseData = await fetcher(
+            `${process.env.NEXT_PUBLIC_STRAPI_URL}/users/me`,
+            {
+                headers: {
+                    Authorization: `Bearer ${jwt}`,
+                },
+            }
+        );
+
+        responseData.avatar = responseData.avatar
+            ? responseData.avatar
+            : "default_avatar";
+
+        return {
+            props: {
+                userData: responseData,
+            },
+        };
+    }
+};
+
+const PerfilPage = ({ userData }) => {
     return (
-        <Container sx={{ px: { lg: 0 } }}>
+        <Container sx={{ my: "40px" }}>
             <Head>
-                <title>Login - {AppConfig.name}</title>
+                <title>Perfil - {AppConfig.name}</title>
             </Head>
             <Box
                 sx={{
@@ -17,8 +49,12 @@ export default function PerfilPage() {
                     overflow: "hidden",
                 }}
             >
-                <h1>Perfil</h1>
+                <ProfilePage userData={userData} />
             </Box>
         </Container>
     );
-}
+};
+
+export default PerfilPage;
+
+export { getServerSideProps };

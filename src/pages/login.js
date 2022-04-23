@@ -6,7 +6,7 @@ import { AppConfig } from "@/config";
 
 export default function LoginPage() {
     return (
-        <Container sx={{ px: { lg: 0 } }}>
+        <Container sx={{ my: "40px" }}>
             <Head>
                 <title>Login - {AppConfig.name}</title>
             </Head>

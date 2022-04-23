@@ -9,7 +9,7 @@ import {
     MenuItem,
 } from "@mui/material";
 
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -54,23 +54,22 @@ const OverflowMenu = ({ user, loading }) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <Link
+            <MenuLink
+                href="/perfil"
+                text="Meu Perfil"
+                onClick={handleMenuClose}
+                Icon={<AccountCircleIcon fontSize="small" />}
+            />
+
+            <MenuLink
                 href="/favoritos"
-                color="neutral"
-                sx={{
-                    textDecoration: "none",
-                    display: "block",
-                }}
-            >
-                <MenuItem>
-                    <ListItemIcon>
-                        <FavoriteIcon fontSize="small" />
-                    </ListItemIcon>
-                    Favoritos
-                </MenuItem>
-            </Link>
+                text="Favoritos"
+                onClick={handleMenuClose}
+                Icon={<FavoriteIcon fontSize="small" />}
+            />
 
             <Divider />
+
             <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                     <LogoutIcon fontSize="small" />
@@ -104,6 +103,24 @@ const OverflowMenu = ({ user, loading }) => {
 
             {menu}
         </Box>
+    );
+};
+
+const MenuLink = ({ href, text, Icon, onClick }) => {
+    return (
+        <Link
+            href={href}
+            color="neutral"
+            sx={{
+                textDecoration: "none",
+                display: "block",
+            }}
+        >
+            <MenuItem onClick={onClick}>
+                <ListItemIcon>{Icon}</ListItemIcon>
+                {text}
+            </MenuItem>
+        </Link>
     );
 };
 

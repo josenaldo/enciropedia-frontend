@@ -65,7 +65,7 @@ export const getTokenFromLocalCookie = () => {
 };
 
 const getCookieFromServer = (req, cookieName) => {
-    if (!req.headers.cookie || "") {
+    if (!req.headers || !req.headers.cookie || "") {
         return undefined;
     }
     const cookie = req.headers.cookie
@@ -79,16 +79,16 @@ const getCookieFromServer = (req, cookieName) => {
 };
 
 export const getUserFromServerCookie = (req) => {
-    const username = getCookieFromServer("username");
+    const username = getCookieFromServer(req, "username");
     return username;
 };
 
 export const getIdFromServerCookie = (req) => {
-    const id = getCookieFromServer("id");
+    const id = getCookieFromServer(req, "id");
     return id;
 };
 
 export const getTokenFromServerCookie = (req) => {
-    const jwt = getCookieFromServer("jwt");
+    const jwt = getCookieFromServer(req, "jwt");
     return jwt;
 };
