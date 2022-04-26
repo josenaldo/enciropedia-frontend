@@ -17,7 +17,6 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import {
     AccountCircle as AccountCircleIcon,
     Email as EmailIcon,
-    Password as PasswordIcon,
     Person as PersonIcon,
     Phone as PhoneIcon,
     Map as MapIcon,
@@ -241,7 +240,6 @@ const ProfilePage = ({ userData }) => {
                         justifyContent: "flex-end",
                     }}
                 >
-                    {/* {loadingSave && <CircularProgress color="primary" />} */}
                     <LoadingButton
                         type="submit"
                         loading={loadingSave}
@@ -250,7 +248,6 @@ const ProfilePage = ({ userData }) => {
                     >
                         Salvar
                     </LoadingButton>
-                    {/* <Button type="submit">Salvar</Button> */}
                 </CardActions>
             </Card>
         </Box>
