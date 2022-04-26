@@ -9,12 +9,16 @@ import {
     MenuItem,
 } from "@mui/material";
 
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import LogoutIcon from "@mui/icons-material/Logout";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import {
+    AccountCircle as AccountCircleIcon,
+    Password as PasswordIcon,
+    Save as SaveIcon,
+    Mail as MailIcon,
+    Notifications as NotificationsIcon,
+    MoreVert as MoreIcon,
+    Logout as LogoutIcon,
+    Favorite as FavoriteIcon,
+} from "@mui/icons-material";
 
 import { LoginDialog } from "@/components/account";
 import { unsetToken } from "@/common/lib";
@@ -55,6 +59,13 @@ const OverflowMenu = ({ user, loading }) => {
             onClose={handleMenuClose}
         >
             <MenuLink
+                href="/favoritos"
+                text="Favoritos"
+                onClick={handleMenuClose}
+                Icon={<FavoriteIcon fontSize="small" />}
+            />
+
+            <MenuLink
                 href="/perfil"
                 text="Meu Perfil"
                 onClick={handleMenuClose}
@@ -62,10 +73,10 @@ const OverflowMenu = ({ user, loading }) => {
             />
 
             <MenuLink
-                href="/favoritos"
-                text="Favoritos"
+                href="/mudar-senha"
+                text="Mudar Senha"
                 onClick={handleMenuClose}
-                Icon={<FavoriteIcon fontSize="small" />}
+                Icon={<PasswordIcon fontSize="small" />}
             />
 
             <Divider />

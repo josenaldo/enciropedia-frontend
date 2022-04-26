@@ -16,6 +16,7 @@ const accountPages = [
     { id: "login", url: "/login", text: "Login" },
     { id: "registro", url: "/registro", text: "Registro" },
     { id: "perfil", url: "/perfil", text: "Perfil" },
+    { id: "mudar-senha", url: "/mudar-senha", text: "Mudar Senha" },
 ];
 
 export { topPages, authenticatedPages, accountPages };

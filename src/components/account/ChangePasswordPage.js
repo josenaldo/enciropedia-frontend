@@ -6,7 +6,7 @@ import {
     Card,
     CardContent,
     CardActions,
-    TextField,
+    Snackbar,
 } from "@mui/material";
 
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -16,24 +16,44 @@ import {
     Save as SaveIcon,
 } from "@mui/icons-material";
 
+import { TextField } from "@/components/elements";
+
 import { fetcher, getTokenFromLocalCookie } from "@/common/lib";
 
 const ChangePasswordPage = ({ userData }) => {
     const router = useRouter();
-    const [userProfileData, setUserProfileData] = useState(userData);
+    const defaultUSerProfileData = {
+        password: "",
+        confirmPassword: "",
+    };
+    const [userProfileData, setUserProfileData] = useState(
+        defaultUSerProfileData
+    );
     const [message, setMessage] = useState();
-    const [loadingSave, setLoadingSave] = useState(false);
+    const [volatileMessage, setVolatileMessage] = useState();
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoadingSave(true);
+        setLoading(true);
+        setVolatileMessage(null);
+        setMessage(null);
 
-        if (userData.password !== userData.confirmPassword) {
+        if (userProfileData.password !== userProfileData.confirmPassword) {
             setMessage({
                 text: "Senha e Confirmar Senha não podem ser diferentes.",
                 level: "error",
             });
-            setLoadingSave(false);
+            setLoading(false);
+            return;
+        }
+
+        if (!userProfileData.password || !userProfileData.confirmPassword) {
+            setMessage({
+                text: "Senha e Confirmar Senha são obrigatórios.",
+                level: "error",
+            });
+            setLoading(false);
             return;
         }
 
@@ -52,31 +72,26 @@ const ChangePasswordPage = ({ userData }) => {
                     }),
                 }
             );
-            setMessage({
-                text: "Usuário salvo com sucesso.",
+            setVolatileMessage({
+                text: "Senha alterada com sucesso.",
                 level: "success",
             });
-            setLoadingSave(false);
-
-            router.push("/perfil");
+            setLoading(false);
+            setUserProfileData(defaultUSerProfileData);
+            router.push("/mudar-senha");
         } catch (error) {
             console.error(error);
             setMessage({
                 text: "Ocorreu um erro ao salvar. Tente novamente em alguns minutos.",
                 level: "error",
             });
-            setLoadingSave(false);
+            setLoading(false);
         }
     };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserProfileData({ ...userProfileData, [name]: value });
-    };
-
-    const handleChangSwitch = (e) => {
-        const { name, checked } = e.target;
-        setUserProfileData({ ...userProfileData, [name]: checked });
     };
 
     return (
@@ -124,19 +139,10 @@ const ChangePasswordPage = ({ userData }) => {
                         <TextField
                             Icon={<PasswordIcon />}
                             type="password"
-                            id="oldPassword"
-                            name="oldPassword"
-                            label="Senha antiga"
-                            required
-                            onChange={(e) => handleChange(e)}
-                        />
-
-                        <TextField
-                            Icon={<PasswordIcon />}
-                            type="password"
                             id="password"
                             name="password"
                             label="Senha nova"
+                            value={userProfileData.password}
                             required
                             onChange={(e) => handleChange(e)}
                         />
@@ -147,6 +153,7 @@ const ChangePasswordPage = ({ userData }) => {
                             id="confirmPassword"
                             name="confirmPassword"
                             label="Confirmar senha"
+                            value={userProfileData.confirmPassword}
                             required
                             onChange={(e) => handleChange(e)}
                         />
@@ -159,57 +166,36 @@ const ChangePasswordPage = ({ userData }) => {
                         justifyContent: "flex-end",
                     }}
                 >
-                    {/* {loadingSave && <CircularProgress color="primary" />} */}
                     <LoadingButton
                         type="submit"
-                        loading={loadingSave}
+                        loading={loading}
                         loadingPosition="start"
                         startIcon={<SaveIcon />}
                     >
                         Salvar
                     </LoadingButton>
-                    {/* <Button type="submit">Salvar</Button> */}
                 </CardActions>
             </Card>
+            {volatileMessage && (
+                <Snackbar
+                    open={volatileMessage}
+                    autoHideDuration={10000}
+                    onClose={() => {
+                        setVolatileMessage(null);
+                    }}
+                >
+                    <Alert
+                        onClose={() => {
+                            setVolatileMessage(null);
+                        }}
+                        severity={volatileMessage.level}
+                        sx={{ width: "100%" }}
+                    >
+                        {volatileMessage.text}
+                    </Alert>
+                </Snackbar>
+            )}
         </Box>
     );
 };
 export { ChangePasswordPage };
-
-const FormInput = ({
-    Icon,
-    type,
-    id,
-    name,
-    label,
-    value,
-    required,
-    autofocus,
-    onChange,
-}) => {
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                alignItems: "flex-end",
-                flexDirection: "row",
-                mb: "16px",
-            }}
-        >
-            <Box sx={{ color: "action.active", mr: 1, my: 0.5 }}>{Icon}</Box>
-            <TextField
-                type={type}
-                id={id}
-                name={name}
-                label={label}
-                variant="standard"
-                margin="dense"
-                value={value}
-                fullWidth
-                required={required ? required : false}
-                autoFocus={autofocus ? autofocus : false}
-                onChange={onChange}
-            />
-        </Box>
-    );
-};
