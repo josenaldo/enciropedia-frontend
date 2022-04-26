@@ -1,5 +1,8 @@
-import * as React from "react";
+// import * as React from "react";
+import { useState } from "react";
+
 import {
+    Alert,
     Box,
     TextField,
     Button,
@@ -7,16 +10,20 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
 } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
+
+import { Login as LoginIcon } from "@mui/icons-material";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import { setToken, fetcher } from "@/common/lib";
 
 const LoginDialog = () => {
-    const [open, setOpen] = React.useState(false);
-    const [data, setData] = React.useState({ identifier: "", password: "" });
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState({ identifier: "", password: "" });
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -29,6 +36,16 @@ const LoginDialog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!data.identifier || !data.password) {
+            setMessage({
+                text: "Email e senha são obrigatórios.",
+                level: "error",
+            });
+            return;
+        }
+
+        setLoading(true);
+
         const responseData = await fetcher(
             `${process.env.NEXT_PUBLIC_STRAPI_URL}/auth/local`,
             {
@@ -40,7 +57,23 @@ const LoginDialog = () => {
                 }),
             }
         );
-        setToken(responseData);
+
+        if (responseData.error) {
+            if (responseData.error.name === "ValidationError") {
+                setMessage({
+                    text: "Usuário e/ou senha incorretos.",
+                    level: "error",
+                });
+            } else {
+                setMessage({
+                    text: "Ocorreu um erro ao executar o login. Tente novamente mais tarde.",
+                    level: "error",
+                });
+            }
+        } else {
+            setToken(responseData);
+        }
+        setLoading(false);
     };
 
     const handleChange = (e) => {
@@ -69,6 +102,16 @@ const LoginDialog = () => {
                 >
                     <DialogTitle>Login</DialogTitle>
                     <DialogContent>
+                        {message && (
+                            <Alert
+                                severity={message.level}
+                                onClose={() => {
+                                    setMessage(null);
+                                }}
+                            >
+                                {message.text}
+                            </Alert>
+                        )}
                         <TextField
                             type="email"
                             name="identifier"
@@ -93,9 +136,21 @@ const LoginDialog = () => {
                             onChange={handleChange}
                         />
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
                         <Button href="/registro">Criar conta</Button>
-                        <Button type="submit">Entrar</Button>
+                        <LoadingButton
+                            type="submit"
+                            loading={loading}
+                            loadingPosition="start"
+                            startIcon={<LoginIcon />}
+                        >
+                            Entrar
+                        </LoadingButton>
                     </DialogActions>
                 </Box>
             </Dialog>
