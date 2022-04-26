@@ -6,30 +6,19 @@ import {
     Card,
     CardContent,
     CardActions,
-    CardMedia,
-    Switch,
-    FormGroup,
-    FormControlLabel,
+    TextField,
 } from "@mui/material";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import {
-    AccountCircle as AccountCircleIcon,
-    Email as EmailIcon,
     Password as PasswordIcon,
-    Person as PersonIcon,
-    Phone as PhoneIcon,
-    Map as MapIcon,
-    WhatsApp as WhatsAppIcon,
     Save as SaveIcon,
 } from "@mui/icons-material";
 
 import { fetcher, getTokenFromLocalCookie } from "@/common/lib";
-import { ProfileAvatar } from "@/components/account";
-import { TextField } from "@/components/elements";
 
-const ProfilePage = ({ userData }) => {
+const ChangePasswordPage = ({ userData }) => {
     const router = useRouter();
     const [userProfileData, setUserProfileData] = useState(userData);
     const [message, setMessage] = useState();
@@ -59,12 +48,7 @@ const ProfilePage = ({ userData }) => {
                         Authorization: `Bearer ${jwt}`,
                     },
                     body: JSON.stringify({
-                        username: userProfileData.username,
-                        email: userProfileData.email,
-                        fullname: userProfileData.fullname,
-                        phone: userProfileData.phone,
-                        cep: userProfileData.cep,
-                        allowGroup: userProfileData.allowGroup,
+                        password: userProfileData.password,
                     }),
                 }
             );
@@ -114,17 +98,6 @@ const ProfilePage = ({ userData }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                <CardMedia
-                    sx={{
-                        bgcolor: "background.paper",
-                        display: "flex",
-                    }}
-                >
-                    <ProfileAvatar
-                        avatar={userData.avatar}
-                        userId={userData.id}
-                    />
-                </CardMedia>
                 <CardContent
                     sx={{
                         width: "100%",
@@ -149,89 +122,34 @@ const ProfilePage = ({ userData }) => {
                         }}
                     >
                         <TextField
-                            Icon={<PersonIcon />}
-                            type="text"
-                            id="fullname"
-                            name="fullname"
-                            label="Nome completo"
-                            value={userProfileData.fullname}
-                            autoFocus
-                            onChange={(e) => handleChange(e)}
-                        />
-
-                        <TextField
-                            Icon={<AccountCircleIcon />}
-                            type="text"
-                            id="username"
-                            name="username"
-                            label="Nome de usuário"
-                            value={userProfileData.username}
-                            required
-                            autoFocus
-                            onChange={(e) => handleChange(e)}
-                        />
-
-                        <TextField
-                            Icon={<EmailIcon />}
-                            type="email"
-                            id="email"
-                            name="email"
-                            label="Email"
-                            value={userProfileData.email}
+                            Icon={<PasswordIcon />}
+                            type="password"
+                            id="oldPassword"
+                            name="oldPassword"
+                            label="Senha antiga"
                             required
                             onChange={(e) => handleChange(e)}
                         />
 
                         <TextField
-                            Icon={<PhoneIcon />}
-                            type="text"
-                            id="phone"
-                            name="phone"
-                            label="Telefone"
-                            value={userProfileData.phone}
-                            autoFocus
+                            Icon={<PasswordIcon />}
+                            type="password"
+                            id="password"
+                            name="password"
+                            label="Senha nova"
+                            required
                             onChange={(e) => handleChange(e)}
                         />
 
                         <TextField
-                            Icon={<MapIcon />}
-                            type="text"
-                            id="cep"
-                            name="cep"
-                            label="CEP"
-                            value={userProfileData.cep}
-                            autoFocus
+                            Icon={<PasswordIcon />}
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            label="Confirmar senha"
+                            required
                             onChange={(e) => handleChange(e)}
                         />
-
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "flex-end",
-                                flexDirection: "row",
-                                mb: "16px",
-                            }}
-                        >
-                            <Box
-                                sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                            >
-                                <WhatsAppIcon />
-                            </Box>
-                            <FormGroup>
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            name="allowGroup"
-                                            checked={userProfileData.allowGroup}
-                                            onChange={(e) =>
-                                                handleChangSwitch(e)
-                                            }
-                                        />
-                                    }
-                                    label="Quero fazer parte do grupo da Aliança Rebelde"
-                                />
-                            </FormGroup>
-                        </Box>
                     </Box>
                 </CardContent>
                 <CardActions
@@ -256,5 +174,42 @@ const ProfilePage = ({ userData }) => {
         </Box>
     );
 };
+export { ChangePasswordPage };
 
-export { ProfilePage };
+const FormInput = ({
+    Icon,
+    type,
+    id,
+    name,
+    label,
+    value,
+    required,
+    autofocus,
+    onChange,
+}) => {
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                alignItems: "flex-end",
+                flexDirection: "row",
+                mb: "16px",
+            }}
+        >
+            <Box sx={{ color: "action.active", mr: 1, my: 0.5 }}>{Icon}</Box>
+            <TextField
+                type={type}
+                id={id}
+                name={name}
+                label={label}
+                variant="standard"
+                margin="dense"
+                value={value}
+                fullWidth
+                required={required ? required : false}
+                autoFocus={autofocus ? autofocus : false}
+                onChange={onChange}
+            />
+        </Box>
+    );
+};
