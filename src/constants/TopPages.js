@@ -19,4 +19,9 @@ const accountPages = [
     { id: "mudar-senha", url: "/mudar-senha", text: "Mudar Senha" },
 ];
 
-export { topPages, authenticatedPages, accountPages };
+const errorPages = [
+    { id: "404", url: "/404", text: "Página não encontrada" },
+    { id: "401", url: "/401", text: "Acesso não autorizado" },
+];
+
+export { topPages, authenticatedPages, accountPages, errorPages };

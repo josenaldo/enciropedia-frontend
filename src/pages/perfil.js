@@ -12,7 +12,7 @@ const getServerSideProps = async ({ req }) => {
 
     if (!jwt) {
         return {
-            redirect: { destination: "/" },
+            redirect: { destination: "/401" },
         };
     } else {
         const responseData = await fetcher(
