@@ -34,13 +34,13 @@ const NewsPage = ({ article }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                {article.image ? (
+                {article.imagem ? (
                     <CardMedia title={article.titulo}>
                         <Image
-                            src={article.image.path}
-                            height={article.image.height}
-                            width={article.image.width}
-                            objectFit="contain"
+                            src={article.imagem.url}
+                            height="400"
+                            width="1160"
+                            objectFit="cover"
                             alt={article.titulo}
                         />
                     </CardMedia>
@@ -62,7 +62,7 @@ const NewsPage = ({ article }) => {
                     <Box>
                         <Typography
                             gutterBottom
-                            variant="h2"
+                            variant="h1"
                             component="div"
                             color="white"
                             textAlign="center"
@@ -85,6 +85,7 @@ const NewsPage = ({ article }) => {
                             alignItems: "center",
                             justifyContent: "center",
                             py: "20px",
+                            flexDirection: { xs: "column", sm: "row" },
                         }}
                     >
                         <Link
@@ -96,7 +97,7 @@ const NewsPage = ({ article }) => {
                                 color="neutral"
                                 size="small"
                                 clickable={true}
-                                sx={{ textDecoration: "none" }}
+                                sx={{ textDecoration: "none", my: "5px" }}
                             />
                         </Link>
                         <Typography

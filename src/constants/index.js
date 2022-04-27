@@ -1,1 +1,6 @@
-export { topPages, authenticatedPages, accountPages } from "./TopPages";
+export {
+    topPages,
+    authenticatedPages,
+    accountPages,
+    errorPages,
+} from "./TopPages";

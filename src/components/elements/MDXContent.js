@@ -25,8 +25,10 @@ const MDXContent = ({ content }) => {
     };
 
     return (
-        <MDXProvider components={components}>
-            <ReactMarkdown remarkPlugins={plugins}>{content}</ReactMarkdown>
+        <MDXProvider>
+            <ReactMarkdown components={components} remarkPlugins={plugins}>
+                {content}
+            </ReactMarkdown>
         </MDXProvider>
     );
 };

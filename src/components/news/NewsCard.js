@@ -24,13 +24,13 @@ const NewsCard = ({ article }) => {
                 itemsAlign: "flex-start",
             }}
         >
-            {article.imagem && article.imagem.data ? (
+            {article.imagem && article.imagem ? (
                 <CardMedia title={article.titulo}>
                     <Image
-                        src={article.imagem.data.path}
-                        height={article.imagem.data.height}
-                        width={article.imagem.data.width}
-                        objectFit="contain"
+                        src={article.imagem.formats.small.url}
+                        height={article.imagem.formats.small.height}
+                        width={article.imagem.formats.small.width}
+                        objectFit="cover"
                         alt={article.titulo}
                     />
                 </CardMedia>

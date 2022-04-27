@@ -85,7 +85,7 @@ const RegisterPage = () => {
                     }}
                 >
                     <Box>
-                        <Typography variant="h1" textAlign="center">
+                        <Typography variant="h5" textAlign="center">
                             Registro
                         </Typography>
                     </Box>
@@ -161,7 +161,14 @@ const RegisterPage = () => {
                     </Box>
                 </CardContent>
                 <CardActions>
-                    <Button type="submit">Registrar</Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        size="large"
+                        fullWidth
+                    >
+                        Cadastrar
+                    </Button>
                 </CardActions>
             </Card>
         </Box>

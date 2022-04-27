@@ -100,7 +100,7 @@ const LoginDialog = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <DialogTitle>Login</DialogTitle>
+                    <DialogTitle textAlign="center">Login</DialogTitle>
                     <DialogContent>
                         {message && (
                             <Alert
@@ -142,12 +142,19 @@ const LoginDialog = () => {
                             justifyContent: "space-between",
                         }}
                     >
-                        <Button href="/registro">Criar conta</Button>
+                        <Button
+                            href="/registro"
+                            variant="contained"
+                            color="secondary"
+                        >
+                            Criar conta
+                        </Button>
                         <LoadingButton
                             type="submit"
                             loading={loading}
                             loadingPosition="start"
                             startIcon={<LoginIcon />}
+                            variant="contained"
                         >
                             Entrar
                         </LoadingButton>
