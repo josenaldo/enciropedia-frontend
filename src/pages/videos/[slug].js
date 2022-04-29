@@ -27,7 +27,7 @@ export async function getStaticProps({ params }) {
     };
 }
 
-export default function Post({ article }) {
+export default function Video({ article }) {
     return (
         <Container sx={{ my: "40px" }}>
             <Head>

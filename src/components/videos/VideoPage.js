@@ -37,7 +37,7 @@ const VideoPage = ({ video }) => {
                 <CardMedia
                     component="iframe"
                     className="ratio ratio-16x9 media"
-                    src={`https://www.youtube.com/embed/${video.video_id}?rel=0`}
+                    src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                 />
