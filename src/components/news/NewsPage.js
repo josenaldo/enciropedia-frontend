@@ -105,7 +105,7 @@ const NewsPage = ({ article }) => {
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            <FormattedDate dateString={article.publishedAt} />
+                            <FormattedDate dateString={article.data || article.publishedAt} />
                         </Typography>
                         <Box>
                             {/* <Link

@@ -23,11 +23,11 @@ const VideoCard = ({ video }) => {
                 itemsAlign: "flex-start",
             }}
         >
-            {video.video_id && (
+            {video.videoId && (
                 <CardMedia
                     component="img"
                     height="210"
-                    image={`https://img.youtube.com/vi/${video.video_id}/0.jpg`}
+                    image={`https://img.youtube.com/vi/${video.videoId}/0.jpg`}
                     alt={video.titulo}
                 />
             )}
@@ -73,7 +73,9 @@ const VideoCard = ({ video }) => {
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={video.publishedAt} />
+                        <FormattedDate
+                            dateString={video.data || video.publishedAt}
+                        />
                     </Typography>
                 </Box>
                 <Box pt="20px">

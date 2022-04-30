@@ -4,11 +4,11 @@ import { AppConfig } from "@/config";
 import { ArticlesApi } from "@/common/api";
 import { VideoPage } from "@/components/videos";
 
-const articleCategory = "videos";
+const category = "videos";
 
 export async function getStaticPaths() {
     const api = new ArticlesApi();
-    const paths = await api.findAllPaths(articleCategory);
+    const paths = await api.findAllPaths(category);
 
     return {
         paths,
@@ -19,23 +19,23 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const api = new ArticlesApi();
 
-    const article = await api.getData(params.slug, articleCategory);
+    const video = await api.getData(params.slug, category);
     return {
         props: {
-            article,
+            video,
         },
     };
 }
 
-export default function Video({ article }) {
+export default function Video({ video }) {
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
                 <title>
-                    {article.titulo} - {AppConfig.name}
+                    {video.titulo} - {AppConfig.name}
                 </title>
             </Head>
-            <VideoPage article={article}></VideoPage>
+            <VideoPage video={video}></VideoPage>
         </Container>
     );
 }

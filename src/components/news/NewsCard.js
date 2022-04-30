@@ -79,7 +79,7 @@ const NewsCard = ({ article }) => {
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={article.publishedAt} />
+                        <FormattedDate dateString={article.data || article.publishedAt} />
                     </Typography>
                 </Box>
                 <Box pt="20px">

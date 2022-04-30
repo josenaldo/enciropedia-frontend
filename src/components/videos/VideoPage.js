@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
 
 import {
     Box,
@@ -16,13 +15,9 @@ import { AppConfig } from "@/config";
 import { Link, FormattedDate, MDXContent } from "@/components/elements";
 
 const VideoPage = ({ video }) => {
+    console.log(video);
     return (
         <>
-            <Head>
-                <title>
-                    {video.title} - {AppConfig.name}
-                </title>
-            </Head>
             <Card
                 elevation={1}
                 sx={{
@@ -40,6 +35,15 @@ const VideoPage = ({ video }) => {
                     src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
                     allow="autoplay; encrypted-media"
                     allowFullScreen
+                    sx={{
+                        height: {
+                            xs: "210px",
+                            sm: "250",
+                            md: "300px",
+                            lg: "400px",
+                            xl: "500px",
+                        },
+                    }}
                 />
 
                 <CardContent
@@ -71,7 +75,7 @@ const VideoPage = ({ video }) => {
                                 },
                             }}
                         >
-                            {video.title}
+                            {video.titulo}
                         </Typography>
                     </Box>
                     <Box
@@ -87,7 +91,9 @@ const VideoPage = ({ video }) => {
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            <FormattedDate dateString={video.date} />
+                            <FormattedDate
+                                dateString={video.data || video.publishedAt}
+                            />
                         </Typography>
                     </Box>
                     <Box
@@ -101,7 +107,7 @@ const VideoPage = ({ video }) => {
                         }}
                     >
                         <Typography variant="body1" color="neutral.light">
-                            {video.summary}
+                            {video.descricao}
                         </Typography>
                     </Box>
 
