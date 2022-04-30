@@ -23,7 +23,7 @@ export async function getStaticProps() {
 export default function VideosPage({ result }) {
     const api = new ArticlesApi();
     const [pageIndex, setPageIndex] = useState(1);
-    const url = api.createFindAllUrl(articleCategory, pageIndex, 2) + "";
+    const url = api.createFindAllUrl(articleCategory, pageIndex, 10) + "";
 
     const { data: videos } = useSWR(url, fetcher, {
         fallbackData: result,

@@ -22,7 +22,7 @@ export default function NoticiasPage({ result }) {
     const api = new ArticlesApi();
     const [pageIndex, setPageIndex] = useState(1);
     const category = "noticias";
-    const url = api.createFindAllUrl(category, pageIndex, 2) + "";
+    const url = api.createFindAllUrl(category, pageIndex, 10) + "";
 
     const { data } = useSWR(url, fetcher, {
         fallbackData: result,

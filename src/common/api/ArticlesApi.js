@@ -18,7 +18,7 @@ export class ArticlesApi {
         result.data = articles;
     }
 
-    createFindAllParams(category, page = 1, pageSize = 5) {
+    createFindAllParams(category, page = 1, pageSize = 10) {
         return {
             populate: "*",
             filters: {
@@ -36,14 +36,14 @@ export class ArticlesApi {
         };
     }
 
-    createFindAllUrl(category, page = 1, pageSize = 5) {
+    createFindAllUrl(category, page = 1, pageSize = 10) {
         const params = this.createFindAllParams(category, page, pageSize);
         const url = createApiUrl(ArticlesApi.apiPath, params);
 
         return url;
     }
 
-    async findAll(category, page = 1, pageSize = 5) {
+    async findAll(category, page = 1, pageSize = 10) {
         const result = await apiCall({
             path: ArticlesApi.apiPath,
             params: this.createFindAllParams(category, page, pageSize),
