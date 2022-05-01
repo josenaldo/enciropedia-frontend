@@ -7,7 +7,7 @@ import { AppConfig } from "@/config";
 import { ArticlesApi } from "@/common/api";
 import { fetcher } from "@/common/lib";
 import { NewsWall } from "@/components/news";
-import { PageTitle, Pagination } from "@/components/elements";
+import { Title, Pagination } from "@/components/elements";
 
 export async function getStaticProps() {
     const api = new ArticlesApi();
@@ -46,7 +46,7 @@ export default function NoticiasPage({ result }) {
                     my: 5,
                 }}
             >
-                <PageTitle>Notícias</PageTitle>
+                <Title>Notícias</Title>
 
                 <NewsWall articles={data.data} />
 
