@@ -20,12 +20,25 @@ const NewsCard = ({ article }) => {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 itemsAlign: "flex-start",
             }}
         >
             {article.imagem && article.imagem ? (
-                <CardMedia title={article.titulo}>
+                <CardMedia
+                    title={article.titulo}
+                    sx={{
+                        display: "flex",
+                        height: {
+                            xs: "150px",
+                            sm: "170px",
+                            md: "190px",
+                            lg: "210px",
+                            xl: "230px",
+                        },
+                        overflow: "hidden",
+                    }}
+                >
                     <Image
                         src={article.imagem.formats.small.url}
                         height={article.imagem.formats.small.height}
@@ -41,7 +54,11 @@ const NewsCard = ({ article }) => {
             <CardContent
                 sx={{
                     width: "100%",
-                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    flexGrow: 1,
                 }}
             >
                 <Box>
@@ -53,6 +70,13 @@ const NewsCard = ({ article }) => {
                         sx={{
                             display: "block",
                             mb: "20px",
+                            fontSize: {
+                                xs: "1.1rem",
+                                sm: "1.2rem",
+                                md: "1.3rem",
+                                lg: "1.4rem",
+                                xl: "1.5rem",
+                            },
                         }}
                     >
                         {article.titulo}
@@ -79,7 +103,9 @@ const NewsCard = ({ article }) => {
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={article.data || article.publishedAt} />
+                        <FormattedDate
+                            dateString={article.data || article.publishedAt}
+                        />
                     </Typography>
                 </Box>
                 <Box pt="20px">
