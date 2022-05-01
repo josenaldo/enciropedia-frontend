@@ -4,16 +4,13 @@ import { Box, Container, Typography, Button } from "@mui/material";
 
 const Hero = () => {
     return (
-        <Container
-            sx={{
-                bgcolor: "background.paper",
-                my: 5,
-                py: "40px",
-                borderRadius: "0.3rem",
-            }}
-        >
+        <Container>
             <Box
                 sx={{
+                    my: 5,
+                    py: 5,
+                    borderRadius: "0.3rem",
+                    bgcolor: "background.paper",
                     display: "flex",
                     flexDirection: "column",
                     alignItens: "center",
@@ -36,7 +33,6 @@ const Hero = () => {
                         textAlign="center"
                         sx={{
                             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-
                             fontWeight: "700",
                             mb: "20px",
                         }}

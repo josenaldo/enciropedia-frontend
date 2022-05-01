@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Head from "next/head";
-import { Box, Container, Stack, Pagination } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import useSWR from "swr";
 
 import { AppConfig } from "@/config";
 import { ArticlesApi } from "@/common/api";
 import { fetcher } from "@/common/lib";
 import { NewsWall } from "@/components/news";
+import { PageTitle, Pagination } from "@/components/elements";
 
 export async function getStaticProps() {
     const api = new ArticlesApi();
@@ -22,7 +23,7 @@ export default function NoticiasPage({ result }) {
     const api = new ArticlesApi();
     const [pageIndex, setPageIndex] = useState(1);
     const category = "noticias";
-    const url = api.createFindAllUrl(category, pageIndex, 10) + "";
+    const url = api.createFindAllUrl(category, pageIndex, 6) + "";
 
     const { data } = useSWR(url, fetcher, {
         fallbackData: result,
@@ -35,29 +36,28 @@ export default function NoticiasPage({ result }) {
     };
 
     return (
-        <Container sx={{ my: "40px" }}>
+        <Container>
             <Head>
                 <title>Notícias - {AppConfig.name}</title>
             </Head>
-            <Box component="section">
+            <Box
+                component="section"
+                sx={{
+                    my: 5,
+                }}
+            >
+                <PageTitle>Notícias</PageTitle>
+
                 <NewsWall articles={data.data} />
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Stack spacing={2}>
-                        <Pagination
-                            count={data.meta.pagination.pageCount}
-                            size="large"
-                            siblingCount={0}
-                            boundaryCount={2}
-                            page={pageIndex}
-                            onChange={handleChange}
-                        />
-                    </Stack>
-                </Box>
+
+                <Pagination
+                    count={data.meta.pagination.pageCount}
+                    size="large"
+                    siblingCount={0}
+                    boundaryCount={2}
+                    page={pageIndex}
+                    onChange={handleChange}
+                />
             </Box>
         </Container>
     );

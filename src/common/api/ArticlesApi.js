@@ -32,7 +32,7 @@ export class ArticlesApi {
                 page: page,
                 pageSize: pageSize,
             },
-            sort: ["publishedAt:desc"],
+            sort: ["data:desc"],
         };
     }
 

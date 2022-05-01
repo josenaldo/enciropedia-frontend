@@ -25,17 +25,7 @@ export function Header(props) {
     return (
         <header>
             <AppBar position="sticky">
-                <Container
-                    sx={{
-                        px: {
-                            xs: "0px",
-                            sm: "0px",
-                            md: "0px",
-                            lg: "0px",
-                            xl: "0px",
-                        },
-                    }}
-                >
+                <Container>
                     <Toolbar
                         disableGutters
                         sx={{
