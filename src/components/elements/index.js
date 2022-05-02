@@ -1,3 +1,4 @@
+export { Carousel } from "./Carousel";
 export { Code } from "./Code";
 export { Favorite } from "./Favorite";
 export { FormattedDate } from "./FormattedDate";

@@ -59,9 +59,20 @@ const NewsCard = ({ article }) => {
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     flexGrow: 1,
+                    noWrap: true,
                 }}
             >
-                <Box>
+                <Box
+                    sx={{
+                        height: {
+                            xs: "3.0rem",
+                            sm: "3.2rem",
+                            md: "3.4rem",
+                            lg: "3.6rem",
+                            xl: "3.8rem",
+                        },
+                    }}
+                >
                     <Link
                         href={`${article.url}`}
                         variant="h5"
@@ -71,11 +82,11 @@ const NewsCard = ({ article }) => {
                             display: "block",
                             mb: "20px",
                             fontSize: {
-                                xs: "1.1rem",
-                                sm: "1.2rem",
-                                md: "1.3rem",
-                                lg: "1.4rem",
-                                xl: "1.5rem",
+                                xs: "1.0rem",
+                                sm: "1.1rem",
+                                md: "1.2rem",
+                                lg: "1.3rem",
+                                xl: "1.4rem",
                             },
                         }}
                     >
@@ -108,8 +119,18 @@ const NewsCard = ({ article }) => {
                         />
                     </Typography>
                 </Box>
-                <Box pt="20px">
-                    <Typography variant="body1" color="neutral.light">
+                <Box pt="20px" component="div">
+                    <Typography
+                        variant="body1"
+                        color="neutral.light"
+                        sx={{
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": "3",
+                            "-webkit-box-orient": "vertical",
+                            overflow: "hidden",
+                            height: "4.2rem",
+                        }}
+                    >
                         {article.descricao}
                     </Typography>
                 </Box>

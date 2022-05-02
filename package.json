@@ -26,6 +26,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-markdown": "^8.0.2",
+    "react-slick": "^0.29.0",
     "react-vertical-timeline-component": "^3.5.2",
     "rehype-external-links": "^1.0.1",
     "rehype-img-size": "^1.0.1",
@@ -33,6 +34,7 @@
     "rehype-probe-image-size": "^1.0.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.1",
+    "slick-carousel": "^1.8.1",
     "swr": "^1.2.2",
     "uuid": "^8.3.2"
   },
