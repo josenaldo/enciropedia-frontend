@@ -5,6 +5,7 @@ import { Box, Container } from "@mui/material";
 import { AppConfig } from "@/config";
 import { BiographyEventsApi } from "@/common/api";
 import { TimeLine } from "@/components/biography";
+import { Title } from "@/components/elements";
 
 const getStaticProps = async () => {
     const api = new BiographyEventsApi();
@@ -27,8 +28,10 @@ const BiografiaPage = ({ result }) => {
                     width: "100%",
                     height: "100%",
                     overflow: "hidden",
+                    my: 5,
                 }}
             >
+                <Title>Biografia</Title>
                 <TimeLine biographyEvents={result.data} />
             </Box>
         </Container>

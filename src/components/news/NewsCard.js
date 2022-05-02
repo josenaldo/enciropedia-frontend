@@ -29,13 +29,7 @@ const NewsCard = ({ article }) => {
                     title={article.titulo}
                     sx={{
                         display: "flex",
-                        height: {
-                            xs: "150px",
-                            sm: "170px",
-                            md: "190px",
-                            lg: "210px",
-                            xl: "230px",
-                        },
+                        aspectRatio: "16/9",
                         overflow: "hidden",
                     }}
                 >
