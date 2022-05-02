@@ -68,11 +68,11 @@ const VideoCard = ({ video }) => {
                             display: "block",
                             mb: "20px",
                             fontSize: {
-                                xs: "1.0rem",
-                                sm: "1.1rem",
-                                md: "1.2rem",
-                                lg: "1.3rem",
-                                xl: "1.4rem",
+                                xs: "0.9rem",
+                                sm: "1.0rem",
+                                md: "1.1em",
+                                lg: "1.2rem",
+                                xl: "1.3rem",
                             },
                         }}
                     >
