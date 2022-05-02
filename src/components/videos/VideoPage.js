@@ -15,7 +15,6 @@ import { AppConfig } from "@/config";
 import { Link, FormattedDate, MDXContent } from "@/components/elements";
 
 const VideoPage = ({ video }) => {
-    console.log(video);
     return (
         <>
             <Card
@@ -36,6 +35,7 @@ const VideoPage = ({ video }) => {
                     allow="autoplay; encrypted-media"
                     allowFullScreen
                     sx={{
+                        border: "none",
                         height: {
                             xs: "210px",
                             sm: "250",

@@ -119,7 +119,7 @@ const NewsCard = ({ article }) => {
                         />
                     </Typography>
                 </Box>
-                <Box pt="20px" component="div">
+                <Box pt="20px">
                     <Typography
                         variant="body1"
                         color="neutral.light"

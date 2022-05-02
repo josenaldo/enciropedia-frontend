@@ -25,20 +25,40 @@ const VideoCard = ({ video }) => {
         >
             {video.videoId && (
                 <CardMedia
-                    component="img"
-                    height="210"
-                    image={`https://img.youtube.com/vi/${video.videoId}/0.jpg`}
-                    alt={video.titulo}
+                    component="iframe"
+                    className="ratio ratio-16x9 media"
+                    src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    sx={{
+                        border: "none",
+                        bgcolor: "background.paper",
+                    }}
                 />
             )}
 
             <CardContent
                 sx={{
                     width: "100%",
-                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    flexGrow: 1,
+                    noWrap: true,
                 }}
             >
-                <Box>
+                <Box
+                    sx={{
+                        height: {
+                            xs: "3.0rem",
+                            sm: "3.2rem",
+                            md: "3.4rem",
+                            lg: "3.6rem",
+                            xl: "3.8rem",
+                        },
+                    }}
+                >
                     <Link
                         href={video.url}
                         variant="h5"
@@ -47,6 +67,13 @@ const VideoCard = ({ video }) => {
                         sx={{
                             display: "block",
                             mb: "20px",
+                            fontSize: {
+                                xs: "1.0rem",
+                                sm: "1.1rem",
+                                md: "1.2rem",
+                                lg: "1.3rem",
+                                xl: "1.4rem",
+                            },
                         }}
                     >
                         {video.titulo}
@@ -79,7 +106,17 @@ const VideoCard = ({ video }) => {
                     </Typography>
                 </Box>
                 <Box pt="20px">
-                    <Typography variant="body1" color="neutral.light">
+                    <Typography
+                        variant="body1"
+                        color="neutral.light"
+                        sx={{
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": "3",
+                            "-webkit-box-orient": "vertical",
+                            overflow: "hidden",
+                            height: "4.2rem",
+                        }}
+                    >
                         {video.descricao}
                     </Typography>
                 </Box>
