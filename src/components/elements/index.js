@@ -9,3 +9,4 @@ export { Pagination } from "./Pagination";
 export { ResponsiveImage } from "./ResponsiveImage";
 export { SearchInput } from "./SearchInput";
 export { TextField } from "./TextField";
+export { YoutubeVideo } from "./YoutubeVideo";

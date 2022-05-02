@@ -14,7 +14,8 @@ export default async function handler(req, res) {
     const biographyEvents = await biographyEventsApi.findAllLinks();
 
     const articlesApi = new ArticlesApi();
-    const articles = await articlesApi.findAllLinks();
+    const articles = await articlesApi.findAllLinks("noticias");
+    const videos = await articlesApi.findAllLinks("videos");
 
     const allPages = [
         ...topPages,
@@ -23,6 +24,7 @@ export default async function handler(req, res) {
         ...errorPages,
         ...biographyEvents,
         ...articles,
+        ...videos,
     ];
 
     const pages = allPages.reduce((previous, current) => {

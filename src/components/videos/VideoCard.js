@@ -8,7 +8,7 @@ import {
     Chip,
 } from "@mui/material";
 
-import { Link, FormattedDate } from "@/components/elements";
+import { Link, FormattedDate, YoutubeVideo } from "@/components/elements";
 
 const VideoCard = ({ video }) => {
     return (
@@ -23,19 +23,7 @@ const VideoCard = ({ video }) => {
                 itemsAlign: "flex-start",
             }}
         >
-            {video.videoId && (
-                <CardMedia
-                    component="iframe"
-                    className="ratio ratio-16x9 media"
-                    src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    sx={{
-                        border: "none",
-                        bgcolor: "background.paper",
-                    }}
-                />
-            )}
+            {video.videoId && <YoutubeVideo>{video.videoId}</YoutubeVideo>}
 
             <CardContent
                 sx={{

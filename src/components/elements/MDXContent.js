@@ -4,10 +4,17 @@ import externalLinks from "rehype-external-links";
 import rehypePrism from "rehype-prism-plus";
 
 import ReactMarkdown from "react-markdown";
-import { Link, ResponsiveImage, Code } from "@/components/elements";
+import rehypeRaw from "rehype-raw";
+
+import {
+    Link,
+    ResponsiveImage,
+    Code,
+    YoutubeVideo,
+} from "@/components/elements";
 
 const MDXContent = ({ content }) => {
-    const plugins = [
+    const remarkPlugins = [
         [
             externalLinks,
             {
@@ -18,15 +25,22 @@ const MDXContent = ({ content }) => {
         [rehypePrism],
     ];
 
+    const rehypePlugins = [rehypeRaw];
+
     const components = {
         img: ResponsiveImage,
         a: Link,
         pre: Code,
+        youtube: YoutubeVideo,
     };
 
     return (
         <MDXProvider>
-            <ReactMarkdown components={components} remarkPlugins={plugins}>
+            <ReactMarkdown
+                components={components}
+                remarkPlugins={remarkPlugins}
+                rehypePlugins={rehypePlugins}
+            >
                 {content}
             </ReactMarkdown>
         </MDXProvider>

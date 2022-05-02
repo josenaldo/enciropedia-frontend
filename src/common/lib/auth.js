@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { fetcher } from "@/common/lib";
 
 export const setToken = (data, reload = true) => {
+    console.log("data", data);
     if (typeof window === "undefined") {
         return;
     }

@@ -12,7 +12,12 @@ import {
 
 import { AppConfig } from "@/config";
 
-import { Link, FormattedDate, MDXContent } from "@/components/elements";
+import {
+    Link,
+    FormattedDate,
+    MDXContent,
+    YoutubeVideo,
+} from "@/components/elements";
 
 const VideoPage = ({ video }) => {
     return (
@@ -28,24 +33,9 @@ const VideoPage = ({ video }) => {
                     itemsAlign: "flex-start",
                 }}
             >
-                <CardMedia
-                    component="iframe"
-                    className="ratio ratio-16x9 media"
-                    src={`https://www.youtube.com/embed/${video.videoId}?rel=0`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                    sx={{
-                        border: "none",
-                        height: {
-                            xs: "210px",
-                            sm: "250",
-                            md: "300px",
-                            lg: "400px",
-                            xl: "500px",
-                        },
-                    }}
-                />
-
+                <CardMedia>
+                    <YoutubeVideo>{video.videoId}</YoutubeVideo>
+                </CardMedia>
                 <CardContent
                     sx={{
                         width: "100%",
