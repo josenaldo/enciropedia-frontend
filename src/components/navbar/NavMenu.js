@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import Link from "next/link";
 import {
     Container,
     Box,
@@ -11,12 +11,13 @@ import {
     List,
     ListItem,
     ListItemButton,
+    ListItemIcon,
     ListItemText,
     Divider,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Menu as MenuIcon, Home as HomeIcon } from "@mui/icons-material";
 import { Logo } from "@/components/navbar";
-import { SearchInput, Link } from "@/components/elements";
+import { SearchInput } from "@/components/elements";
 
 import { topPages } from "@/constants";
 
@@ -69,18 +70,39 @@ const NavMenu = () => {
                     <Divider />
 
                     <List>
-                        <ListItem button>
-                            <ListItemButton component="a" href="/">
-                                <ListItemText primary="Home" />
-                            </ListItemButton>
-                        </ListItem>
-
-                        {topPages.map((page) => (
-                            <ListItem button key={page.text}>
-                                <ListItemButton component="a" href={page.url}>
-                                    <ListItemText primary={page.text} />
+                        <Link
+                            href="/"
+                            color="neutral"
+                            sx={{
+                                textDecoration: "none",
+                            }}
+                        >
+                            <ListItem disablePadding>
+                                <ListItemButton component="a" href="/">
+                                    <ListItemIcon>
+                                        <HomeIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Home" />
                                 </ListItemButton>
                             </ListItem>
+                        </Link>
+
+                        {topPages.map((page) => (
+                            <Link
+                                key={page.text}
+                                href={page.url}
+                                color="neutral"
+                                sx={{
+                                    textDecoration: "none",
+                                }}
+                            >
+                                <ListItem disablePadding>
+                                    <ListItemButton component="div">
+                                        <ListItemIcon>{page.icon}</ListItemIcon>
+                                        <ListItemText primary={page.text} />
+                                    </ListItemButton>
+                                </ListItem>
+                            </Link>
                         ))}
                     </List>
 

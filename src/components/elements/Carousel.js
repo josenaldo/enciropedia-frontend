@@ -43,6 +43,7 @@ const Carousel = ({ children }) => {
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
+                    centerPadding: "60px",
                 },
             },
             {
@@ -50,6 +51,7 @@ const Carousel = ({ children }) => {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
+                    centerPadding: "40px",
                 },
             },
             {
@@ -57,6 +59,7 @@ const Carousel = ({ children }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    centerPadding: "20px",
                 },
             },
         ],

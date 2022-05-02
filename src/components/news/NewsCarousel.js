@@ -17,7 +17,16 @@ const NewsCarousel = ({ articles }) => {
                 {articles.map((article) => (
                     <Box
                         key={article.id}
-                        sx={{ px: "10px", py: "40px" }}
+                        sx={{
+                            px: {
+                                xs: "4px",
+                                sm: "6px",
+                                md: "8px",
+                                lg: "10px",
+                                xl: "16px",
+                            },
+                            py: "40px",
+                        }}
                         className="newsBox"
                     >
                         <NewsCard article={article}></NewsCard>

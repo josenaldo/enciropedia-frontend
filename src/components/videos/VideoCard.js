@@ -99,8 +99,8 @@ const VideoCard = ({ video }) => {
                         color="neutral.light"
                         sx={{
                             display: "-webkit-box",
-                            "-webkit-line-clamp": "3",
-                            "-webkit-box-orient": "vertical",
+                            WebkitLineClamp: "3",
+                            WebkitBoxOrient: "vertical",
                             overflow: "hidden",
                             height: "4.2rem",
                         }}

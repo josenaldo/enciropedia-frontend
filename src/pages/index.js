@@ -5,7 +5,7 @@ import { ChevronRight as ChevronRightIcon } from "@mui/icons-material";
 import { ArticlesApi } from "@/common/api";
 import { NewsCarousel } from "@/components/news";
 import { VideosCarousel } from "@/components/videos";
-import { Hero } from "@/components/home";
+import { Hero, DialBar } from "@/components/home";
 import { Title } from "@/components/elements";
 
 export async function getStaticProps() {
@@ -30,6 +30,24 @@ export default function Home({ articles, videos }) {
                 }}
             >
                 <Hero />
+            </Box>
+
+            <Box
+                component="section"
+                sx={{
+                    bgcolor: "background.b900",
+                }}
+            >
+                <Container>
+                    <Box
+                        sx={{
+                            // my: 5,
+                            py: 5,
+                        }}
+                    >
+                        <DialBar />
+                    </Box>
+                </Container>
             </Box>
 
             <Box

@@ -1,11 +1,44 @@
+import {
+    Explore as ExploreIcon,
+    History as HistoryIcon,
+    Newspaper as NewspaperIcon,
+    OndemandVideo as OndemandVideoIcon,
+    Groups as GroupsIcon,
+    Engineering as EngineeringIcon,
+} from "@mui/icons-material";
+
 const topPages = [
-    { id: "pnd", url: "/pnd", text: "PND" },
-    { id: "noticias", url: "/noticias", text: "Notícias" },
-    { id: "biografia", url: "/biografia", text: "Biografia" },
-    { id: "videos", url: "/videos", text: "Vídeos" },
-    // { id: "podcasts", url: "/podcasts", text: "Podcast" },
-    { id: "movimentos", url: "/movimentos", text: "Movimentos" },
-    { id: "colaboradores", url: "/colaboradores", text: "Colaboradores" },
+    { id: "pnd", url: "/pnd", text: "PND", icon: <ExploreIcon /> },
+    {
+        id: "biografia",
+        url: "/biografia",
+        text: "Biografia",
+        icon: <HistoryIcon />,
+    },
+    {
+        id: "noticias",
+        url: "/noticias",
+        text: "Notícias",
+        icon: <NewspaperIcon />,
+    },
+    {
+        id: "videos",
+        url: "/videos",
+        text: "Vídeos",
+        icon: <OndemandVideoIcon />,
+    },
+    {
+        id: "turma-boa",
+        url: "/turma-boa",
+        text: "Turma Boa",
+        icon: <GroupsIcon />,
+    },
+    {
+        id: "colaboradores",
+        url: "/colaboradores",
+        text: "Colaboradores",
+        icon: <EngineeringIcon />,
+    },
 ];
 
 const authenticatedPages = [

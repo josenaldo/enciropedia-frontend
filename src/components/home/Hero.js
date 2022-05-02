@@ -37,7 +37,7 @@ const Hero = () => {
                             mb: "20px",
                         }}
                     >
-                        Projeto Nacional de Desenvolvimento
+                        Enciropedia
                     </Typography>
                 </Box>
 
@@ -52,7 +52,7 @@ const Hero = () => {
                             },
                             display: "flex",
                             textAlign: "center",
-                            width: "50%",
+                            width: "80%",
                             color: "neutral.main",
                         }}
                     >
