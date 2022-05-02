@@ -1,0 +1,8 @@
+.centerBlock {
+    display: flex;
+}
+
+.centerBlock .newsBox {
+    border: 5px solid #ccc;
+    transform: scale(1.1) !important;
+}

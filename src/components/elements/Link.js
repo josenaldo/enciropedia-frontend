@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { Link as MuiLink } from "@mui/material";
 
-export function Link({ href, children, color, sx, ...restProps }) {
+const Link = ({ href, children, color, sx, ...restProps }) => {
     const linkStyle = {
         color: `${color}.main`,
         "&:hover": {
@@ -19,9 +19,11 @@ export function Link({ href, children, color, sx, ...restProps }) {
             </MuiLink>
         </NextLink>
     );
-}
+};
 
 // Set default props
 Link.defaultProps = {
     color: "primary",
 };
+
+export { Link };

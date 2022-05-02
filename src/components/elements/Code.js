@@ -1,7 +1,6 @@
-import Image from "next/image";
 import { Box } from "@mui/material";
 
-export function Code(props) {
+const Code = ({ children }) => {
     return (
         <Box
             className="remark-highlight"
@@ -13,7 +12,9 @@ export function Code(props) {
                 padding: "10px",
             }}
         >
-            <pre>{props.children}</pre>
+            <pre>{children}</pre>
         </Box>
     );
-}
+};
+
+export { Code };

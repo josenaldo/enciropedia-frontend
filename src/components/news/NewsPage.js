@@ -1,7 +1,4 @@
 import Image from "next/image";
-import Head from "next/head";
-import NextLink from "next/link";
-import { MDXRemote } from "next-mdx-remote";
 
 import {
     Box,
@@ -10,17 +7,22 @@ import {
     CardMedia,
     Typography,
     Chip,
-    Link as MuiLink,
+    IconButton,
 } from "@mui/material";
 
-import { Link, FormattedDate } from "@/components/elements";
+import {
+    Link,
+    FormattedDate,
+    MDXContent,
+    Favorite,
+} from "@/components/elements";
+import { useUser } from "@/contexts";
 
-export function NewsPage({ post }) {
+const NewsPage = ({ article }) => {
+    const { user, loading } = useUser();
+
     return (
         <>
-            <Head>
-                <title>{post.title}</title>
-            </Head>
             <Card
                 elevation={1}
                 sx={{
@@ -32,14 +34,14 @@ export function NewsPage({ post }) {
                     itemsAlign: "flex-start",
                 }}
             >
-                {post.image ? (
-                    <CardMedia title={post.title}>
+                {article.imagem ? (
+                    <CardMedia title={article.titulo}>
                         <Image
-                            src={post.image.path}
-                            height={post.image.height}
-                            width={post.image.width}
-                            objectFit="contain"
-                            alt={post.title}
+                            src={article.imagem.url}
+                            height="400"
+                            width="1160"
+                            objectFit="cover"
+                            alt={article.titulo}
                         />
                     </CardMedia>
                 ) : (
@@ -60,7 +62,7 @@ export function NewsPage({ post }) {
                     <Box>
                         <Typography
                             gutterBottom
-                            variant="h2"
+                            variant="h1"
                             component="div"
                             color="white"
                             textAlign="center"
@@ -74,7 +76,7 @@ export function NewsPage({ post }) {
                                 },
                             }}
                         >
-                            {post.title}
+                            {article.titulo}
                         </Typography>
                     </Box>
                     <Box
@@ -83,33 +85,42 @@ export function NewsPage({ post }) {
                             alignItems: "center",
                             justifyContent: "center",
                             py: "20px",
+                            flexDirection: { xs: "column", sm: "row" },
                         }}
                     >
-                        <MuiLink underline="none">
+                        <Link
+                            underline="none"
+                            href={`${article.categoria.url}`}
+                        >
                             <Chip
-                                label={post.category}
+                                label={article.categoria.rotulo}
                                 color="neutral"
                                 size="small"
                                 clickable={true}
-                                sx={{ textDecaoration: "none" }}
+                                sx={{ textDecoration: "none", my: "5px" }}
                             />
-                        </MuiLink>
+                        </Link>
                         <Typography
                             color="neutral.main"
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            <FormattedDate dateString={post.date} />
+                            <FormattedDate dateString={article.data || article.publishedAt} />
                         </Typography>
-                        <Link
-                            href={post.authorUrl}
-                            variant="caption"
-                            color="neutral.main"
-                            underline="none"
-                            sx={{ mx: "10px" }}
-                        >
-                            {post.author}
-                        </Link>
+                        <Box>
+                            {/* <Link
+                                href={`${article.colaborador.url}`}
+                                variant="caption"
+                                color="neutral.main"
+                                underline="none"
+                                sx={{ mx: "10px" }}
+                            > */}
+                            {article.colaborador.nome}
+                            {/* </Link> */}
+                        </Box>
+                        <Box sx={{ px: "5px" }}>
+                            {user && <Favorite user={user} article={article} />}
+                        </Box>
                     </Box>
                     <Box
                         sx={{
@@ -122,7 +133,7 @@ export function NewsPage({ post }) {
                         }}
                     >
                         <Typography variant="body1" color="neutral.light">
-                            {post.summary}
+                            {article.descricao}
                         </Typography>
                     </Box>
 
@@ -131,13 +142,12 @@ export function NewsPage({ post }) {
                             color: "neutral.main",
                         }}
                     >
-                        <MDXRemote
-                            {...post.mdxSource}
-                            // components={{ Button, SyntaxHighlighter }}
-                        />
+                        <MDXContent content={article.conteudo} />
                     </Box>
                 </CardContent>
             </Card>
         </>
     );
-}
+};
+
+export { NewsPage };

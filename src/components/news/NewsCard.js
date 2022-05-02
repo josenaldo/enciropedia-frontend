@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import Image from "next/image";
 import {
     Box,
     Card,
@@ -6,14 +6,12 @@ import {
     CardActions,
     CardMedia,
     Typography,
-    Button,
     Chip,
-    Link as MuiLink,
 } from "@mui/material";
 
 import { Link, FormattedDate } from "@/components/elements";
 
-export function NewsCard({ post }) {
+const NewsCard = ({ article }) => {
     return (
         <Card
             elevation={1}
@@ -22,38 +20,71 @@ export function NewsCard({ post }) {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 itemsAlign: "flex-start",
             }}
         >
-            {post.image ? (
+            {article.imagem && article.imagem ? (
                 <CardMedia
-                    component="img"
-                    height="210"
-                    image={post.image.path}
-                    alt={post.title}
-                />
+                    title={article.titulo}
+                    sx={{
+                        display: "flex",
+                        aspectRatio: "16/9",
+                        overflow: "hidden",
+                    }}
+                >
+                    <Image
+                        src={article.imagem.formats.small.url}
+                        height={article.imagem.formats.small.height}
+                        width={article.imagem.formats.small.width}
+                        objectFit="cover"
+                        alt={article.titulo}
+                    />
+                </CardMedia>
             ) : (
                 ""
             )}
+
             <CardContent
                 sx={{
                     width: "100%",
-                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    flexGrow: 1,
+                    noWrap: true,
                 }}
             >
-                <Box>
+                <Box
+                    sx={{
+                        height: {
+                            xs: "3.0rem",
+                            sm: "3.2rem",
+                            md: "3.4rem",
+                            lg: "3.6rem",
+                            xl: "3.8rem",
+                        },
+                    }}
+                >
                     <Link
-                        href={post.url}
+                        href={`${article.url}`}
                         variant="h5"
                         color="primary"
                         underline="none"
                         sx={{
                             display: "block",
                             mb: "20px",
+                            fontSize: {
+                                xs: "0.9rem",
+                                sm: "1.0rem",
+                                md: "1.1em",
+                                lg: "1.2rem",
+                                xl: "1.3rem",
+                            },
                         }}
                     >
-                        {post.title}
+                        {article.titulo}
                     </Link>
                 </Box>
 
@@ -63,37 +94,49 @@ export function NewsCard({ post }) {
                         alignItems: "center",
                     }}
                 >
-                    <NextLink href={`/${post.category}`} passHref>
-                        <MuiLink underline="none">
-                            <Chip
-                                label={post.category}
-                                color="neutral"
-                                size="small"
-                                clickable={true}
-                                sx={{ textDecaoration: "none" }}
-                            />
-                        </MuiLink>
-                    </NextLink>
+                    <Link href={`/${article.categoria.slug}`} underline="none">
+                        <Chip
+                            label={article.categoria.rotulo}
+                            color="neutral"
+                            size="small"
+                            clickable={true}
+                            sx={{ textDecaoration: "none" }}
+                        />
+                    </Link>
                     <Typography
                         color="neutral.main"
                         variant="caption"
                         ml="10px"
                     >
-                        <FormattedDate dateString={post.date} />
+                        <FormattedDate
+                            dateString={article.data || article.publishedAt}
+                        />
                     </Typography>
                 </Box>
                 <Box pt="20px">
-                    <Typography variant="body1" color="neutral.light">
-                        {post.excerpt}
+                    <Typography
+                        variant="body1"
+                        color="neutral.light"
+                        sx={{
+                            display: "-webkit-box",
+                            "-webkit-line-clamp": "3",
+                            "-webkit-box-orient": "vertical",
+                            overflow: "hidden",
+                            height: "4.2rem",
+                        }}
+                    >
+                        {article.descricao}
                     </Typography>
                 </Box>
             </CardContent>
 
             <CardActions sx={{ p: "16px" }}>
-                <Link href={post.url} underline="none">
+                <Link href={article.url} underline="none">
                     Leia mais...
                 </Link>
             </CardActions>
         </Card>
     );
-}
+};
+
+export { NewsCard };

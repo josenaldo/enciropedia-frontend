@@ -6,6 +6,8 @@ category: videos
 author: josenaldo
 tags: [ciro gomes, parlatorio, debate]
 summary: Ciro debate no Parlatório
+excerpt: |-
+    Debate do Parlatório com Ciro Gomes.
 video_id: ukgfu_XEmIA
 ---
 

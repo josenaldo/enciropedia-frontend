@@ -1,6 +1,10 @@
-import { parse, format } from "date-fns";
+import { parseISO, format } from "date-fns";
 
-export function FormattedDate({ dateString }) {
-    const date = parse(dateString, "yyyy-MM-dd HH:mm", new Date());
-    return <time dateTime={dateString}>{format(date, "dd/MM/yyyy")}</time>;
-}
+const FormattedDate = ({ dateString }) => {
+    const date = parseISO(dateString);
+    return (
+        <time dateTime={dateString}>{format(date, "dd/MM/yyyy hh:mm")}</time>
+    );
+};
+
+export { FormattedDate };

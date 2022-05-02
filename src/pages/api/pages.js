@@ -1,7 +1,4 @@
-import { getPostsLinks } from "@/common/lib";
-
 export default function handler(req, res) {
-    // posts = getPostsLinks();
     pages = [
         { url: "/", text: "Home" },
         { url: "/pnd", text: "PND" },

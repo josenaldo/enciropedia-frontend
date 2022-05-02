@@ -1,20 +1,26 @@
-import Image from "next/image";
+import { Box, Button, Container } from "@mui/material";
 
-import { Box, Container, Typography, Button } from "@mui/material";
+import { ChevronRight as ChevronRightIcon } from "@mui/icons-material";
 
-import { getSortedPostsData } from "@/common/lib";
-import { NewsWall } from "@/components/news";
+import { ArticlesApi } from "@/common/api";
+import { NewsCarousel } from "@/components/news";
+import { VideosCarousel } from "@/components/videos";
+import { Hero } from "@/components/home";
+import { Title } from "@/components/elements";
 
 export async function getStaticProps() {
-    const allPostsData = getSortedPostsData(3);
+    const api = new ArticlesApi();
+    const articles = await api.findAll("noticias", 1, 5);
+    const videos = await api.findAll("videos", 1, 5);
     return {
         props: {
-            allPostsData,
+            articles: articles,
+            videos: videos,
         },
     };
 }
 
-export default function HomePage({ setCrumbs, allPostsData }) {
+export default function Home({ articles, videos }) {
     return (
         <>
             <Box
@@ -29,100 +35,82 @@ export default function HomePage({ setCrumbs, allPostsData }) {
             <Box
                 component="section"
                 sx={{
-                    bgcolor: "background.b500",
+                    bgcolor: "background.b800",
+                    px: "0px",
                 }}
             >
-                <NewsWall posts={allPostsData} />
+                <Container>
+                    <Box
+                        sx={{
+                            // my: 5,
+                            py: 5,
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
+                        <Title color="neutral.main">Últimas Notícias</Title>
+                        <Box>
+                            <NewsCarousel articles={articles.data} />
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                // mt: 5,
+                            }}
+                        >
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                href="/noticias"
+                                endIcon={<ChevronRightIcon />}
+                            >
+                                Ver mais notícias
+                            </Button>
+                        </Box>
+                    </Box>
+                </Container>
+            </Box>
+
+            <Box
+                component="section"
+                sx={{
+                    bgcolor: "background.paper",
+                    px: "0px",
+                }}
+            >
+                <Container>
+                    <Box
+                        sx={{
+                            // my: 5,
+                            py: 5,
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
+                        <Title color="neutral.main">Últimos Vídeos</Title>
+                        <Box>
+                            <VideosCarousel videos={videos.data} />
+                        </Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                // mt: 5,
+                            }}
+                        >
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                href="/videos"
+                                endIcon={<ChevronRightIcon />}
+                            >
+                                Ver mais vídeos
+                            </Button>
+                        </Box>
+                    </Box>
+                </Container>
             </Box>
         </>
-    );
-}
-
-function Hero() {
-    return (
-        <Container
-            sx={{
-                bgcolor: "background.paper",
-                my: 5,
-                py: "40px",
-                borderRadius: "0.3rem",
-            }}
-        >
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItens: "center",
-                    justifyContent: "flex-end",
-                    textAlign: "center",
-                }}
-            >
-                <Box>
-                    <Image
-                        src="/images/enciropedia-logo-icon-branca.svg"
-                        alt="Logo da Enciropedia na Home"
-                        width={222}
-                        height={188}
-                    ></Image>
-                </Box>
-
-                <Box>
-                    <Typography
-                        component="h1"
-                        textAlign="center"
-                        sx={{
-                            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
-
-                            fontWeight: "700",
-                            mb: "20px",
-                        }}
-                    >
-                        Projeto Nacional de Desenvolvimento
-                    </Typography>
-                </Box>
-
-                <Box sx={{ display: "flex", justifyContent: "center" }}>
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            fontSize: {
-                                xs: "1rem",
-                                sm: "1.2rem",
-                                md: "1.3rem",
-                            },
-                            display: "flex",
-                            textAlign: "center",
-                            width: "50%",
-                            color: "neutral.main",
-                        }}
-                    >
-                        Cansou de procurar informações sobre o PND? Cansou de
-                        buscar dados sobre a vida do Ciro Gomes? Está buscando
-                        novas entrevistas do Ciro pra assistir? A Enciropedia é
-                        a sua solução!
-                    </Typography>
-                </Box>
-                <Box mt="20px">
-                    <Button
-                        href="/pnd"
-                        size="large"
-                        variant="contained"
-                        color="primary"
-                        sx={{ mx: "5px" }}
-                    >
-                        Conheça o PND
-                    </Button>
-                    <Button
-                        href="/biografia"
-                        size="large"
-                        variant="contained"
-                        color="secondary"
-                        sx={{ m: "5px" }}
-                    >
-                        Conheça o Ciro
-                    </Button>
-                </Box>
-            </Box>
-        </Container>
     );
 }

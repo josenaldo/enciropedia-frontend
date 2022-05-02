@@ -97,10 +97,11 @@ function Crumb({
     href,
     last = false,
 }) {
-    const [text, setText] = React.useState(defaultText);
+    const [text, setText] = React.useState();
 
     React.useEffect(() => {
         async function fetchData() {
+            setText(defaultText);
             // If `getTextGenerator` is nonexistent, then don't do anything
             if (!Boolean(textGenerator)) {
                 return;
@@ -115,13 +116,15 @@ function Crumb({
         fetchData();
     }, [textGenerator, textGeneratorParam, textGeneratorQuery]);
 
-    if (last) {
-        return <Typography color="text.primary">{text}</Typography>;
-    }
-
     return (
-        <Link underline="hover" color="inherit" href={href}>
-            {text}
-        </Link>
+        <>
+            {last ? (
+                <Typography color="text.primary">{text}</Typography>
+            ) : (
+                <Link underline="hover" color="inherit" href={href}>
+                    {text}
+                </Link>
+            )}
+        </>
     );
 }

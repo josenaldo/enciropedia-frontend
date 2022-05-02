@@ -5,6 +5,8 @@ category: videos
 author: josenaldo
 tags: [ciro, flow, podcast, gomes]
 summary: Ciro arrasa no flow Podcast \#397
+excerpt: |-
+    Neste podcast, Ciro fala conversa com Monark e Igor sobre o Projeto nacional de desenvolvimento.
 video_id: n6vVlG8raXY
 ---
 
