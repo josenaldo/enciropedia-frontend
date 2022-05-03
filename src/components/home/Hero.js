@@ -20,7 +20,7 @@ const Hero = () => {
             >
                 <Box>
                     <Image
-                        src="/images/enciropedia-logo-icon-branca.svg"
+                        src="/images/enciropedia-logo-icon-branca.png"
                         alt="Logo da Enciropedia na Home"
                         width={222}
                         height={188}
