@@ -15,10 +15,11 @@ import {
     FormattedDate,
     MDXContent,
     Favorite,
+    YoutubeVideo,
 } from "@/components/elements";
 import { useUser } from "@/contexts";
 
-const NewsPage = ({ article }) => {
+const ArticlePage = ({ article }) => {
     const { user, loading } = useUser();
 
     return (
@@ -45,7 +46,7 @@ const NewsPage = ({ article }) => {
                         />
                     </CardMedia>
                 ) : (
-                    ""
+                    <YoutubeVideo>{article.videoId}</YoutubeVideo>
                 )}
                 <CardContent
                     sx={{
@@ -105,7 +106,9 @@ const NewsPage = ({ article }) => {
                             variant="caption"
                             sx={{ mx: "10px" }}
                         >
-                            <FormattedDate dateString={article.data || article.publishedAt} />
+                            <FormattedDate
+                                dateString={article.data || article.publishedAt}
+                            />
                         </Typography>
                         <Box>
                             {/* <Link
@@ -150,4 +153,4 @@ const NewsPage = ({ article }) => {
     );
 };
 
-export { NewsPage };
+export { ArticlePage };

@@ -1,7 +1,7 @@
 import { Container, Box } from "@mui/material";
-import { NewsCard } from "@/components/news";
+import { ArticleCard } from "@/components/articles";
 
-const NewsWall = ({ articles }) => {
+const ArticlesWall = ({ articles }) => {
     return (
         <Box
             sx={{
@@ -18,10 +18,10 @@ const NewsWall = ({ articles }) => {
             }}
         >
             {articles.map((article) => (
-                <NewsCard key={article.id} article={article}></NewsCard>
+                <ArticleCard key={article.id} article={article}></ArticleCard>
             ))}
         </Box>
     );
 };
 
-export { NewsWall };
+export { ArticlesWall };

@@ -62,14 +62,20 @@ export class ArticlesApi {
     async findAllPaths(category) {
         const params = {
             fields: "slug",
-            filters: {
+            populate: {
+                categoria: "*",
+            },
+        };
+
+        if (category) {
+            params.filters = {
                 categoria: {
                     slug: {
                         $eq: category,
                     },
                 },
-            },
-        };
+            };
+        }
 
         const result = await apiCall({
             path: ArticlesApi.apiPath,
@@ -79,6 +85,7 @@ export class ArticlesApi {
         const paths = result.data.map((article) => {
             return {
                 params: {
+                    category: article.categoria.slug,
                     slug: article.slug,
                 },
             };

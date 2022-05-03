@@ -3,8 +3,7 @@ import { Box, Button, Container } from "@mui/material";
 import { ChevronRight as ChevronRightIcon } from "@mui/icons-material";
 
 import { ArticlesApi } from "@/common/api";
-import { NewsCarousel } from "@/components/news";
-import { VideosCarousel } from "@/components/videos";
+import { ArticlesCarousel } from "@/components/articles";
 import { Hero, DialBar } from "@/components/home";
 import { Title } from "@/components/elements";
 
@@ -68,7 +67,7 @@ export default function Home({ articles, videos }) {
                     >
                         <Title color="neutral.main">Últimas Notícias</Title>
                         <Box>
-                            <NewsCarousel articles={articles.data} />
+                            <ArticlesCarousel articles={articles.data} />
                         </Box>
                         <Box
                             sx={{
@@ -108,7 +107,7 @@ export default function Home({ articles, videos }) {
                     >
                         <Title color="neutral.main">Últimos Vídeos</Title>
                         <Box>
-                            <VideosCarousel videos={videos.data} />
+                            <ArticlesCarousel articles={videos.data} />
                         </Box>
                         <Box
                             sx={{

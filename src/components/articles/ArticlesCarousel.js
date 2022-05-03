@@ -1,22 +1,22 @@
-import { Box } from "@mui/material";
-import { VideoCard } from "@/components/videos";
+import { Container, Box } from "@mui/material";
+import { ArticleCard } from "@/components/articles";
 
 import { Carousel } from "@/components/elements";
 
-const VideosCarousel = ({ videos }) => {
+const ArticlesCarousel = ({ articles }) => {
     return (
         <Box
             sx={{
                 px: "0",
-                // gap: { xs: 1, sm: 2 },
+                gap: 2,
                 alignItems: "center",
                 alignContent: "stretch",
             }}
         >
             <Carousel>
-                {videos.map((video) => (
+                {articles.map((article) => (
                     <Box
-                        key={video.id}
+                        key={article.id}
                         sx={{
                             px: {
                                 xs: "4px",
@@ -27,8 +27,9 @@ const VideosCarousel = ({ videos }) => {
                             },
                             py: "40px",
                         }}
+                        className="newsBox"
                     >
-                        <VideoCard video={video}></VideoCard>
+                        <ArticleCard article={article}></ArticleCard>
                     </Box>
                 ))}
             </Carousel>
@@ -36,4 +37,4 @@ const VideosCarousel = ({ videos }) => {
     );
 };
 
-export { VideosCarousel };
+export { ArticlesCarousel };

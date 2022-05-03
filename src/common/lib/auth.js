@@ -24,7 +24,7 @@ export const unsetToken = () => {
     Cookies.remove("jwt");
     Cookies.remove("username");
 
-    Router.reload("/");
+    Router.push("/");
 };
 
 export const getUserFromLocalCookie = () => {

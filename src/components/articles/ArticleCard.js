@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
     Box,
     Card,
@@ -10,7 +11,7 @@ import {
 
 import { Link, FormattedDate, YoutubeVideo } from "@/components/elements";
 
-const VideoCard = ({ video }) => {
+const ArticleCard = ({ article }) => {
     return (
         <Card
             elevation={1}
@@ -19,11 +20,34 @@ const VideoCard = ({ video }) => {
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 itemsAlign: "flex-start",
             }}
         >
-            {video.videoId && <YoutubeVideo>{video.videoId}</YoutubeVideo>}
+            {article.imagem && article.imagem ? (
+                <CardMedia
+                    title={article.titulo}
+                    sx={{
+                        display: "flex",
+                        aspectRatio: "16/9",
+                        overflow: "hidden",
+                    }}
+                >
+                    <Image
+                        src={article.imagem.formats.small.url}
+                        height={article.imagem.formats.small.height}
+                        width={article.imagem.formats.small.width}
+                        objectFit="cover"
+                        alt={article.titulo}
+                    />
+                </CardMedia>
+            ) : (
+                <CardMedia>
+                    {article.videoId && (
+                        <YoutubeVideo>{article.videoId}</YoutubeVideo>
+                    )}
+                </CardMedia>
+            )}
 
             <CardContent
                 sx={{
@@ -48,7 +72,7 @@ const VideoCard = ({ video }) => {
                     }}
                 >
                     <Link
-                        href={video.url}
+                        href={`${article.url}`}
                         variant="h5"
                         color="primary"
                         underline="none"
@@ -64,7 +88,7 @@ const VideoCard = ({ video }) => {
                             },
                         }}
                     >
-                        {video.titulo}
+                        {article.titulo}
                     </Link>
                 </Box>
 
@@ -74,9 +98,9 @@ const VideoCard = ({ video }) => {
                         alignItems: "center",
                     }}
                 >
-                    <Link href={`/videos`} underline="none">
+                    <Link href={`/${article.categoria.slug}`} underline="none">
                         <Chip
-                            label="Vídeo"
+                            label={article.categoria.rotulo}
                             color="neutral"
                             size="small"
                             clickable={true}
@@ -89,7 +113,7 @@ const VideoCard = ({ video }) => {
                         ml="10px"
                     >
                         <FormattedDate
-                            dateString={video.data || video.publishedAt}
+                            dateString={article.data || article.publishedAt}
                         />
                     </Typography>
                 </Box>
@@ -105,13 +129,13 @@ const VideoCard = ({ video }) => {
                             height: "4.2rem",
                         }}
                     >
-                        {video.descricao}
+                        {article.descricao}
                     </Typography>
                 </Box>
             </CardContent>
 
             <CardActions sx={{ p: "16px" }}>
-                <Link href={video.url} underline="none">
+                <Link href={article.url} underline="none">
                     Leia mais...
                 </Link>
             </CardActions>
@@ -119,4 +143,4 @@ const VideoCard = ({ video }) => {
     );
 };
 
-export { VideoCard };
+export { ArticleCard };

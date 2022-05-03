@@ -2,13 +2,13 @@ import Head from "next/head";
 import { Container } from "@mui/material";
 import { AppConfig } from "@/config";
 import { ArticlesApi } from "@/common/api";
-import { VideoPage } from "@/components/videos";
+import { ArticlePage } from "@/components/articles";
 
-const category = "videos";
+// const articleCategory = "noticias";
 
 export async function getStaticPaths() {
     const api = new ArticlesApi();
-    const paths = await api.findAllPaths(category);
+    const paths = await api.findAllPaths();
 
     return {
         paths,
@@ -19,23 +19,23 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const api = new ArticlesApi();
 
-    const video = await api.getData(params.slug, category);
+    const article = await api.getData(params.slug, params.category);
     return {
         props: {
-            video,
+            article,
         },
     };
 }
 
-export default function Video({ video }) {
+export default function Post({ article }) {
     return (
         <Container sx={{ my: "40px" }}>
             <Head>
                 <title>
-                    {video.titulo} - {AppConfig.name}
+                    {article.titulo} - {AppConfig.name}
                 </title>
             </Head>
-            <VideoPage video={video}></VideoPage>
+            <ArticlePage article={article}></ArticlePage>
         </Container>
     );
 }
