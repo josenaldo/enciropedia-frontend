@@ -19,7 +19,14 @@ import {
 } from "@mui/icons-material";
 
 const DialBar = (props) => {
-    const iconFontSize = "6rem";
+    const iconFontSize = {
+        xs: "3.00rem",
+        sm: "3.75rem",
+        md: "4.50rem",
+        lg: "5.25rem",
+        xl: "6.00rem",
+    };
+
     const pages = [
         {
             url: "/pnd",
@@ -65,13 +72,14 @@ const DialBar = (props) => {
                 sx={{
                     px: "0",
                     display: "grid",
-                    gap: 5,
-                    alignItems: "center",
+                    gap: 2,
+                    alignItems: "stretch",
                     alignContent: "stretch",
                     gridTemplateColumns: {
-                        xs: "repeat(1, 1fr)",
+                        xs: "repeat(2, 1fr)",
                         sm: "repeat(2, 1fr)",
                         md: "repeat(3, 1fr)",
+                        lg: "repeat(6, 1fr)",
                     },
                 }}
             >
@@ -83,30 +91,43 @@ const DialBar = (props) => {
                                 sx={{
                                     textDecoration: "none",
                                     color: "neutral.main",
+                                    borderRadius: 2,
                                 }}
                             >
                                 <CardActionArea>
-                                    <CardMedia
-                                        sx={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            my: 3,
-                                        }}
-                                    >
-                                        {page.icon}
-                                    </CardMedia>
                                     <CardContent
                                         sx={{
                                             display: "flex",
                                             flexDirection: "column",
                                             justifyContent: "center",
                                             alignItems: "center",
+                                            padding: 1,
                                         }}
                                     >
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                my: 1,
+                                            }}
+                                        >
+                                            {page.icon}
+                                        </Box>
                                         <Typography
-                                            variant="h2"
+                                            variant="h5"
                                             textAlign="center"
+                                            my={1}
+                                            fontWeight="bold"
+                                            sx={{
+                                                fontSize: {
+                                                    xs: "1.00rem",
+                                                    sm: "1.12rem",
+                                                    md: "1.25rem",
+                                                    lg: "1.37rem",
+                                                    xl: "1.50rem",
+                                                },
+                                            }}
                                         >
                                             {page.label}
                                         </Typography>
